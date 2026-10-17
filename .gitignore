@@ -1,0 +1,10 @@
+.vercel
+.env*
+.env*.local
+node_modules
+data/.lock
+scratch
+*.log
+sessao_pinterest/
+**/sessao_pinterest/**
+erro.png

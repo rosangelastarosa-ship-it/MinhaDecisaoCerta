@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.minhadecisaocerta.com.br/sitemap.xml

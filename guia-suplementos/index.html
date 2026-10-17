@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Suplementação 2026 | Como Otimizar seus Resultados | Minha Decisão Certa</title>
+
+    <meta name="description" content="O guia definitivo de suplementação para 2026. Saiba quais suplementos realmente funcionam para ganhar massa, perder peso e melhorar sua saúde.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <nav class="nav-supps">
+        <div class="container nav-inner">
+            <a href="../" class="logo">Minha Decisão <span>Certa</span></a>
+            <div class="nav-tag">Guia de Suplementação 2026</div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero-supps">
+        <div class="container hero-content">
+            <span class="badge-yellow">Elite Performance</span>
+            <h1>O Guia Definitivo de <br><span>Suplementação 2026</span></h1>
+            <p>Descubra os segredos dos suplementos que realmente entregam resultados. Baseado em ciência e performance real.</p>
+            <div class="hero-btns">
+                <a href="#artigos" class="btn-yellow">Explorar Guia</a>
+                <a href="#vitamina-d" class="btn-outline">Ver Destaque</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Content Sections -->
+    <section id="artigos" class="container articles-grid">
+        
+        <!-- Artigo 1: Vitamina D -->
+        <article class="art-card fade-up" id="vitamina-d">
+            <div class="art-img">☀️</div>
+            <div class="art-info">
+                <span class="tag-green">Saúde & Imunidade</span>
+                <h2>Vitamina D: O Hormônio do Sol</h2>
+                <p>Por que a Vitamina D é essencial para sua imunidade, saúde óssea e até para o seu humor em 2026.</p>
+                <a href="#" class="btn-read">Ler Artigo Completo <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </article>
+
+        <!-- Artigo 2: Whey Protein -->
+        <article class="art-card fade-up delay-1">
+            <div class="art-img">💪</div>
+            <div class="art-info">
+                <span class="tag-green">Massa Muscular</span>
+                <h2>Whey Protein: Qual escolher?</h2>
+                <p>Isolado, Hidrolisado ou Concentrado? Entenda qual versão se adapta melhor ao seu objetivo e bolso.</p>
+                <a href="#" class="btn-read">Ler Artigo Completo <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </article>
+
+        <!-- Artigo 3: Creatina -->
+        <article class="art-card fade-up delay-2">
+            <div class="art-img">⚡</div>
+            <div class="art-info">
+                <span class="tag-green">Força & Energia</span>
+                <h2>Creatina: O Suplemento Nº 1</h2>
+                <p>Tudo o que você precisa saber sobre o suplemento mais estudado da história para ganho de força.</p>
+                <a href="#" class="btn-read">Ler Artigo Completo <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </article>
+
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-supps">
+        <div class="container cta-inner">
+            <h2>Quer um Plano Personalizado?</h2>
+            <p>Assine nossa newsletter e receba dicas exclusivas de suplementação direto no seu e-mail.</p>
+            <form class="supps-form">
+                <input type="email" placeholder="Seu melhor e-mail">
+                <button type="submit" class="btn-yellow">Inscrever-se</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Minha Decisão Certa · Guia de Suplementação</p>
+        </div>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "mdc-static",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["C:\\Users\\Rosangela\\Documents\\MinhaDecisaoCerta-V2\\_devserver.js"],
+      "port": 8792
+    }
+  ]
+}

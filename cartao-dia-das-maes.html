@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crie seu Cartão Personalizado de Dia das Mães | Minha Decisão Certa</title>
+  <meta name="description" content="Personalize e baixe gratuitamente cartões exclusivos para o Dia das Mães. Edite os nomes e surpreenda quem você ama!">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <style>
+    :root {
+      --rose: #ff85a1;
+      --gold: #d4af37;
+    }
+
+    body {
+      background-color: #0f1115;
+    }
+
+    .editor-section {
+      padding: 8rem 5% 4rem;
+      text-align: center;
+      background: radial-gradient(circle at top, rgba(255, 133, 161, 0.1) 0%, transparent 70%);
+    }
+
+    .input-group {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .input-field {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      color: #fff;
+      font-size: 1.1rem;
+      width: 300px;
+      transition: all 0.3s ease;
+    }
+
+    .input-field:focus {
+      outline: none;
+      border-color: var(--rose);
+      box-shadow: 0 0 15px rgba(255, 133, 161, 0.3);
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 3rem;
+      padding: 4rem 5%;
+    }
+
+    .card-container {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      color: #333;
+    }
+
+    .card-text-main {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      color: #d81b60;
+    }
+
+    .card-message {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      font-style: italic;
+    }
+
+    .card-footer {
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .download-btn {
+      margin-top: 1.5rem;
+      background: var(--rose);
+      color: #fff;
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .download-btn:hover {
+      background: #ff5c8d;
+      transform: translateY(-3px);
+    }
+
+    .share-btn {
+      margin-top: 0.5rem;
+      background: #25d366;
+      color: #fff;
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .share-btn:hover {
+      background: #128c7e;
+      transform: translateY(-3px);
+    }
+
+    /* Card Styles */
+    .style-1 { background: url('img/img1.png') center/cover; color: #d81b60; border: 10px solid #fff; }
+    .style-2 { background: url('img/img2.png') center/cover; color: #444; border: 1px solid rgba(0,0,0,0.1); }
+    .style-3 { background: url('img/img3.png') center/cover; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+    .style-3 .card-text-main, .style-3 .card-footer { color: #fff !important; }
+    .style-4 { background: linear-gradient(to bottom, #ffffff, #fff0f0); border-top: 10px solid #ff85a1; color: #333; }
+    .style-5 { background: #fff; background-image: radial-gradient(#ff85a1 0.5px, transparent 0.5px); background-size: 10px 10px; color: #333; }
+
+    @media (max-width: 768px) {
+      .input-field { width: 100%; }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<!-- SEO Global (Injetado via script) -->
+<meta name="google-site-verification" content="HD6C01fIjD6g9HzuyVJbt-RWDHEgVG-8IicQsOv3Idw" />
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta property="og:site_name" content="Minha Decisão Certa">
+<meta property="og:locale" content="pt_BR">
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Crie seu Cartão Personalizado de Dia das Mães | Minha Decisão Certa">
+<meta name="twitter:description" content="Personalize e baixe gratuitamente cartões exclusivos para o Dia das Mães. Edite os nomes e surpreenda quem você ama!">
+<meta name="twitter:image" content="https://www.minhadecisaocerta.com.br/img/capa-seo.jpg">
+
+<!-- Dados Estruturados -->
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "WebSite",
+"name": "Minha Decisão Certa",
+"url": "https://www.minhadecisaocerta.com.br/",
+"description": "Reviews honestos, análises detalhadas e as melhores indicações de custo-benefício."
+}
+</script>
+</head>
+<body>
+
+  <div class="top-bar" id="top-announcement-bar">
+        Filtramos o que realmente vale a pena para você não jogar dinheiro fora. <span>✓ Curadoria 100% Humana</span>
+    </div>
+
+    <header id="main-header">
+        <div class="container nav-container">
+            <!-- Logo -->
+            <a href="index.html" class="logo" id="logo-anchor" style="display: flex; align-items: center; gap: 8px;">
+                <img src="img/favicon.png" alt="Logo Minha Decisão Certa" style="width: 32px; height: 32px; object-fit: contain;">
+                <span>Minha<span class="logo-highlight">Decisão</span>Certa</span>
+            </a>
+
+            <!-- Search Bar -->
+            <div class="search-container" id="nav-search-bar">
+                <form class="search-input-wrapper" onsubmit="return false;">
+                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    <input type="text" class="search-input-field" placeholder="Qual produto você procura?" id="search-input-main" aria-label="Pesquisar produtos">
+                    <button class="search-btn search-trigger-btn" type="submit" id="search-button-main">Buscar</button>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <!-- Subheader Categories -->
+    <nav class="category-nav-bar" id="category-navigation" aria-label="Categorias de produtos">
+        <div class="category-nav-links">
+            <a href="index.html" class="category-link" id="cat-all">🏠 Início</a>
+            <a href="notebooks.html" class="category-link" id="cat-notebook">💻 Notebooks</a>
+            <a href="geladeiras.html" class="category-link" id="cat-geladeiras">🧊 Geladeiras</a>
+            <a href="airfryers.html" class="category-link" id="cat-airfryer">🍟 Air Fryers</a>
+            <a href="bicicletas.html" class="category-link" id="cat-bicicletas">🚲 Bicicletas</a>
+            <a href="maquinas-de-lavar.html" class="category-link" id="cat-maquinas">⚙️ Máquinas</a>
+            <a href="celulares.html" class="category-link" id="cat-celular">📱 Celulares</a>
+            <a href="tvs.html" class="category-link" id="cat-tvs">📺 TVs</a>
+            <a href="https://www.minhadecisaocerta.com.br/veo-ai" class="category-link" id="cat-veo" style="color: #10b981; font-weight: 700;">VEO AI</a>
+            <a href="https://www.minhadecisaocerta.com.br/video-de-amor" class="category-link" id="cat-video-amor">❤️ Video de Amor</a>
+            <a href="https://www.minhadecisaocerta.com.br/guia-gemini" class="category-link" id="cat-guia-gemini">🤖 Guia Gemini</a>
+            <a href="https://www.minhadecisaocerta.com.br/animacao-2d" class="category-link" id="cat-animacao">🎬 Animação 2D</a>
+            <a href="https://www.minhadecisaocerta.com.br/album-copa-2026" class="category-link" id="cat-copa">⚽ Álbum Copa 2026</a>
+            <a href="https://www.minhadecisaocerta.com.br/blog" class="category-link" id="cat-blog">📝 Blog</a>
+            <a href="calca-jeans-wide-leg.html" class="category-link" id="cat-moda" style="border-left: 1px solid var(--border-color); padding-left: 15px; color: #ec4899; font-weight: 700;">👗 Moda</a>
+            <a href="celimax-retinal.html" class="category-link" id="cat-beleza" style="border-left: 1px solid var(--border-color); padding-left: 15px; color: #e879a0; font-weight: 700;">💄 Beleza e Cuidados Pessoais</a>
+            <a href="massageador-portatil.html" class="category-link" id="cat-massageador" style="border-left: 1px solid var(--border-color); padding-left: 15px; color: #06b6d4; font-weight: 700;">💆‍♂️ Massageador Portátil</a>
+            <a href="planejador-sandbox.html" class="category-link" id="cat-sandbox" style="border-left: 1px solid var(--border-color); padding-left: 15px; color: var(--accent);">🛠️ Planejador Sandbox</a>
+            <a href="gerador-de-prompts.html" class="category-link" id="cat-gerador" style="border-left: 1px solid var(--border-color); padding-left: 15px; color: #f59e0b; font-weight: 700;">✨ Gerador de Prompts</a>
+        </div>
+    </nav>
+
+  <main>
+    <section class="editor-section">
+      <span class="badge" style="background: rgba(255, 133, 161, 0.1); color: var(--rose); border: 1px solid var(--rose);">🎁 ESPECIAL DIA DAS MÃES</span>
+      <h1>Crie um Cartão <span>Inesquecível</span></h1>
+      <p style="color: #888; max-width: 600px; margin: 1rem auto;">Digite os nomes abaixo e veja a mágica acontecer. Escolha o seu design favorito e salve para enviar pelo WhatsApp ou imprimir.</p>
+      
+      <div class="input-group">
+        <input type="text" id="momName" class="input-field" placeholder="Nome da Mãe (Ex: Maria)" oninput="updateCards()">
+        <input type="text" id="yourName" class="input-field" placeholder="Seu Nome (Ex: João)" oninput="updateCards()">
+      </div>
+    </section>
+
+    <div class="cards-grid" id="cardsGrid">
+      <!-- Cards will be generated here by JS -->
+    </div>
+  </main>
+
+  <footer style="text-align: center; padding: 4rem 5%; color: #666; border-top: 1px solid rgba(255,255,255,0.05);">
+    <div class="logo" style="justify-content: center; margin-bottom: 1rem;">Minha Decisão <span>Certa</span></div>
+    <p>&copy; 2026 Minha Decisão Certa - Transformando momentos em memórias.</p>
+  </footer>
+
+  <script>
+    const cardMessages = [
+      "Você é a luz que ilumina meus dias e o amor que aquece meu coração.",
+      "Obrigado por ser meu porto seguro e minha maior inspiração.",
+      "Nenhuma palavra é capaz de expressar o quanto eu te amo e te admiro.",
+      "Você é a prova de que anjos existem e caminham entre nós.",
+      "Obrigado por cada abraço, cada conselho e por seu amor infinito.",
+      "Ter você como mãe é o maior presente que a vida poderia me dar.",
+      "Sua força e sua doçura me ensinaram a ser quem eu sou hoje.",
+      "Para o mundo você é uma mãe, para mim você é o meu mundo.",
+      "Obrigado por acreditar em mim mesmo quando ninguém mais acreditava.",
+      "Que o seu dia seja tão maravilhoso e especial quanto você é para mim."
+    ];
+
+    function updateCards() {
+      const mom = document.getElementById('momName').value || "[Nome da Mãe]";
+      const child = document.getElementById('yourName').value || "[Seu Nome]";
+      const grid = document.getElementById('cardsGrid');
+      grid.innerHTML = '';
+
+      for (let i = 0; i < 10; i++) {
+        const card = document.createElement('div');
+        card.className = 'card-wrapper';
+        card.innerHTML = `
+          <div class="card-container style-${(i % 5) + 1}" id="card-${i}">
+            <div class="card-text-main">Para a melhor mãe do mundo: <br><span style="color: var(--rose)">${mom}</span></div>
+            <div class="card-message">"${cardMessages[i]}"</div>
+            <div class="card-footer">Com todo amor, <br>${child}</div>
+          </div>
+          <button class="download-btn" onclick="downloadCard(${i})"><i class="fas fa-download"></i> Baixar Cartão</button>
+          <button class="share-btn" onclick="shareCard(${i})"><i class="fab fa-whatsapp"></i> Compartilhar</button>
+        `;
+        grid.appendChild(card);
+      }
+    }
+
+    async function downloadCard(id) {
+      const card = document.getElementById(`card-${id}`);
+      const btn = event.currentTarget;
+      const originalText = btn.innerHTML;
+      
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Gerando...';
+      btn.disabled = true;
+
+      try {
+        const canvas = await html2canvas(card, {
+          scale: 2, // Melhor qualidade
+          useCORS: true,
+          allowTaint: true,
+          backgroundColor: null
+        });
+        
+        const link = document.createElement('a');
+        link.download = `cartao-dia-das-maes-${id}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      } catch (err) {
+        alert("Erro ao gerar imagem. Tente novamente.");
+        console.error(err);
+      } finally {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }
+    }
+
+    async function shareCard(id) {
+      const card = document.getElementById(`card-${id}`);
+      const btn = event.currentTarget;
+      const originalText = btn.innerHTML;
+
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparando...';
+      
+      try {
+        const canvas = await html2canvas(card, { scale: 2 });
+        canvas.toBlob(async (blob) => {
+          const file = new File([blob], 'cartao-dia-das-maes.png', { type: 'image/png' });
+          
+          if (navigator.share && navigator.canShare({ files: [file] })) {
+            await navigator.share({
+              files: [file],
+              title: 'Meu Cartão de Dia das Mães',
+              text: 'Olha o cartão que eu criei no Minha Decisão Certa!',
+            });
+          } else {
+            const url = window.location.href;
+            window.open(`https://api.whatsapp.com/send?text=Olha o cartão que eu criei no Minha Decisão Certa! Veja aqui: ${url}`, '_blank');
+          }
+          btn.innerHTML = originalText;
+        });
+      } catch (err) {
+        btn.innerHTML = originalText;
+        console.error(err);
+      }
+    }
+
+    // Initial load
+    updateCards();
+  </script>
+<script src="js/search.js"></script>
+<script src="js/pinterest.js"></script>
+<script src="js/chatbot.js"></script>
+
+    <!-- Dados Estruturados (SEO) -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Crie seu Cartão Personalizado de Dia das Mães | Minha Decisão Certa",
+  "description": "Personalize e baixe gratuitamente cartões exclusivos para o Dia das Mães. Edite os nomes e surpreenda quem você ama!",
+  "url": "https://www.minhadecisaocerta.com.br/cartao-dia-das-maes.html",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Minha Decisão Certa"
+  }
+}
+    </script>
+<script src="js/main.js"></script>
+</body>
+</html>

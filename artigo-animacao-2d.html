@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Como Criar Animações 2D Automáticas com Claude Code e Python | Minha Decisão Certa</title>
+  <meta name="description" content="Guia completo para criar animações 2D automáticas para canais Dark no YouTube usando Claude Code, Python e Golpo. Economize horas de edição com IA.">
+  <meta name="keywords" content="animação 2D automática, Claude Code, Python animação, Golpo IA, canal dark youtube, automação de vídeos, inteligência artificial youtube">
+  <meta property="og:title" content="Como Criar Animações 2D Automáticas com Claude Code e Python">
+  <meta property="og:description" content="Transforme seu roteiro em vídeo cinematográfico automaticamente usando IA e Python.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.minhadecisaocerta.com.br/artigo-animacao-2d.html">
+  <meta property="og:image" content="https://www.minhadecisaocerta.com.br/img/banner_animacao_2d.png">
+  <link rel="canonical" href="https://www.minhadecisaocerta.com.br/artigo-animacao-2d.html">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "headline": "Como Criar Animações 2D Automáticas com Claude Code e Python (Passo a Passo)",
+        "description": "Descubra o método para criar animações 2D incríveis utilizando o Claude Code em conjunto com a linguagem Python e Golpo.",
+        "image": "https://www.minhadecisaocerta.com.br/img/banner_animacao_2d.png",
+        "author": {
+          "@type": "Organization",
+          "name": "Minha Decisão Certa"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Minha Decisão Certa",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.minhadecisaocerta.com.br/img/favicon.png"
+          }
+        },
+        "datePublished": "2026-05-06",
+        "dateModified": "2026-05-06"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [{
+          "@type": "Question",
+          "name": "O que é necessário para criar animações automáticas?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Você precisará do Python, Node.js, Claude Code e da skill Golpo (ou Goku) instalada no terminal para gerar os vídeos via prompt."
+          }
+        }, {
+          "@type": "Question",
+          "name": "Funciona para canais Dark no YouTube?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sim, este método é ideal para canais Dark, pois gera animações rápidas e profissionais sem que você precise aparecer ou editar manualmente cada frame."
+          }
+        }]
+      }
+    ]
+  }
+  </script>
+  <style>
+    .article-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem 5% 5rem;
+      font-size: 1.15rem;
+      line-height: 1.8;
+      color: #ccc;
+    }
+    .article-content h2 {
+      color: var(--text-main);
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+      font-size: 1.8rem;
+    }
+    .article-content h3 {
+      color: var(--primary);
+      margin-top: 2rem;
+      font-size: 1.4rem;
+    }
+    .article-content p {
+      margin-bottom: 1.5rem;
+    }
+    .article-hero {
+      text-align: center;
+      padding: 8rem 5% 4rem;
+      background: linear-gradient(to bottom, rgba(15, 23, 42, 0.8) 0%, var(--bg-main) 100%), url('img/banner_animacao_2d.png') center/cover;
+    }
+    .article-hero h1 {
+      font-size: 2.8rem;
+      color: #fff;
+      max-width: 900px;
+      margin: 0 auto 1.5rem;
+      line-height: 1.2;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.8);
+    }
+    .step-card {
+      background: rgba(255, 184, 0, 0.03);
+      border: 1px solid rgba(255, 184, 0, 0.1);
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+    }
+    .step-number {
+      background: var(--primary);
+      color: #000;
+      width: 30px;
+      height: 30px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+    code {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-family: monospace;
+      color: var(--primary);
+    }
+  </style>
+
+<!-- SEO Global (Injetado via script) -->
+<meta name="google-site-verification" content="HD6C01fIjD6g9HzuyVJbt-RWDHEgVG-8IicQsOv3Idw" />
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta property="og:site_name" content="Minha Decisão Certa">
+<meta property="og:locale" content="pt_BR">
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Como Criar Animações 2D Automáticas com Claude Code e Python">
+<meta name="twitter:description" content="Transforme seu roteiro em vídeo cinematográfico automaticamente usando IA e Python.">
+<meta name="twitter:image" content="https://www.minhadecisaocerta.com.br/img/banner_animacao_2d.png">
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="top-bar" id="top-announcement-bar">
+        Filtramos o que realmente vale a pena para você não jogar dinheiro fora. <span>✓ Curadoria 100% Humana</span>
+    </div>
+
+    <header id="main-header">
+        <div class="container nav-container">
+            <!-- Logo -->
+            <a href="index.html" class="logo" id="logo-anchor" style="display: flex; align-items: center; gap: 8px;">
+                <img src="img/favicon.png" alt="Logo Minha Decisão Certa" style="width: 32px; height: 32px; object-fit: contain;">
+                <span>Minha<span class="logo-highlight">Decisão</span>Certa</span>
+            </a>
+
+            <!-- Search Bar -->
+            <div class="search-container" id="nav-search-bar">
+                <form class="search-input-wrapper" onsubmit="return false;">
+                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    <input type="text" class="search-input-field" placeholder="Qual produto você procura?" id="search-input-main" aria-label="Pesquisar produtos">
+                    <button class="search-btn search-trigger-btn" type="submit" id="search-button-main">Buscar</button>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <!-- Subheader Categories -->
+    <nav class="category-nav-bar" id="category-navigation" aria-label="Categorias de produtos">
+        <div class="category-nav-links">
+            <a href="index.html" class="category-link" id="cat-all">🏠 Início</a>
+            <a href="notebooks.html" class="category-link" id="cat-notebook">💻 Notebooks</a>
+            <a href="geladeiras.html" class="category-link" id="cat-geladeiras">🧊 Geladeiras</a>
+            <a href="airfryers.html" class="category-link" id="cat-airfryer">🍟 Air Fryers</a>
+            <a href="bicicletas.html" class="category-link" id="cat-bicicletas">🚲 Bicicletas</a>
+            <a href="maquinas-de-lavar.html" class="category-link" id="cat-maquinas">⚙️ Máquinas</a>
+            <a href="celulares.html" class="category-link" id="cat-celular">📱 Celulares</a>
+            <a href="tvs.html" class="category-link" id="cat-tvs">📺 TVs</a>
+            <a href="https://www.minhadecisaocerta.com.br/veo-ai" class="category-link" id="cat-veo" style="color: #10b981; font-weight: 700;">VEO AI</a>
+            <a href="https://www.minhadecisaocerta.com.br/video-de-amor" class="category-link" id="cat-video-amor">❤️ Video de Amor</a>
+            <a href="https://www.minhadecisaocerta.com.br/guia-gemini" class="category-link" id="cat-guia-gemini">🤖 Guia Gemini</a>
+            <a href="https://www.minhadecisaocerta.com.br/animacao-2d" class="category-link" id="cat-animacao">🎬 Animação 2D</a>
+            <a href="https://www.minhadecisaocerta.com.br/album-copa-2026" class="category-link" id="cat-copa">⚽ Álbum Copa 2026</a>
+            <a href="https://www.minhadecisaocerta.com.br/blog" class="category-link" id="cat-blog">📝 Blog</a>
+            <a href="calca-jeans-wide-leg.html" class="category-link" id="cat-moda" style="border-left: 1px solid var(--border-color); padding-left: 15px; color: #ec4899; font-weight: 700;">👗 Moda</a>
+            <a href="celimax-retinal.html" class="category-link" id="cat-beleza" style="border-left: 1px solid var(--border-color); padding-left: 15px; color: #e879a0; font-weight: 700;">💄 Beleza e Cuidados Pessoais</a>
+            <a href="massageador-portatil.html" class="category-link" id="cat-massageador" style="border-left: 1px solid var(--border-color); padding-left: 15px; color: #06b6d4; font-weight: 700;">💆‍♂️ Massageador Portátil</a>
+            <a href="planejador-sandbox.html" class="category-link" id="cat-sandbox" style="border-left: 1px solid var(--border-color); padding-left: 15px; color: var(--accent);">🛠️ Planejador Sandbox</a>
+            <a href="gerador-de-prompts.html" class="category-link" id="cat-gerador" style="border-left: 1px solid var(--border-color); padding-left: 15px; color: #f59e0b; font-weight: 700;">✨ Gerador de Prompts</a>
+        </div>
+    </nav>
+
+  <!-- Article Hero -->
+  <section class="article-hero">
+    <div class="badge" style="background: #3b82f6; color: #fff; margin-bottom: 1rem;">AUTOMAÇÃO & YOUTUBE</div>
+    <h1>Como Criar Animações 2D Automáticas com Claude Code e Python (Passo a Passo)</h1>
+    <div class="article-meta">
+      <i class="fas fa-film"></i> Por Equipe MDC &bull; Guia Completo
+    </div>
+  </section>
+
+  <!-- Article Content -->
+  <main class="article-content">
+    <p>Todo mundo sabe que o YouTube é uma excelente plataforma para gerar renda. Mas e se você pudesse ter um canal 100% automático, com edição cinematográfica e perfeitamente alinhada ao seu roteiro?</p>
+
+    <p>Neste artigo, vamos desvendar o método para criar animações 2D incríveis utilizando o <strong>Claude Code</strong> em conjunto com a linguagem <strong>Python</strong> e uma ferramenta chamada Golpo (ou Goku). Esse formato é ideal para canais "Dark" (onde você não aparece) ou para qualquer projeto de conteúdo que demande animações rápidas.</p>
+
+    <p>Vamos ao passo a passo de como configurar a sua própria "fábrica" de animações:</p>
+
+    <div class="step-card">
+      <h3><span class="step-number">1</span> Preparando o Terreno (Baixando Claude e Python)</h3>
+      <p>A primeira coisa que você precisa fazer é baixar as ferramentas principais:</p>
+      <ul>
+        <li>Acesse o site do Claude e baixe o aplicativo para o seu computador (como a versão para Windows).</li>
+        <li>Em seguida, acesse <code>python.org/download</code> e baixe a última versão do <strong>Python</strong>. A instalação é bem simples, basta executar o arquivo baixado e ir aceitando os termos até concluir.</li>
+      </ul>
+    </div>
+
+    <div class="step-card">
+      <h3><span class="step-number">2</span> Configurando as Requisições no Terminal</h3>
+      <p>Com o Python instalado, você precisará abrir o "Prompt de Comando" (cmd) do seu computador executando-o como <strong>administrador</strong>.</p>
+      <ul>
+        <li>Use o comando <code>CD</code> seguido do diretório de instalação do Python para navegar até a pasta correta.</li>
+        <li>Cole o comando necessário para instalar alguns <em>user requests</em> (requisições de usuário) – essenciais para as automações de conteúdo funcionarem.</li>
+      </ul>
+    </div>
+
+    <div class="step-card">
+      <h3><span class="step-number">3</span> Instalando o Node.js e o Claude Code</h3>
+      <p>Para que o Claude Code rode perfeitamente na sua máquina, a instalação do <strong>Node.js</strong> é obrigatória.</p>
+      <ul>
+        <li>Baixe e instale o Node.js (basta avançar na instalação com as configurações padrão).</li>
+        <li>De volta ao terminal, cole o comando de instalação do <strong>Claude Code</strong>.</li>
+        <li><strong>Dica de verificação:</strong> Para garantir que tudo deu certo, digite no terminal <code>node --version</code> e <code>python --version</code> (deve aparecer algo como Python 3.14.3).</li>
+      </ul>
+    </div>
+
+    <div class="step-card">
+      <h3><span class="step-number">4</span> Criando e Iniciando o Seu Projeto</h3>
+      <p>Agora, crie uma nova pasta no seu computador (por exemplo, chamada "projeto") onde as suas criações ficarão salvas.</p>
+      <ul>
+        <li>Abra o terminal como administrador novamente, use o comando <code>CD</code> com o caminho dessa nova pasta e digite <code>cloud</code>.</li>
+        <li>A interface do Claude Code vai carregar. Faça o login utilizando sua conta; ele abrirá uma aba no navegador para você autorizar e depois retornará pronto para uso.</li>
+      </ul>
+    </div>
+
+    <div class="step-card">
+      <h3><span class="step-number">5</span> Adicionando a "Skill" de Animação 2D</h3>
+      <p>O grande segredo dessa automação são as <em>skills</em> (habilidades) instaladas no Claude Code.</p>
+      <ul>
+        <li>No terminal do Claude Code, cole os comandos de instalação e adicione a skill <strong>Golpo/Goku</strong>, que é a responsável por gerar as animações 2D.</li>
+        <li>Escolha a opção de instalar apenas para o seu usuário ("user scope") e digite o comando <code>reload plugins</code> para ativar a ferramenta.</li>
+      </ul>
+    </div>
+
+    <div class="step-card">
+      <h3><span class="step-number">6</span> Gerando a Chave de API</h3>
+      <p>Para que a sua máquina consiga se comunicar com o servidor remotamente sem precisar que você faça login em sites toda hora, você precisa de uma <strong>Chave de API</strong>.</p>
+      <ul>
+        <li>Acesse o site do Golpo/Goku e crie uma conta gratuita.</li>
+        <li>Gere a sua chave de API e vincule-a no chat do terminal.</li>
+      </ul>
+    </div>
+
+    <div class="step-card">
+      <h3><span class="step-number">7</span> A Mágica Acontece (Gerando a Animação!)</h3>
+      <p>Tudo pronto! No próprio terminal do Claude Code, você agora pode digitar o seu prompt pedindo o vídeo.</p>
+      <div style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; font-style: italic; margin: 1rem 0;">
+        "Crie uma animação de 10 segundos em um quadro branco usando golp skill sobre a explosão de Chernobyl. Tenha certeza de usar Python e não Python 3".
+      </div>
+      <p>O sistema vai processar o pedido remotamente e baixar o arquivo de vídeo diretamente na sua máquina, além de gerar um link de hospedagem para você visualizar o resultado final!</p>
+    </div>
+
+    <div class="highlight-box" style="background: rgba(59, 130, 246, 0.1); border-left: 4px solid #3b82f6; padding: 1.5rem; border-radius: 8px; margin: 2rem 0;">
+      <p style="margin-bottom: 0;"><strong>💡 Dica Extra:</strong> Caso você ache a configuração do terminal muito complexa, você também pode criar essas animações diretamente pelo site do Golpo, digitando os prompts manualmente por lá. No entanto, usar o Claude Code deixa o fluxo muito mais automático!</p>
+    </div>
+
+    <p>As animações podem ser utilizadas tanto para vídeos curtos (Shorts) quanto para projetos longos e autorais. O céu é o limite quando você domina as ferramentas de IA certas!</p>
+
+    <div class="conclusion-box" style="background: rgba(255, 184, 0, 0.1); border: 1px solid var(--primary); padding: 2rem; border-radius: 12px; text-align: center; margin-top: 3rem;">
+      <h3 style="color: #fff; margin-bottom: 1rem;">Quer turbinar sua produção?</h3>
+      <p style="color: #ccc; margin-bottom: 2rem;">Para rodar Python e IA sem travamentos, você precisa de um notebook potente. Confira nosso ranking atualizado.</p>
+      <a href="index.html#ranking" class="btn btn-primary">Ver Notebooks para Produtividade <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <div style="margin-top: 3rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem;">
+      <h3 style="color: #fff; font-size: 1.2rem; margin-bottom: 1rem;">Leia Também:</h3>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+        <a href="artigo-veo-ai.html" style="text-decoration: none; background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 10px; border-left: 3px solid #ef4444; transition: 0.3s;">
+          <h4 style="color: #ef4444; margin: 0 0 5px;">VEO AI Free</h4>
+          <p style="color: #888; font-size: 0.9rem; margin: 0;">Como criar Shorts virais automaticamente com IA.</p>
+        </a>
+        <a href="artigo-gemini.html" style="text-decoration: none; background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 10px; border-left: 3px solid var(--primary); transition: 0.3s;">
+          <h4 style="color: var(--primary); margin: 0 0 5px;">Guia Google Gemini</h4>
+          <p style="color: #888; font-size: 0.9rem; margin: 0;">Aumente sua produtividade nos estudos e trabalho.</p>
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer id="footer-section">
+        <div class="container footer-grid">
+            <div class="footer-about" id="footer-about-info">
+                <h3>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                    </svg>
+                    Minha Decisão Certa
+                </h3>
+                <p>Nós não vendemos produtos. Fazemos análises independentes baseadas em dados e avaliações de consumidores para te ajudar a escolher o produto ideal para o seu perfil e orçamento.</p>
+            </div>
+
+            <div class="footer-col" id="footer-categories-col">
+                <h4>Categorias</h4>
+                <ul class="footer-links">
+                    <li><a href="notebooks.html">Notebooks</a></li>
+                    <li><a href="celulares.html">Celulares</a></li>
+                    <li><a href="geladeiras.html">Eletrodomésticos</a></li>
+                    <li><a href="tvs.html">TVs</a></li>
+                    <li><a href="bicicletas.html">Bicicletas</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col" id="footer-institutional-col">
+                <h4>Institucional</h4>
+                <ul class="footer-links">
+                    <li><a href="sobre.html">Sobre Nós</a></li>
+                    <li><a href="contato.html">Contato / Sugestões</a></li>
+                    <li><a href="planejador-sandbox.html">🛠️ Planejador Sandbox</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col" id="footer-trust-col">
+                <h4>Transparência</h4>
+                <ul class="footer-links">
+                    <li><a href="privacidade.html">Política de Privacidade</a></li>
+                    <li><a href="sobre.html">Divulgação de Afiliados</a></li>
+                    <li><a href="termos.html">Termos de Uso</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Minha Decisão Certa. Todos os direitos reservados. Alguns links podem gerar comissões de afiliado sem custo extra para você.</p>
+            <div class="footer-legal-links">
+                <a href="privacidade.html">Privacidade</a>
+            </div>
+        </div>
+    </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/search.js"></script>
+<script src="js/pinterest.js"></script>
+<script src="js/chatbot.js"></script>
+</body>
+</html>

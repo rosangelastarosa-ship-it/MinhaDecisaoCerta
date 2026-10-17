@@ -1,0 +1,46 @@
+name: Minha Decisao Certa - Scheduled Article Publisher
+
+on:
+  schedule:
+    # Runs everyday at 13:00 UTC (10:00 AM America/Sao_Paulo, UTC-3)
+    - cron: '0 13 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish-due-articles:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run MDC Publisher Engine
+        env:
+          SHOPEE_APP_ID: ${{ secrets.SHOPEE_APP_ID || '18312910009' }}
+          SHOPEE_SECRET: ${{ secrets.SHOPEE_SECRET || 'OFXWN5FVLGYYUHJZDKXBCZUJEXMROUGC' }}
+        run: |
+          node scripts/publisher.js
+
+      - name: Commit and Push if New Articles Published
+        run: |
+          git config --global user.name "MdcBot"
+          git config --global user.email "bot@minhadecisaocerta.com.br"
+          
+          if [[ -n $(git status -s *.html sitemap.xml artigos_agendados.json data/) ]]; then
+            echo "Novo artigo publicado! Comitando e acionando deploy da Vercel..."
+            git add *.html sitemap.xml artigos_agendados.json data/publish-history.json
+            git commit -m "chore(content): automated article publication [skip ci]"
+            git push origin main
+          else
+            echo "Nenhum artigo agendado para hoje ou nada alterado."
+          fi

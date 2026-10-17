@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Achadinhos da Shopee | Ofertas e Mais Vendidos</title>
+    <meta name="description" content="Confira os melhores achadinhos da Shopee com super descontos. Seleção de itens úteis para casa, bolsas, beleza e moda com frete grátis e descontos reais.">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .achadinhos-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, #ee4d2d 0%, #ff7337 100%);
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 12px rgba(238, 77, 45, 0.25);
+        }
+        .achadinhos-tabs {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 25px 0 35px 0;
+        }
+        .achadinhos-tab-btn {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            padding: 10px 20px;
+            border-radius: 999px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #475569;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .achadinhos-tab-btn:hover {
+            border-color: #ee4d2d;
+            color: #ee4d2d;
+        }
+        .achadinhos-tab-btn.active {
+            background: #ee4d2d;
+            color: #fff;
+            border-color: #ee4d2d;
+            box-shadow: 0 4px 12px rgba(238, 77, 45, 0.25);
+        }
+        .achadinhos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 24px;
+            margin-bottom: 50px;
+        }
+        .achadinho-card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.25s ease;
+            position: relative;
+        }
+        .achadinho-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+            border-color: #ffd6cd;
+        }
+        .achadinho-tag-top {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(4px);
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 8px;
+            z-index: 2;
+        }
+        .achadinho-img-wrap {
+            width: 100%;
+            height: 240px;
+            background: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .achadinho-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .achadinho-card:hover .achadinho-img-wrap img {
+            transform: scale(1.04);
+        }
+        .achadinho-body {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .achadinho-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-bottom: 8px;
+        }
+        .achadinho-rating {
+            color: #f59e0b;
+            font-weight: 700;
+        }
+        .achadinho-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #1e293b;
+            line-height: 1.4;
+            height: 2.8em;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            margin-bottom: 12px;
+        }
+        .achadinho-price-box {
+            margin-top: auto;
+            margin-bottom: 14px;
+        }
+        .achadinho-old-price {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            text-decoration: line-through;
+        }
+        .achadinho-current-price-row {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+        .achadinho-price {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #ee4d2d;
+        }
+        .achadinho-discount {
+            background: #fef2f2;
+            color: #ef4444;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 1px solid #fee2e2;
+        }
+        .achadinho-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: #ee4d2d;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 12px;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+        }
+        .achadinho-btn:hover {
+            background: #d73211;
+            box-shadow: 0 6px 16px rgba(238, 77, 45, 0.3);
+        }
+        .achadinho-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Info Bar -->
+    <div class="top-bar" id="top-announcement-bar">
+        🔥 Seleção de Achadinhos da Shopee • Preços baixos e produtos bem avaliados <span>✓ Atualizado Diariamente</span>
+    </div>
+
+    <!-- Header / Navigation -->
+    <header id="main-header">
+        <div class="container nav-container">
+            <a href="index.html" class="logo" id="logo-anchor" style="display: flex; align-items: center; gap: 8px;">
+                <img src="img/favicon.png" alt="Mascote Abelhinha" style="width: 32px; height: 32px; object-fit: contain;">
+                <span>Minha<span class="logo-highlight">Decisão</span>Certa</span>
+            </a>
+            <div class="search-container" id="nav-search-bar">
+                <form class="search-input-wrapper" onsubmit="return false;">
+                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    <input type="text" class="search-input-field" placeholder="Buscar achadinho..." id="search-input-achadinhos" aria-label="Pesquisar achadinhos">
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <!-- Subheader Categories -->
+    <nav class="category-nav-bar" id="category-navigation">
+        <div class="category-nav-links">
+            <a href="index.html" class="category-link">🏠 Início</a>
+            <a href="achadinhos.html" class="category-link active" style="color: #ee4d2d; font-weight: 700;">🛍️ Achadinhos Shopee</a>
+            <a href="bolsas.html" class="category-link">👜 Bolsas</a>
+            <a href="celulares.html" class="category-link">📱 Celulares</a>
+            <a href="notebooks.html" class="category-link">💻 Notebooks</a>
+            <a href="airfryers.html" class="category-link">🍟 Air Fryers</a>
+            <a href="rotina-sono-bebe.html" class="category-link" style="color: #e07a5f; font-weight: 700;">👶 Sono do Bebê</a>
+            <a href="blog.html" class="category-link">📝 Blog</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" style="background: linear-gradient(135deg, #fff5f2 0%, #fff 100%); padding: 40px 0 20px 0;">
+        <div class="container" style="text-align: center; max-width: 800px;">
+            <div class="achadinhos-badge">
+                🛍️ Seleção Especial Shopee
+            </div>
+            <h1 style="font-size: 2.2rem; font-weight: 800; color: #1e293b; margin-bottom: 12px;">Achadinhos Imperdíveis da Shopee</h1>
+            <p style="color: #64748b; font-size: 1.05rem; line-height: 1.6;">
+                Reunimos os produtos mais bem avaliados, com descontos reais e frete grátis na Shopee. Clique para conferir as ofertas antes que esgotem!
+            </p>
+
+            <!-- Categorias / Filtros -->
+            <div class="achadinhos-tabs" id="category-filter-buttons">
+                <button class="achadinhos-tab-btn active" data-filter="todos">Todos</button>
+                <button class="achadinhos-tab-btn" data-filter="maternidade">👶 Bebê & Maternidade</button>
+                <button class="achadinhos-tab-btn" data-filter="casa">🏠 Casa & Cozinha</button>
+                <button class="achadinhos-tab-btn" data-filter="bolsas">👜 Bolsas & Moda</button>
+                <button class="achadinhos-tab-btn" data-filter="beleza">💄 Beleza & Pessoal</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="achadinhos-grid" id="achadinhos-container">
+            <!-- Os cards dos produtos serão carregados aqui via JavaScript -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer style="background: #0f172a; color: #94a3b8; padding: 40px 0; text-align: center; margin-top: 60px;">
+        <div class="container">
+            <p style="margin-bottom: 8px;">© 2026 Minha Decisão Certa. Como afiliado Shopee, recebemos comissão por compras qualificadas.</p>
+            <p style="font-size: 0.85rem;">Os preços e estoques podem variar de acordo com o vendedor oficial da Shopee.</p>
+        </div>
+    </footer>
+
+    <!-- Script para carregar os produtos dinamicamente -->
+    <script>
+        let allProducts = [];
+
+        async function carregarProdutos() {
+            try {
+                const response = await fetch('shopee_produtos.json');
+                allProducts = await response.json();
+                renderizarProdutos(allProducts);
+            } catch (error) {
+                console.error("Erro ao carregar produtos:", error);
+            }
+        }
+
+        function renderizarProdutos(produtos) {
+            const container = document.getElementById('achadinhos-container');
+            container.innerHTML = '';
+
+            if (produtos.length === 0) {
+                container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #64748b; padding: 40px;">Nenhum produto encontrado nessa categoria.</p>';
+                return;
+            }
+
+            produtos.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'achadinho-card';
+                card.innerHTML = `
+                    <div class="achadinho-tag-top">${item.tag}</div>
+                    <div class="achadinho-img-wrap">
+                        <img src="${item.imagem}" alt="${item.titulo}" loading="lazy">
+                    </div>
+                    <div class="achadinho-body">
+                        <div class="achadinho-meta">
+                            <span class="achadinho-rating">★ ${item.avaliacao}</span>
+                            <span>${item.vendas}</span>
+                        </div>
+                        <h3 class="achadinho-title">${item.titulo}</h3>
+                        <div class="achadinho-price-box">
+                            <div class="achadinho-old-price">${item.preco_antigo}</div>
+                            <div class="achadinho-current-price-row">
+                                <span class="achadinho-price">${item.preco_atual}</span>
+                                <span class="achadinho-discount">${item.desconto}</span>
+                            </div>
+                        </div>
+                        <a href="${item.link_afiliado}" target="_blank" rel="nofollow noopener noreferrer" class="achadinho-btn">
+                            Ver na Shopee
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </a>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Filtro por Abas
+        document.querySelectorAll('.achadinhos-tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.achadinhos-tab-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.getAttribute('data-filter');
+                if (filter === 'todos') {
+                    renderizarProdutos(allProducts);
+                } else {
+                    const filtrados = allProducts.filter(p => p.categoria === filter);
+                    renderizarProdutos(filtrados);
+                }
+            });
+        });
+
+        // Campo de Busca
+        const searchInput = document.getElementById('search-input-achadinhos');
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                const termo = e.target.value.toLowerCase().trim();
+                const filtrados = allProducts.filter(p => p.titulo.toLowerCase().includes(termo));
+                renderizarProdutos(filtrados);
+            });
+        }
+
+        carregarProdutos();
+    </script>
+</body>
+</html>

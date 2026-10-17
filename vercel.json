@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/index_antigo.html",
+      "destination": "/notebooks.html",
+      "permanent": true
+    }
+  ]
+}

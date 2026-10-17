@@ -1,0 +1,1551 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vídeo Romântico Personalizado - Dia dos Namorados | Minha Decisão Certa</title>
+    <meta name="description" content="Crie um vídeo cinematográfico personalizado com suas fotos e mensagens para o seu amor. Ferramenta grátis do portal Minha Decisão Certa.">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --bg: #0F0507;
+            --bg-builder: #130609;
+            --card: #1E0C12;
+            --card-hover: #2A1118;
+            --fg: #FFF5F0;
+            --fg-dim: #D4B8BD;
+            --muted: #7A5E64;
+            --accent: #E8475F;
+            --accent-glow: rgba(232,71,95,0.3);
+            --gold: #D4A855;
+            --gold-dim: rgba(212,168,85,0.2);
+            --border: #3D1F28;
+            --rose: #C79C96;
+            --primary: #D4A855; /* Match site color */
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Lora', serif;
+            background: var(--bg-builder);
+            color: var(--fg);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* === FUNDO ANIMADO DO BUILDER === */
+        #builderBg {
+            position: fixed; inset:0; z-index:0; pointer-events:none;
+        }
+
+        /* === BUILDER === */
+        #builder { position: relative; z-index:1; }
+
+        .hero-section {
+            min-height: 50vh;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            text-align: center;
+            padding: 3rem 1.5rem;
+            position: relative;
+        }
+        .hero-section::after {
+            content:''; position:absolute; bottom:0; left:0; right:0;
+            height: 120px;
+            background: linear-gradient(to top, var(--bg-builder), transparent);
+        }
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900; font-size: clamp(2.5rem, 7vw, 4.5rem);
+            line-height: 1.1;
+            background: linear-gradient(135deg, var(--fg), var(--rose), var(--gold));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+        .hero-sub {
+            font-family: 'Lora', serif; font-style: italic;
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            color: var(--fg-dim); max-width: 500px;
+        }
+
+        .form-section {
+            max-width: 680px; margin: 0 auto;
+            padding: 0 1.5rem 4rem;
+        }
+        .form-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            transition: border-color 0.3s;
+        }
+        .form-card:hover { border-color: var(--muted); }
+        .form-card h2 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700; font-size: 1.35rem;
+            margin-bottom: 1.25rem;
+            display: flex; align-items: center; gap: 0.6rem;
+        }
+        .form-card h2 i { color: var(--accent); font-size: 1.1rem; }
+
+        .input-group { margin-bottom: 1rem; }
+        .input-group label {
+            display: block; font-size: 0.85rem;
+            color: var(--muted); margin-bottom: 0.4rem;
+            font-weight: 500;
+        }
+        .input-group input, .input-group textarea {
+            width: 100%; padding: 0.75rem 1rem;
+            background: var(--bg); border: 1px solid var(--border);
+            border-radius: 10px; color: var(--fg);
+            font-family: 'Lora', serif; font-size: 0.95rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            outline: none;
+        }
+        .input-group input:focus, .input-group textarea:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+        .input-group textarea { resize: vertical; min-height: 70px; }
+        .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+        /* Grid de Fotos */
+        .photo-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+        }
+        .photo-slot {
+            aspect-ratio: 4/3;
+            border: 2px dashed var(--border);
+            border-radius: 12px;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative; overflow: hidden;
+            background: var(--bg);
+        }
+        .photo-slot:hover {
+            border-color: var(--accent);
+            background: rgba(232,71,95,0.05);
+        }
+        .photo-slot.has-photo { border-style: solid; border-color: var(--gold); }
+        .photo-slot img {
+            position: absolute; inset:0;
+            width:100%; height:100%; object-fit:cover;
+            border-radius: 10px;
+        }
+        .photo-slot .remove-btn {
+            position: absolute; top: 4px; right: 4px;
+            width: 24px; height: 24px; border-radius: 50%;
+            background: rgba(0,0,0,0.7); color: var(--fg);
+            border: none; cursor: pointer; font-size: 12px;
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; transition: opacity 0.2s;
+            z-index: 2;
+        }
+        .photo-slot:hover .remove-btn { opacity: 1; }
+        .photo-slot .slot-icon {
+            font-size: 1.5rem; color: var(--muted);
+            margin-bottom: 0.3rem;
+        }
+        .photo-slot .slot-text {
+            font-size: 0.7rem; color: var(--muted);
+        }
+
+        /* Botão Criar */
+        .create-btn {
+            display: block; width: 100%; max-width: 680px;
+            margin: 0 auto 3rem;
+            padding: 1.1rem 2rem;
+            background: linear-gradient(135deg, var(--accent), #C0394F);
+            color: var(--fg); border: none; border-radius: 14px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem; font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 24px var(--accent-glow);
+            position: relative; overflow: hidden;
+        }
+        .create-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(232,71,95,0.5);
+        }
+        .create-btn:active { transform: translateY(0); }
+        .create-btn::after {
+            content:''; position:absolute; inset:0;
+            background: linear-gradient(135deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+        .create-btn:hover::after { transform: translateX(100%); }
+
+        /* === PLAYER === */
+        #player {
+            position: fixed; inset:0; z-index: 1000;
+            background: #000;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.6s;
+        }
+        #player.active { display: block; opacity: 1; }
+
+        .letterbox {
+            position: fixed; left:0; right:0;
+            height: 8vh; background: #000; z-index: 1010;
+            pointer-events: none;
+        }
+        .letterbox.top { top:0; }
+        .letterbox.bottom { bottom:0; }
+
+        #sceneContainer {
+            position: fixed; inset: 0;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 1005;
+            padding: 8vh 0;
+        }
+
+        .scene {
+            position: absolute; inset: 0;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            padding: 2rem;
+            opacity: 0;
+            transition: opacity 1s ease;
+            text-align: center;
+        }
+        .scene.visible { opacity: 1; }
+
+        #particleCanvas {
+            position: fixed; inset:0; z-index: 1008;
+            pointer-events: none;
+        }
+
+        /* Controles do Player */
+        .player-controls {
+            position: fixed; bottom: 9vh; left:50%;
+            transform: translateX(-50%);
+            display: flex; align-items: center; gap: 1rem;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(10px);
+            padding: 0.6rem 1.2rem;
+            border-radius: 40px;
+            z-index: 1020;
+            opacity: 0; transition: opacity 0.3s;
+        }
+        #player:hover .player-controls,
+        .player-controls.show { opacity: 1; }
+        .ctrl-btn {
+            background: none; border: none; color: var(--fg);
+            font-size: 1rem; cursor: pointer; padding: 0.3rem;
+            opacity: 0.7; transition: all 0.2s;
+        }
+        .ctrl-btn:hover { opacity: 1; color: var(--accent); }
+
+        .progress-bar {
+            position: fixed; bottom: 8vh; left:0; right:0;
+            height: 3px; background: rgba(255,255,255,0.1);
+            z-index: 1019;
+        }
+        .progress-fill {
+            height: 100%; width: 0%;
+            background: linear-gradient(90deg, var(--accent), var(--gold));
+            transition: width 0.3s linear;
+        }
+
+        /* === CENAS DO VÍDEO === */
+        .scene-opening {
+            background: radial-gradient(ellipse at center, rgba(232,71,95,0.08) 0%, transparent 70%);
+        }
+        .scene-opening .glow {
+            position: absolute; width: 300px; height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(232,71,95,0.15) 0%, transparent 70%);
+            animation: glowPulse 4s ease-in-out infinite;
+        }
+        .scene-opening .sub-text {
+            font-family: 'Lora', serif; font-style: italic;
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: var(--rose); opacity: 0;
+            animation: fadeSlideUp 1.2s ease 0.5s forwards;
+        }
+        .scene-opening .name-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            color: var(--fg);
+            opacity: 0;
+            animation: fadeScaleIn 1.5s ease 1.5s forwards;
+            text-shadow: 0 0 40px var(--accent-glow);
+        }
+
+        .scene-photo {
+            background: #000;
+        }
+        .photo-frame {
+            position: absolute; inset: 0;
+            overflow: hidden;
+        }
+        .photo-frame img {
+            width: 100%; height: 100%; object-fit: cover;
+            opacity: 0;
+            transition: opacity 1.2s ease;
+        }
+        .photo-frame img.loaded { opacity: 1; }
+        .photo-overlay {
+            position: absolute; inset:0;
+            background: linear-gradient(
+                to bottom,
+                rgba(15,5,7,0.4) 0%,
+                transparent 40%,
+                transparent 60%,
+                rgba(15,5,7,0.7) 100%
+            );
+        }
+        .photo-caption {
+            position: absolute; bottom: 12vh;
+            left: 50%; transform: translateX(-50%);
+            font-family: 'Lora', serif; font-style: italic;
+            font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+            color: var(--fg-dim);
+            max-width: 80%;
+            opacity: 0;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+        }
+        .photo-caption.show { animation: fadeSlideUp 1s ease forwards; }
+
+        .scene-message {
+            background: radial-gradient(ellipse at 30% 40%, rgba(232,71,95,0.06) 0%, transparent 50%),
+                        radial-gradient(ellipse at 70% 60%, rgba(212,168,85,0.04) 0%, transparent 50%),
+                        var(--bg);
+        }
+        .quote-mark {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(4rem, 12vw, 8rem);
+            color: var(--accent); opacity: 0.2;
+            line-height: 1; margin-bottom: -2rem;
+        }
+        .message-text {
+            font-family: 'Lora', serif; font-style: italic;
+            font-size: clamp(1.1rem, 3vw, 1.6rem);
+            color: var(--fg-dim);
+            max-width: 600px; line-height: 1.7;
+            min-height: 3em;
+        }
+        .message-text .word {
+            display: inline-block; opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s ease;
+        }
+        .message-text .word.show {
+            opacity: 1; transform: translateY(0);
+        }
+
+        .scene-date {
+            background: radial-gradient(ellipse at center, rgba(212,168,85,0.06) 0%, transparent 60%), var(--bg);
+        }
+        .since-text {
+            font-family: 'Lora', serif; font-size: clamp(0.9rem, 2vw, 1.1rem);
+            color: var(--muted); letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0;
+        }
+        .since-text.show { animation: fadeSlideUp 0.8s ease forwards; }
+        .date-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            color: var(--gold);
+            margin: 0.5rem 0;
+            opacity: 0;
+        }
+        .date-text.show { animation: fadeScaleIn 1s ease 0.5s forwards; }
+        .heart-divider {
+            font-size: 1.5rem; color: var(--accent);
+            opacity: 0;
+        }
+        .heart-divider.show { animation: heartBeat 1s ease 1s forwards; }
+
+        .scene-finale {
+            background: radial-gradient(ellipse at center, rgba(232,71,95,0.1) 0%, transparent 60%), var(--bg);
+        }
+        .finale-names {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            color: var(--fg);
+            opacity: 0;
+        }
+        .finale-names.show { animation: fadeScaleIn 1.2s ease forwards; }
+        .finale-amp {
+            color: var(--accent); font-weight: 400;
+            font-style: italic; margin: 0 0.3em;
+        }
+        .finale-heart {
+            font-size: clamp(3rem, 10vw, 6rem);
+            color: var(--accent);
+            margin: 0.5rem 0;
+            opacity: 0;
+            filter: drop-shadow(0 0 20px var(--accent-glow));
+        }
+        .finale-heart.show { animation: heartBeat 1s ease 0.8s forwards; }
+        .finale-text {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--gold);
+            font-weight: 400;
+            opacity: 0;
+        }
+        .finale-text.show { animation: fadeSlideUp 1s ease 1.5s forwards; }
+        .finale-year {
+            font-family: 'Lora', serif;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            color: var(--muted);
+            margin-top: 0.5rem;
+            letter-spacing: 0.3em;
+            opacity: 0;
+        }
+        .finale-year.show { animation: fadeIn 1s ease 2s forwards; }
+
+        /* Tela de Replay */
+        .replay-screen {
+            position: absolute; inset:0;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            background: rgba(0,0,0,0.85);
+            z-index: 1030; opacity:0;
+            transition: opacity 0.8s;
+            pointer-events: none;
+        }
+        .replay-screen.show { opacity:1; pointer-events: all; }
+        .replay-btn {
+            margin-top: 2rem; padding: 0.8rem 2.5rem;
+            background: var(--accent); color: var(--fg);
+            border: none; border-radius: 30px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem; font-weight: 700;
+            cursor: pointer; transition: all 0.3s;
+        }
+        .replay-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px var(--accent-glow);
+        }
+
+        /* Loading */
+        .loading-screen {
+            position: absolute; inset:0;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            background: #000; z-index: 1040;
+        }
+        .loading-spinner {
+            width: 40px; height: 40px;
+            border: 3px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        .loading-text {
+            margin-top: 1rem; font-size: 0.9rem;
+            color: var(--muted);
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed; bottom: 2rem; left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--card); color: var(--fg);
+            padding: 0.7rem 1.5rem; border-radius: 10px;
+            border: 1px solid var(--border);
+            font-size: 0.85rem; z-index: 2000;
+            transition: transform 0.4s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); }
+
+        /* === ANIMAÇÕES === */
+        @keyframes fadeSlideUp {
+            from { opacity:0; transform: translateY(20px); }
+            to { opacity:1; transform: translateY(0); }
+        }
+        @keyframes fadeScaleIn {
+            from { opacity:0; transform: scale(0.85); }
+            to { opacity:1; transform: scale(1); }
+        }
+        @keyframes fadeIn {
+            from { opacity:0; } to { opacity:1; }
+        }
+        @keyframes heartBeat {
+            0% { opacity:0; transform: scale(0.5); }
+            50% { opacity:1; transform: scale(1.15); }
+            100% { opacity:1; transform: scale(1); }
+        }
+        @keyframes glowPulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.3); opacity: 1; }
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+        @keyframes kenBurns1 {
+            0% { transform: scale(1) translate(0,0); }
+            100% { transform: scale(1.12) translate(-1.5%,-1%); }
+        }
+        @keyframes kenBurns2 {
+            0% { transform: scale(1.1) translate(-2%,0); }
+            100% { transform: scale(1) translate(1%,1%); }
+        }
+        @keyframes kenBurns3 {
+            0% { transform: scale(1) translate(1%,-1%); }
+            100% { transform: scale(1.15) translate(-1%,1%); }
+        }
+        @keyframes kenBurns4 {
+            0% { transform: scale(1.08) translate(0,2%); }
+            100% { transform: scale(1) translate(0,-1%); }
+        }
+        .kb-1 img.loaded { animation: kenBurns1 6s ease-in-out forwards; }
+        .kb-2 img.loaded { animation: kenBurns2 6s ease-in-out forwards; }
+        .kb-3 img.loaded { animation: kenBurns3 6s ease-in-out forwards; }
+        .kb-4 img.loaded { animation: kenBurns4 6s ease-in-out forwards; }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        @media (max-width: 600px) {
+            .photo-grid { grid-template-columns: repeat(2, 1fr); }
+            .input-row { grid-template-columns: 1fr; }
+            .form-card { padding: 1.25rem; }
+            .letterbox { height: 4vh; }
+            #sceneContainer { padding: 4vh 0; }
+            .photo-caption { bottom: 6vh; }
+            .player-controls { bottom: 5vh; }
+            .progress-bar { bottom: 4vh; }
+        }
+    </style>
+
+<!-- SEO Global (Injetado via script) -->
+<meta name="google-site-verification" content="HD6C01fIjD6g9HzuyVJbt-RWDHEgVG-8IicQsOv3Idw" />
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta property="og:site_name" content="Minha Decisão Certa">
+<meta property="og:locale" content="pt_BR">
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Vídeo Romântico Personalizado - Dia dos Namorados | Minha Decisão Certa">
+<meta name="twitter:description" content="Crie um vídeo cinematográfico personalizado com suas fotos e mensagens para o seu amor. Ferramenta grátis do portal Minha Decisão Certa.">
+<meta name="twitter:image" content="https://www.minhadecisaocerta.com.br/img/capa-seo.jpg">
+
+<!-- Dados Estruturados -->
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "WebSite",
+"name": "Minha Decisão Certa",
+"url": "https://www.minhadecisaocerta.com.br/",
+"description": "Reviews honestos, análises detalhadas e as melhores indicações de custo-benefício."
+}
+</script>
+</head>
+<body>
+
+<!-- === CANVAS DE FUNDO DO BUILDER === -->
+<canvas id="builderBg"></canvas>
+
+<!-- === BUILDER === -->
+<div id="builder">
+    <header class="hero-section">
+        <h1 class="hero-title">Vídeo Romântico</h1>
+        <p class="hero-sub">Crie um vídeo cinematográfico personalizado para o Dia dos Namorados</p>
+    </header>
+
+    <main class="form-section">
+        <!-- Nomes -->
+        <div class="form-card">
+            <h2><i class="fas fa-heart"></i> Vocês</h2>
+            <div class="input-row">
+                <div class="input-group">
+                    <label>Nome dele(a)</label>
+                    <input type="text" id="name1" placeholder="Ex: Meu Amor" value="Meu Amor">
+                </div>
+                <div class="input-group">
+                    <label>Seu nome</label>
+                    <input type="text" id="name2" placeholder="Ex: Maria" value="">
+                </div>
+            </div>
+            <div class="input-group" style="margin-top:0.5rem">
+                <label>Data especial</label>
+                <input type="text" id="dateInput" placeholder="Ex: 12 de Junho de 2025" value="12 de Junho de 2025">
+            </div>
+        </div>
+
+        <!-- Fotos -->
+        <div class="form-card">
+            <h2><i class="fas fa-images"></i> Fotos (até 6)</h2>
+            <div class="photo-grid" id="photoGrid"></div>
+            <p style="font-size:0.75rem; color:var(--muted); margin-top:0.75rem;">
+                <i class="fas fa-info-circle"></i> Se não enviar fotos, usaremos imagens românticas automáticas
+            </p>
+        </div>
+
+        <!-- Mensagens -->
+        <div class="form-card">
+            <h2><i class="fas fa-pen-fancy"></i> Mensagens do Coração</h2>
+            <div class="input-group">
+                <label>Mensagem 1</label>
+                <textarea id="msg1">Cada momento ao seu lado é um presente que guardo no coração.</textarea>
+            </div>
+            <div class="input-group">
+                <label>Mensagem 2</label>
+                <textarea id="msg2">Você é a melhor parte dos meus dias, a razão do meu sorriso.</textarea>
+            </div>
+            <div class="input-group">
+                <label>Mensagem 3</label>
+                <textarea id="msg3">Para sempre e mais um dia, eu escolho você.</textarea>
+            </div>
+        </div>
+    </main>
+
+    <button class="create-btn" id="createBtn">
+        <i class="fas fa-play"></i>&nbsp; Criar Vídeo Romântico
+    </button>
+</div>
+
+<!-- === PLAYER === -->
+<div id="player">
+    <div class="letterbox top"></div>
+    <div class="letterbox bottom"></div>
+    <canvas id="particleCanvas"></canvas>
+    <div id="sceneContainer"></div>
+
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+    <div class="player-controls show" id="playerControls">
+        <button class="ctrl-btn" id="prevBtn" title="Anterior"><i class="fas fa-backward-step"></i></button>
+        <button class="ctrl-btn" id="pauseBtn" title="Pausar"><i class="fas fa-pause"></i></button>
+        <button class="ctrl-btn" id="nextBtn" title="Próxima"><i class="fas fa-forward-step"></i></button>
+        <button class="ctrl-btn" id="muteBtn" title="Som"><i class="fas fa-volume-high"></i></button>
+        <button class="ctrl-btn" id="exitBtn" title="Sair"><i class="fas fa-xmark"></i></button>
+    </div>
+
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-spinner"></div>
+        <p class="loading-text">Preparando seu vídeo...</p>
+    </div>
+
+    <div class="replay-screen" id="replayScreen">
+        <p style="font-family:'Playfair Display',serif; font-size:1.5rem; color:var(--fg-dim); font-style:italic;">
+            Com todo o amor,
+        </p>
+        <p id="replayNames" style="font-family:'Playfair Display',serif; font-size:2rem; font-weight:900; color:var(--gold); margin-top:0.5rem;"></p>
+        <div style="display: flex; gap: 10px; margin-top: 2rem;">
+            <button class="replay-btn" id="replayBtn" style="margin-top:0"><i class="fas fa-redo"></i>&nbsp; Assistir</button>
+            <button class="replay-btn" id="recordBtn" style="margin-top:0; background: #22c55e; box-shadow: 0 4px 20px rgba(34,197,94,0.3);"><i class="fas fa-download"></i>&nbsp; Baixar .webm</button>
+        </div>
+        <p style="font-size: 0.75rem; color: var(--muted); margin-top: 1rem; max-width: 300px; text-align: center;">
+            Nota: O download captura o fundo animado. Para o vídeo com textos, recomendamos gravar a tela.
+        </p>
+    </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// =====================================================
+// DADOS PADRÃO E CONFIGURAÇÃO
+// =====================================================
+const DEFAULT_PHOTOS = [
+    'https://picsum.photos/seed/roses2025/1200/800.jpg',
+    'https://picsum.photos/seed/sunsetlove/1200/800.jpg',
+    'https://picsum.photos/seed/couplwalk/1200/800.jpg',
+    'https://picsum.photos/seed/romantdin/1200/800.jpg',
+    'https://picsum.photos/seed/heartsfly/1200/800.jpg',
+    'https://picsum.photos/seed/goldhour/1200/800.jpg',
+];
+
+const ROMANTIC_QUOTES = [
+    '"O amor não se vê com os olhos, mas com o coração." — Shakespeare',
+    '"Eu te amo não pelo que você é, mas pelo que eu sou quando estou com você." — Roy Croft',
+    '"Amar não é olhar um para o outro, é olhar juntos na mesma direção." — Saint-Exupéry',
+];
+
+// =====================================================
+// SISTEMA DE TOAST
+// =====================================================
+function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// =====================================================
+// FUNDO ANIMADO DO BUILDER (bokeh flutuante)
+// =====================================================
+(function initBuilderBg() {
+    const canvas = document.getElementById('builderBg');
+    const ctx = canvas.getContext('2d');
+    let w, h, bokehs = [];
+
+    function resize() {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    // Criar bokehs
+    for (let i = 0; i < 25; i++) {
+        bokehs.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            r: Math.random() * 40 + 10,
+            vx: (Math.random() - 0.5) * 0.3,
+            vy: (Math.random() - 0.5) * 0.3 - 0.15,
+            alpha: Math.random() * 0.08 + 0.02,
+            color: Math.random() > 0.5 ? '232,71,95' : '212,168,85',
+        });
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, w, h);
+        bokehs.forEach(b => {
+            b.x += b.vx;
+            b.y += b.vy;
+            if (b.x < -b.r) b.x = w + b.r;
+            if (b.x > w + b.r) b.x = -b.r;
+            if (b.y < -b.r) b.y = h + b.r;
+            if (b.y > h + b.r) b.y = -b.r;
+
+            const grad = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.r);
+            grad.addColorStop(0, `rgba(${b.color},${b.alpha})`);
+            grad.addColorStop(1, `rgba(${b.color},0)`);
+            ctx.fillStyle = grad;
+            ctx.beginPath();
+            ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+            ctx.fill();
+        });
+        requestAnimationFrame(draw);
+    }
+    draw();
+})();
+
+// =====================================================
+// UPLOAD DE FOTOS
+// =====================================================
+const uploadedPhotos = []; // data URLs
+const MAX_PHOTOS = 6;
+
+function buildPhotoGrid() {
+    const grid = document.getElementById('photoGrid');
+    grid.innerHTML = '';
+    for (let i = 0; i < MAX_PHOTOS; i++) {
+        const slot = document.createElement('div');
+        slot.className = 'photo-slot' + (uploadedPhotos[i] ? ' has-photo' : '');
+        slot.dataset.index = i;
+
+        if (uploadedPhotos[i]) {
+            const img = document.createElement('img');
+            img.src = uploadedPhotos[i];
+            img.alt = 'Foto ' + (i + 1);
+            slot.appendChild(img);
+
+            const rm = document.createElement('button');
+            rm.className = 'remove-btn';
+            rm.innerHTML = '<i class="fas fa-xmark"></i>';
+            rm.addEventListener('click', (e) => {
+                e.stopPropagation();
+                uploadedPhotos[i] = null;
+                buildPhotoGrid();
+            });
+            slot.appendChild(rm);
+        } else {
+            slot.innerHTML = `
+                <i class="fas fa-plus slot-icon"></i>
+                <span class="slot-text">Adicionar</span>
+            `;
+            slot.addEventListener('click', () => triggerUpload(i));
+        }
+        grid.appendChild(slot);
+    }
+}
+
+function triggerUpload(index) {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.onchange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+            uploadedPhotos[index] = ev.target.result;
+            buildPhotoGrid();
+            showToast('Foto adicionada!');
+        };
+        reader.readAsDataURL(file);
+    };
+    input.click();
+}
+
+buildPhotoGrid();
+
+// =====================================================
+// SISTEMA DE PARTÍCULAS (Corações e brilhos)
+// =====================================================
+class ParticleSystem {
+    constructor(canvas) {
+        this.canvas = canvas;
+        this.ctx = canvas.getContext('2d');
+        this.particles = [];
+        this.running = false;
+        this.intensity = 0.5; // 0-1
+        this.resize();
+        window.addEventListener('resize', () => this.resize());
+    }
+
+    resize() {
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
+    }
+
+    // Desenha um coração paramétrico
+    drawHeart(x, y, size, color, alpha) {
+        const ctx = this.ctx;
+        ctx.save();
+        ctx.globalAlpha = alpha;
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        for (let t = 0; t < Math.PI * 2; t += 0.05) {
+            const hx = size * 16 * Math.pow(Math.sin(t), 3) / 17;
+            const hy = -size * (13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t)) / 17;
+            if (t === 0) ctx.moveTo(x + hx, y + hy);
+            else ctx.lineTo(x + hx, y + hy);
+        }
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+    }
+
+    spawn(count = 1) {
+        for (let i = 0; i < count; i++) {
+            const isHeart = Math.random() > 0.35;
+            this.particles.push({
+                x: Math.random() * this.canvas.width,
+                y: this.canvas.height + 20,
+                vx: (Math.random() - 0.5) * 0.8,
+                vy: -(Math.random() * 1.5 + 0.5),
+                size: isHeart ? Math.random() * 10 + 5 : Math.random() * 3 + 1,
+                alpha: Math.random() * 0.5 + 0.3,
+                decay: Math.random() * 0.003 + 0.001,
+                rotation: Math.random() * Math.PI * 2,
+                rotSpeed: (Math.random() - 0.5) * 0.02,
+                type: isHeart ? 'heart' : 'sparkle',
+                color: Math.random() > 0.3 ? '#E8475F' : '#D4A855',
+            });
+        }
+    }
+
+    // Explosão de corações em um ponto
+    burst(x, y, count = 30) {
+        for (let i = 0; i < count; i++) {
+            const angle = (Math.PI * 2 / count) * i + Math.random() * 0.3;
+            const speed = Math.random() * 3 + 1;
+            this.particles.push({
+                x, y,
+                vx: Math.cos(angle) * speed,
+                vy: Math.sin(angle) * speed,
+                size: Math.random() * 12 + 6,
+                alpha: 0.9,
+                decay: Math.random() * 0.008 + 0.005,
+                rotation: Math.random() * Math.PI * 2,
+                rotSpeed: (Math.random() - 0.5) * 0.05,
+                type: 'heart',
+                color: Math.random() > 0.4 ? '#E8475F' : '#D4A855',
+            });
+        }
+    }
+
+    update() {
+        if (!this.running) return;
+        const ctx = this.ctx;
+        ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+        // Gerar novas partículas conforme intensidade
+        if (Math.random() < this.intensity * 0.3) {
+            this.spawn(1);
+        }
+
+        for (let i = this.particles.length - 1; i >= 0; i--) {
+            const p = this.particles[i];
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy -= 0.005; // leve flutuação para cima
+            p.alpha -= p.decay;
+            p.rotation += p.rotSpeed;
+
+            if (p.alpha <= 0) {
+                this.particles.splice(i, 1);
+                continue;
+            }
+
+            if (p.type === 'heart') {
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate(p.rotation);
+                this.drawHeart(0, 0, p.size, p.color, p.alpha);
+                ctx.restore();
+            } else {
+                ctx.save();
+                ctx.globalAlpha = p.alpha;
+                ctx.fillStyle = p.color;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, Math.max(0.5, p.size), 0, Math.PI * 2);
+                ctx.fill();
+                // Brilho extra
+                ctx.globalAlpha = p.alpha * 0.3;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, Math.max(0.5, p.size * 2.5), 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        requestAnimationFrame(() => this.update());
+    }
+
+    start() {
+        this.running = true;
+        this.update();
+    }
+
+    stop() {
+        this.running = false;
+        this.particles = [];
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+}
+
+// =====================================================
+// SISTEMA DE ÁUDIO (pad romântico com Web Audio API)
+// =====================================================
+class RomanticAudio {
+    constructor() {
+        this.ctx = null;
+        this.masterGain = null;
+        this.oscillators = [];
+        this.muted = false;
+        this.started = false;
+    }
+
+    init() {
+        if (this.started) return;
+        this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+
+        this.masterGain = this.ctx.createGain();
+        this.masterGain.gain.value = 0.12;
+        this.masterGain.connect(this.ctx.destination);
+
+        // Filtro passa-baixa para suavidade
+        const filter = this.ctx.createBiquadFilter();
+        filter.type = 'lowpass';
+        filter.frequency.value = 600;
+        filter.Q.value = 1;
+        filter.connect(this.masterGain);
+
+        // LFO no filtro para movimento
+        const lfo = this.ctx.createOscillator();
+        const lfoGain = this.ctx.createGain();
+        lfo.type = 'sine';
+        lfo.frequency.value = 0.15;
+        lfoGain.gain.value = 200;
+        lfo.connect(lfoGain);
+        lfoGain.connect(filter.frequency);
+        lfo.start();
+
+        // Acorde de Dó maior 7 (Cmaj7) - quente e romântico
+        const freqs = [130.81, 164.81, 196.00, 246.94];
+        freqs.forEach((freq, i) => {
+            const osc = this.ctx.createOscillator();
+            osc.type = 'sine';
+            osc.frequency.value = freq;
+            // Leve detuning para riqueza
+            osc.detune.value = (i % 2 === 0 ? 4 : -4);
+            const g = this.ctx.createGain();
+            g.gain.value = 0.25;
+            osc.connect(g);
+            g.connect(filter);
+            osc.start();
+            this.oscillators.push(osc);
+        });
+
+        // Sub-bass sutil
+        const sub = this.ctx.createOscillator();
+        sub.type = 'sine';
+        sub.frequency.value = 65.41; // C2
+        const subGain = this.ctx.createGain();
+        subGain.gain.value = 0.15;
+        sub.connect(subGain);
+        subGain.connect(filter);
+        sub.start();
+        this.oscillators.push(sub);
+
+        this.started = true;
+    }
+
+    toggleMute() {
+        if (!this.started) return;
+        this.muted = !this.muted;
+        this.masterGain.gain.linearRampToValueAtTime(
+            this.muted ? 0 : 0.12,
+            this.ctx.currentTime + 0.3
+        );
+        return this.muted;
+    }
+
+    stop() {
+        if (!this.started) return;
+        this.masterGain.gain.linearRampToValueAtTime(0, this.ctx.currentTime + 1);
+        setTimeout(() => {
+            this.oscillators.forEach(o => { try { o.stop(); } catch(e){} });
+            this.ctx.close();
+            this.started = false;
+        }, 1200);
+    }
+}
+
+// =====================================================
+// GERENCIADOR DE CENAS E REPRODUTOR
+// =====================================================
+class VideoPlayer {
+    constructor() {
+        this.container = document.getElementById('sceneContainer');
+        this.particles = new ParticleSystem(document.getElementById('particleCanvas'));
+        this.audio = new RomanticAudio();
+        this.scenes = [];
+        this.currentScene = -1;
+        this.sceneTimeout = null;
+        this.isPlaying = false;
+        this.isPaused = false;
+        this.totalDuration = 0;
+        this.elapsed = 0;
+        this.progressInterval = null;
+        this.config = {};
+    }
+
+    // Pré-carrega imagens e monta as cenas
+    async prepare(config) {
+        this.config = config;
+        this.scenes = this.buildScenes();
+
+        // Calcular duração total
+        this.totalDuration = this.scenes.reduce((sum, s) => sum + s.duration + 1800, 0);
+
+        // Pré-carregar imagens
+        const allPhotos = this.config.photos;
+        await Promise.all(allPhotos.map(url => new Promise(r => {
+            const img = new Image();
+            img.onload = r;
+            img.onerror = r;
+            img.src = url;
+        })));
+    }
+
+    buildScenes() {
+        const c = this.config;
+        const scenes = [];
+        const photos = c.photos;
+        const msgs = c.messages;
+        const kbClasses = ['kb-1','kb-2','kb-3','kb-4'];
+        let photoIdx = 0;
+
+        // 1. Abertura
+        scenes.push({ type: 'opening', name: c.name1, duration: 4500 });
+
+        // 2. Foto 1 + legenda
+        scenes.push({
+            type: 'photo', src: photos[photoIdx % photos.length],
+            kb: kbClasses[photoIdx % 4],
+            caption: msgs[0].substring(0, 50) + (msgs[0].length > 50 ? '...' : ''),
+            duration: 5500
+        });
+        photoIdx++;
+
+        // 3. Mensagem 1
+        scenes.push({ type: 'message', text: msgs[0], duration: 5000 });
+
+        // 4. Foto 2
+        scenes.push({
+            type: 'photo', src: photos[photoIdx % photos.length],
+            kb: kbClasses[photoIdx % 4],
+            caption: '', duration: 5000
+        });
+        photoIdx++;
+
+        // 5. Citação
+        scenes.push({
+            type: 'message',
+            text: ROMANTIC_QUOTES[Math.floor(Math.random() * ROMANTIC_QUOTES.length)],
+            duration: 5500
+        });
+
+        // 6. Foto 3
+        scenes.push({
+            type: 'photo', src: photos[photoIdx % photos.length],
+            kb: kbClasses[photoIdx % 4],
+            caption: msgs[1] ? msgs[1].substring(0, 50) + (msgs[1].length > 50 ? '...' : '') : '',
+            duration: 5000
+        });
+        photoIdx++;
+
+        // 7. Mensagem 2
+        if (msgs[1]) {
+            scenes.push({ type: 'message', text: msgs[1], duration: 5000 });
+        }
+
+        // 8. Foto 4
+        scenes.push({
+            type: 'photo', src: photos[photoIdx % photos.length],
+            kb: kbClasses[photoIdx % 4],
+            caption: '', duration: 5000
+        });
+        photoIdx++;
+
+        // 9. Data
+        scenes.push({ type: 'date', date: c.date, duration: 4500 });
+
+        // 10. Mensagem 3
+        if (msgs[2]) {
+            scenes.push({ type: 'message', text: msgs[2], duration: 5000 });
+        }
+
+        // 11. Final
+        scenes.push({
+            type: 'finale', name1: c.name1, name2: c.name2,
+            duration: 7000
+        });
+
+        return scenes;
+    }
+
+    // Cria o DOM de uma cena
+    createSceneElement(scene) {
+        const div = document.createElement('div');
+        div.className = 'scene';
+
+        switch (scene.type) {
+            case 'opening':
+                div.classList.add('scene-opening');
+                div.innerHTML = `
+                    <div class="glow"></div>
+                    <p class="sub-text">Para você,</p>
+                    <h1 class="name-text">${this.escHTML(scene.name)}</h1>
+                `;
+                break;
+
+            case 'photo':
+                div.classList.add('scene-photo');
+                div.innerHTML = `
+                    <div class="photo-frame ${scene.kb}">
+                        <img src="${scene.src}" alt="Foto romântica">
+                    </div>
+                    <div class="photo-overlay"></div>
+                    ${scene.caption ? `<p class="photo-caption">${this.escHTML(scene.caption)}</p>` : ''}
+                `;
+                // Carregar imagem
+                const img = div.querySelector('img');
+                img.onload = () => img.classList.add('loaded');
+                if (img.complete) img.classList.add('loaded');
+                break;
+
+            case 'message':
+                div.classList.add('scene-message');
+                const words = scene.text.split(' ').map(w =>
+                    `<span class="word">${this.escHTML(w)}</span>`
+                ).join(' ');
+                div.innerHTML = `
+                    <div class="quote-mark">"</div>
+                    <p class="message-text">${words}</p>
+                `;
+                break;
+
+            case 'date':
+                div.classList.add('scene-date');
+                div.innerHTML = `
+                    <p class="since-text">Desde</p>
+                    <h2 class="date-text">${this.escHTML(scene.date)}</h2>
+                    <div class="heart-divider">&#9829;</div>
+                `;
+                break;
+
+            case 'finale':
+                div.classList.add('scene-finale');
+                const names = scene.name2
+                    ? `${this.escHTML(scene.name1)} <span class="finale-amp">&</span> ${this.escHTML(scene.name2)}`
+                    : this.escHTML(scene.name1);
+                div.innerHTML = `
+                    <h1 class="finale-names">${names}</h1>
+                    <div class="finale-heart">&#9829;</div>
+                    <p class="finale-text">Feliz Dia dos Namorados</p>
+                    <p class="finale-year">2025</p>
+                `;
+                break;
+        }
+        return div;
+    }
+
+    // Anima elementos específicos de cada cena após ela ficar visível
+    animateScene(scene, element) {
+        switch (scene.type) {
+            case 'photo':
+                setTimeout(() => {
+                    const cap = element.querySelector('.photo-caption');
+                    if (cap) cap.classList.add('show');
+                }, 1500);
+                break;
+            case 'message':
+                const words = element.querySelectorAll('.word');
+                words.forEach((w, i) => {
+                    setTimeout(() => w.classList.add('show'), 400 + i * 120);
+                });
+                break;
+            case 'date':
+                setTimeout(() => element.querySelector('.since-text').classList.add('show'), 300);
+                setTimeout(() => element.querySelector('.date-text').classList.add('show'), 800);
+                setTimeout(() => element.querySelector('.heart-divider').classList.add('show'), 1300);
+                break;
+            case 'finale':
+                setTimeout(() => element.querySelector('.finale-names').classList.add('show'), 300);
+                setTimeout(() => element.querySelector('.finale-heart').classList.add('show'), 1000);
+                setTimeout(() => element.querySelector('.finale-text').classList.add('show'), 1800);
+                setTimeout(() => element.querySelector('.finale-year').classList.add('show'), 2500);
+                // Explosão de corações!
+                setTimeout(() => {
+                    this.particles.burst(
+                        this.particles.canvas.width / 2,
+                        this.particles.canvas.height / 2,
+                        50
+                    );
+                    this.particles.intensity = 1;
+                }, 1200);
+                break;
+        }
+    }
+
+    // Avança para a próxima cena
+    nextScene() {
+        if (this.isPaused) return;
+
+        // Remover cena anterior
+        const prev = this.container.querySelector('.scene.visible');
+        if (prev) {
+            prev.classList.remove('visible');
+            setTimeout(() => prev.remove(), 1000);
+        }
+
+        this.currentScene++;
+        if (this.currentScene >= this.scenes.length) {
+            this.endVideo();
+            return;
+        }
+
+        const scene = this.scenes[this.currentScene];
+        const el = this.createSceneElement(scene);
+        this.container.appendChild(el);
+
+        // Pequeno atraso para a transição (fade in)
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                el.classList.add('visible');
+                this.animateScene(scene, el);
+            });
+        });
+
+        // Aumentar partículas em cenas especiais
+        if (scene.type === 'finale') {
+            this.particles.intensity = 0.8;
+        } else if (scene.type === 'opening') {
+            this.particles.intensity = 0.3;
+        } else {
+            this.particles.intensity = 0.4 + Math.random() * 0.2;
+        }
+
+        // Agendar próxima cena
+        this.sceneTimeout = setTimeout(() => this.nextScene(), scene.duration);
+    }
+
+    // Iniciar reprodução
+    play() {
+        this.audio.init();
+        this.particles.start();
+        this.isPlaying = true;
+        this.isPaused = false;
+        this.elapsed = 0;
+
+        document.getElementById('loadingScreen').style.display = 'none';
+        document.getElementById('replayScreen').classList.remove('show');
+        document.getElementById('playerControls').classList.add('show');
+
+        // Iniciar progresso
+        this.progressInterval = setInterval(() => {
+            if (!this.isPaused) {
+                this.elapsed += 100;
+                const pct = Math.min(100, (this.elapsed / this.totalDuration) * 100);
+                document.getElementById('progressFill').style.width = pct + '%';
+            }
+        }, 100);
+
+        this.nextScene();
+    }
+
+    pause() {
+        this.isPaused = true;
+        clearTimeout(this.sceneTimeout);
+        document.querySelector('#pauseBtn i').className = 'fas fa-play';
+    }
+
+    resume() {
+        this.isPaused = false;
+        document.querySelector('#pauseBtn i').className = 'fas fa-pause';
+        // Continuar cena atual após um tempo reduzido
+        const remaining = this.scenes[this.currentScene]
+            ? this.scenes[this.currentScene].duration * 0.5
+            : 2000;
+        this.sceneTimeout = setTimeout(() => this.nextScene(), remaining);
+    }
+
+    skipNext() {
+        clearTimeout(this.sceneTimeout);
+        this.nextScene();
+    }
+
+    skipPrev() {
+        if (this.currentScene <= 0) return;
+        clearTimeout(this.sceneTimeout);
+        // Remove cena atual
+        const cur = this.container.querySelector('.scene.visible');
+        if (cur) { cur.classList.remove('visible'); setTimeout(() => cur.remove(), 300); }
+        this.currentScene -= 2; // -2 porque nextScene vai +1
+        if (this.currentScene < -1) this.currentScene = -1;
+        this.nextScene();
+    }
+
+    endVideo() {
+        this.isPlaying = false;
+        clearInterval(this.progressInterval);
+        document.getElementById('progressFill').style.width = '100%';
+
+        // Mostrar tela de replay
+        const n1 = this.config.name1 || 'Amor';
+        const n2 = this.config.name2;
+        document.getElementById('replayNames').textContent = n2 ? `${n1} & ${n2}` : n1;
+        setTimeout(() => {
+            document.getElementById('replayScreen').classList.add('show');
+        }, 1500);
+    }
+
+    // Limpar tudo
+    destroy() {
+        clearTimeout(this.sceneTimeout);
+        clearInterval(this.progressInterval);
+        this.particles.stop();
+        this.audio.stop();
+        this.container.innerHTML = '';
+        this.currentScene = -1;
+        this.isPlaying = false;
+        this.isPaused = false;
+        this.elapsed = 0;
+        document.getElementById('progressFill').style.width = '0%';
+        document.getElementById('replayScreen').classList.remove('show');
+    }
+
+    escHTML(str) {
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+    }
+}
+
+// =====================================================
+// INICIALIZAÇÃO E EVENTOS
+// =====================================================
+const player = new VideoPlayer();
+
+// Botão Criar Vídeo
+document.getElementById('createBtn').addEventListener('click', async () => {
+    const name1 = document.getElementById('name1').value.trim() || 'Meu Amor';
+    const name2 = document.getElementById('name2').value.trim();
+    const date = document.getElementById('dateInput').value.trim() || '12 de Junho de 2025';
+    const messages = [
+        document.getElementById('msg1').value.trim(),
+        document.getElementById('msg2').value.trim(),
+        document.getElementById('msg3').value.trim(),
+    ].filter(m => m.length > 0);
+
+    // Combinar fotos do usuário com padrões
+    const userPhotos = uploadedPhotos.filter(p => p !== null && p !== undefined);
+    const photos = [
+        ...userPhotos,
+        ...DEFAULT_PHOTOS.slice(userPhotos.length)
+    ].slice(0, 6);
+
+    const config = { name1, name2, date, messages, photos };
+
+    // Mostrar player
+    const playerEl = document.getElementById('player');
+    playerEl.classList.add('active');
+    document.getElementById('loadingScreen').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    document.title = '♥ Vídeo Romântico';
+
+    // Preparar e reproduzir
+    try {
+        await player.prepare(config);
+        // Pequeno delay para a transição de opacidade
+        setTimeout(() => player.play(), 800);
+    } catch (err) {
+        console.error(err);
+        document.getElementById('loadingScreen').style.display = 'none';
+        showToast('Erro ao preparar o vídeo. Tente novamente.');
+    }
+});
+
+// Controles do player
+document.getElementById('pauseBtn').addEventListener('click', () => {
+    if (!player.isPlaying) return;
+    if (player.isPaused) player.resume();
+    else player.pause();
+});
+
+document.getElementById('nextBtn').addEventListener('click', () => {
+    if (player.isPlaying) player.skipNext();
+});
+
+document.getElementById('prevBtn').addEventListener('click', () => {
+    if (player.isPlaying) player.skipPrev();
+});
+
+document.getElementById('muteBtn').addEventListener('click', () => {
+    const muted = player.audio.toggleMute();
+    document.querySelector('#muteBtn i').className = muted
+        ? 'fas fa-volume-xmark' : 'fas fa-volume-high';
+});
+
+document.getElementById('exitBtn').addEventListener('click', exitPlayer);
+
+    document.getElementById('recordBtn').addEventListener('click', () => {
+        const stream = document.getElementById('particleCanvas').captureStream(30);
+        const recorder = new MediaRecorder(stream, { mimeType: 'video/webm' });
+        const chunks = [];
+
+        recorder.ondataavailable = e => chunks.push(e.data);
+        recorder.onstop = () => {
+            const blob = new Blob(chunks, { type: 'video/webm' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'meu-video-romantico.webm';
+            a.click();
+            showToast('Download concluído!');
+        };
+
+        player.destroy();
+        document.getElementById('loadingScreen').style.display = 'flex';
+        player.prepare(player.config).then(() => {
+            setTimeout(() => {
+                recorder.start();
+                player.play();
+                showToast('Gravando fundo animado...');
+                
+                // Parar gravação ao final das cenas
+                setTimeout(() => {
+                    recorder.stop();
+                }, player.totalDuration);
+            }, 500);
+        });
+    });
+
+    document.getElementById('replayBtn').addEventListener('click', () => {
+        player.destroy();
+        document.getElementById('loadingScreen').style.display = 'flex';
+        player.prepare(player.config).then(() => {
+            setTimeout(() => player.play(), 500);
+        });
+    });
+
+function exitPlayer() {
+    player.destroy();
+    const playerEl = document.getElementById('player');
+    playerEl.classList.remove('active');
+    document.body.style.overflow = '';
+    document.title = 'Vídeo Romântico - Dia dos Namorados';
+    // Resetar ícones
+    document.querySelector('#muteBtn i').className = 'fas fa-volume-high';
+    document.querySelector('#pauseBtn i').className = 'fas fa-pause';
+}
+
+// Teclado
+document.addEventListener('keydown', (e) => {
+    if (!player.isPlaying) return;
+    switch(e.key) {
+        case ' ': case 'k':
+            e.preventDefault();
+            if (player.isPaused) player.resume();
+            else player.pause();
+            break;
+        case 'ArrowRight': case 'l':
+            player.skipNext(); break;
+        case 'ArrowLeft': case 'j':
+            player.skipPrev(); break;
+        case 'm':
+            document.getElementById('muteBtn').click(); break;
+        case 'Escape':
+            exitPlayer(); break;
+    }
+});
+
+// Esconder controles automaticamente no player
+let hideControlsTimeout;
+document.getElementById('player').addEventListener('mousemove', () => {
+    const ctrl = document.getElementById('playerControls');
+    ctrl.classList.add('show');
+    clearTimeout(hideControlsTimeout);
+    hideControlsTimeout = setTimeout(() => {
+        if (player.isPlaying && !player.isPaused) {
+            ctrl.classList.remove('show');
+        }
+    }, 3000);
+});
+</script>
+<script src="js/search.js"></script>
+<script src="js/pinterest.js"></script>
+<script src="js/chatbot.js"></script>
+
+    <!-- Dados Estruturados (SEO) -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Vídeo Romântico Personalizado - Dia dos Namorados | Minha Decisão Certa",
+  "description": "Crie um vídeo cinematográfico personalizado com suas fotos e mensagens para o seu amor. Ferramenta grátis do portal Minha Decisão Certa.",
+  "url": "https://www.minhadecisaocerta.com.br/video-romantico.html",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Minha Decisão Certa"
+  }
+}
+    </script>
+<script src="js/main.js"></script>
+</body>
+</html>
