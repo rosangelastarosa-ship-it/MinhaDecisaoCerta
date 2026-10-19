@@ -17,15 +17,15 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     .article-content {
-      max-width: 800px;
+      max-width: 840px;
       margin: 0 auto;
       padding: 2rem 5% 5rem;
       font-size: 1.15rem;
       line-height: 1.8;
-      color: #ccc;
+      color: var(--text-main);
     }
     .article-content h2 {
-      color: var(--text-main);
+      color: var(--text-dark);
       margin-top: 3rem;
       margin-bottom: 1rem;
       font-size: 1.8rem;
@@ -35,37 +35,29 @@
     }
     .article-hero {
       text-align: center;
-      padding: 8rem 5% 4rem;
-      background: linear-gradient(to bottom, rgba(15, 23, 42, 0.7) 0%, var(--bg-main) 100%), url('https://images.unsplash.com/photo-1628840042765-356cda07504e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') center/cover;
+      padding: 6rem 5% 3.5rem;
+      background: linear-gradient(to bottom, rgba(15, 23, 42, 0.75) 0%, rgba(15, 23, 42, 0.95) 100%), url('https://images.unsplash.com/photo-1628840042765-356cda07504e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') center/cover;
     }
     .article-hero h1 {
-      font-size: 2.8rem;
+      font-size: 2.6rem;
       color: #fff;
       max-width: 900px;
-      margin: 0 auto 1.5rem;
-      line-height: 1.2;
+      margin: 0 auto 1.2rem;
+      line-height: 1.25;
       text-shadow: 0 4px 20px rgba(0,0,0,0.8);
     }
     .article-meta {
-      color: var(--primary);
-      font-weight: 600;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+      color: #94a3b8;
+      font-weight: 500;
+      font-size: 0.95rem;
     }
     .highlight-box {
-      background: rgba(220, 53, 69, 0.1);
-      border-left: 4px solid #ff6b6b;
+      background: rgba(220, 53, 69, 0.08);
+      border-left: 4px solid #ef4444;
       padding: 1.5rem;
       border-radius: 8px;
       margin: 2rem 0;
-      color: #fff;
-    }
-    .conclusion-box {
-      background: rgba(40, 167, 69, 0.1);
-      border: 1px solid var(--success);
-      padding: 2rem;
-      border-radius: 12px;
-      text-align: center;
-      margin-top: 3rem;
+      color: var(--text-main);
     }
   </style>
 
@@ -125,72 +117,141 @@
             <a href="index.html" class="category-link" id="cat-all">🏠 Início</a>
             <a href="notebooks.html" class="category-link" id="cat-notebook">💻 Notebooks</a>
             <a href="geladeiras.html" class="category-link" id="cat-geladeiras">🧊 Geladeiras</a>
-            <a href="airfryers.html" class="category-link" id="cat-airfryer">🍟 Air Fryers</a>
+            <a href="airfryers.html" class="category-link active" id="cat-airfryer">🍟 Air Fryers</a>
             <a href="bicicletas.html" class="category-link" id="cat-bicicletas">🚲 Bicicletas</a>
             <a href="maquinas-de-lavar.html" class="category-link" id="cat-maquinas">⚙️ Máquinas</a>
             <a href="celulares.html" class="category-link" id="cat-celular">📱 Celulares</a>
             <a href="tvs.html" class="category-link" id="cat-tvs">📺 TVs</a>
-            <a href="https://www.minhadecisaocerta.com.br/veo-ai" class="category-link" id="cat-veo" style="color: #10b981; font-weight: 700;">VEO AI</a>
-            <a href="https://www.minhadecisaocerta.com.br/video-de-amor" class="category-link" id="cat-video-amor">❤️ Video de Amor</a>
-            <a href="https://www.minhadecisaocerta.com.br/guia-gemini" class="category-link" id="cat-guia-gemini">🤖 Guia Gemini</a>
-            <a href="https://www.minhadecisaocerta.com.br/animacao-2d" class="category-link" id="cat-animacao">🎬 Animação 2D</a>
-            <a href="https://www.minhadecisaocerta.com.br/album-copa-2026" class="category-link" id="cat-copa">⚽ Álbum Copa 2026</a>
-            <a href="https://www.minhadecisaocerta.com.br/blog" class="category-link" id="cat-blog">📝 Blog</a>
-            <a href="calca-jeans-wide-leg.html" class="category-link" id="cat-moda" style="border-left: 1px solid var(--border-color); padding-left: 15px; color: #ec4899; font-weight: 700;">👗 Moda</a>
-            <a href="celimax-retinal.html" class="category-link" id="cat-beleza" style="border-left: 1px solid var(--border-color); padding-left: 15px; color: #e879a0; font-weight: 700;">💄 Beleza e Cuidados Pessoais</a>
-            <a href="massageador-portatil.html" class="category-link" id="cat-massageador" style="border-left: 1px solid var(--border-color); padding-left: 15px; color: #06b6d4; font-weight: 700;">💆‍♂️ Massageador Portátil</a>
-            <a href="planejador-sandbox.html" class="category-link" id="cat-sandbox" style="border-left: 1px solid var(--border-color); padding-left: 15px; color: var(--accent);">🛠️ Planejador Sandbox</a>
-            <a href="gerador-de-prompts.html" class="category-link" id="cat-gerador" style="border-left: 1px solid var(--border-color); padding-left: 15px; color: #f59e0b; font-weight: 700;">✨ Gerador de Prompts</a>
+            <a href="blog.html" class="category-link" id="cat-blog">📝 Blog</a>
         </div>
     </nav>
 
   <!-- Article Hero -->
   <section class="article-hero">
-    <div class="badge" style="background: var(--success); color: #fff; margin-bottom: 1rem;">SAÚDE E AIR FRYERS</div>
+    <div class="badge" style="background: var(--secondary-color); color: #fff; margin-bottom: 1rem; padding: 6px 14px; border-radius: 20px; font-weight: 700; font-size: 0.85rem; display: inline-block;">SAÚDE E AIR FRYERS 2026</div>
     <h1>Seu antiaderente está te envenenando? O perigo das Air Fryers baratas</h1>
     <div class="article-meta">
-      <i class="fas fa-user-circle"></i> Por Equipe MDC &bull; Leitura: 3 min
+      <i class="fas fa-user-circle"></i> Por Equipe Minha Decisão Certa &bull; Atualizado em Outubro de 2026 &bull; Leitura: 3 min
     </div>
   </section>
 
   <!-- Article Content -->
   <main class="article-content">
+
+    <!-- 1. DISCLAIMER DE AFILIADO TRANSPARENTE (CONAR / PLATAFORMAS) -->
+    <aside class="affiliate-disclosure">
+      <strong>Aviso de Transparência:</strong> Este conteúdo é independente e baseado em testes de segurança alimentar e curadoria técnica. Quando você compra através dos nossos links, podemos receber uma comissão das lojas oficiais (como Shopee e Amazon), sem nenhum custo extra para você. Isso mantém nossa curadoria 100% gratuita e isenta de anúncios invasivos.
+    </aside>
+
     <!-- Resumo Direto (Answer-First para GEO/LLMO) -->
-    <div style="background: rgba(16, 185, 129, 0.1); border-left: 4px solid var(--success); padding: 1.5rem; margin-bottom: 2.5rem; border-radius: 4px;">
-      <p style="margin: 0; font-size: 1.15rem; line-height: 1.6; color: #fff;">
-        <strong>Resposta Rápida: O teflon da Air Fryer faz mal à saúde e solta toxinas?</strong> Não, desde que você compre modelos certificados. Fritadeiras muito baratas e de procedência duvidosa descascam o antiaderente com facilidade, podendo liberar compostos químicos (como o PFOA) na comida. Para garantir 100% de segurança, invista em marcas consolidadas (como Philips Walita, Oster ou Mondial) que utilizam <strong>antiaderente livre de toxinas</strong> ou <strong>revestimento de cerâmica</strong>.
+    <div style="background: #f0fdf4; border-left: 4px solid #16a34a; padding: 1.5rem; margin-bottom: 2rem; border-radius: 6px;">
+      <p style="margin: 0; font-size: 1.1rem; line-height: 1.6; color: #166534;">
+        <strong>Resposta Rápida: O teflon da Air Fryer faz mal à saúde e solta toxinas?</strong> Não, desde que você compre modelos de marcas certificadas. Fritadeiras muito baratas e sem homologação costumam usar pintura frágil que descasca em altas temperaturas, podendo liberar compostos tóxicos (como o PFOA). Para garantir 100% de segurança, invista em marcas consolidadas no Brasil (como <strong>Mondial</strong> e <strong>Britânia</strong>), que possuem cestos com antiaderente atóxico aprovado pelo Inmetro.
       </p>
     </div>
+
+    <!-- 2. CARD DE DECISÃO RÁPIDA (PRIMEIRO TERÇO DA PÁGINA) -->
+    <section class="quick-decision-box">
+      <div class="quick-decision-header">
+        <span style="font-size: 1.6rem;">⚡</span>
+        <h2>Decisão Rápida: Os 3 Modelos Mais Seguros e Duráveis</h2>
+      </div>
+      <p class="quick-decision-desc">Sem tempo para ler todo o artigo técnico? Cruzamos as avaliações de durabilidade do cesto e elegemos as 3 melhores escolhas de 2026:</p>
+
+      <div class="decision-cards-grid">
+        
+        <!-- ESCOLHA 1: TOP DE LINHA -->
+        <div class="decision-card winner">
+          <span class="decision-badge">🥇 Melhor Escolha Geral</span>
+          <h3 class="decision-card-title">Mondial AFON-12L-BI (12L)</h3>
+          <p class="decision-card-desc">Formato forno com cesto antiaderente Duraflon e prateleiras em inox. O teflon não descasca e assa porções grandes de uma só vez sem grudar.</p>
+          <a href="https://s.shopee.com.br/W36mDCKtK" target="_blank" rel="nofollow sponsored" class="btn-affiliate btn-shopee">
+            Ver Oferta na Shopee
+            <span class="btn-subtext">Menor Preço + Frete Grátis</span>
+          </a>
+        </div>
+
+        <!-- ESCOLHA 2: CUSTO-BENEFÍCIO -->
+        <div class="decision-card value">
+          <span class="decision-badge">🥈 Melhor Custo-Benefício</span>
+          <h3 class="decision-card-title">Britânia BFR21P Air Flow (4L)</h3>
+          <p class="decision-card-desc">Cesto com revestimento antiaderente reforçado Ultra Resistente, tamanho ideal para famílias de 2 a 4 pessoas e limpeza fácil no dia a dia.</p>
+          <a href="https://s.shopee.com.br/2g7ZuLBrOy" target="_blank" rel="nofollow sponsored" class="btn-affiliate btn-shopee">
+            Ver Oferta na Shopee
+            <span class="btn-subtext">Vendedor Oficial Indicado</span>
+          </a>
+        </div>
+
+        <!-- ESCOLHA 3: ECONÔMICA -->
+        <div class="decision-card budget">
+          <span class="decision-badge">🥉 Melhor Opção Barata</span>
+          <h3 class="decision-card-title">Mondial AF35BF (3,5L)</h3>
+          <p class="decision-card-desc">A opção confiável mais acessível do mercado. Antiaderente certificado pelo Inmetro com preço frequentemente abaixo de R$ 200.</p>
+          <a href="https://s.shopee.com.br/2BBKlKRwkO" target="_blank" rel="nofollow sponsored" class="btn-affiliate btn-shopee">
+            Ver Oferta na Shopee
+            <span class="btn-subtext">Preço Promocional Ativo</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
 
     <p>A promessa da Air Fryer é linda: saúde, praticidade e nada de óleo. Mas e se o material de onde a sua comida sai, a 200 graus celsius, estiver liberando toxinas silenciosas no seu prato todos os dias?</p>
 
     <p>Com a explosão de popularidade das fritadeiras sem óleo, o mercado foi inundado por marcas importadas de procedência duvidosa com preços extremamente baixos. O problema não é o preço, é <strong>do que elas são feitas</strong>.</p>
 
     <div class="highlight-box">
-      <h3 style="color: #ff6b6b; margin-top: 0;"><i class="fas fa-exclamation-triangle"></i> O Pesadelo do Teflon Descascando</h3>
-      <p style="margin-bottom: 0;">Você já notou pintinhas pretas grudadas na sua batata frita ou no frango? Isso é o revestimento antiaderente descascando devido à baixa qualidade do material e à alta temperatura constante.</p>
+      <h3 style="color: #b91c1c; margin-top: 0;"><i class="fas fa-exclamation-triangle"></i> O Pesadelo do Teflon Descascando</h3>
+      <p style="margin-bottom: 0;">Você já notou pintinhas pretas grudadas na sua batata frita ou no frango? Isso é o revestimento antiaderente de baixa qualidade descascando devido à temperatura contínua e à falta de aderência molecular na fábrica.</p>
     </div>
 
-    <img src="img/airfryer_cadence.png" alt="Air Fryer Cadence" style="width: 100%; max-width: 500px; display: block; margin: 2rem auto; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+    <img src="img/airfryer_cadence.png" alt="Air Fryer Cadence" style="width: 100%; max-width: 500px; display: block; margin: 2rem auto; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
 
     <h2>A polêmica do PTFE e PFOA</h2>
-    <p>Revestimentos antiaderentes antigos e não regulamentados utilizam compostos químicos (como o <a href="https://pt.wikipedia.org/wiki/PFOA" target="_blank" rel="nofollow" style="color: #ff6b6b; text-decoration: underline;">PFOA</a>) que, quando superaquecidos ou quando arranhados, podem liberar gases e partículas no alimento. Marcas baratas que não passam por testes rigorosos de segurança alimentar costumam utilizar a forma mais barata (e frágil) de pintura para a cesta.</p>
+    <p>Revestimentos antiaderentes antigos e não regulamentados utilizavam compostos químicos (como o <a href="https://pt.wikipedia.org/wiki/PFOA" target="_blank" rel="nofollow" style="color: #ef4444; text-decoration: underline;">PFOA</a>) que, quando superaquecidos ou quando arranhados, podem liberar gases e partículas no alimento. Marcas baratas que não passam por testes rigorosos de segurança alimentar costumam utilizar a forma mais barata (e frágil) de pintura para a cesta.</p>
     <p>Além do risco à saúde, a praticidade da Air Fryer vai por água abaixo: em menos de 2 meses, tudo começa a grudar no fundo, e lavá-la se torna o mesmo sacrifício de lavar uma forma cheia de óleo no fogão tradicional.</p>
 
-    <h2>Como evitar esse erro?</h2>
-    <p>Você não precisa gastar mil reais em uma Air Fryer para ter segurança. Você só precisa escolher o modelo certo de uma marca que utilize tecnologia de fixação profissional e seja certificada no Brasil, com garantia real de qualidade do antiaderente.</p>
-    
-    <p>Marcas consolidadas investem em cestos removíveis com dupla ou até tripla camada de antiaderente (Teflon ou Cerâmica) livre de toxinas perigosas. E sim, elas podem custar quase o mesmo preço da marca "genérica" do supermercado se você souber onde comprar. Depois de garantir um modelo seguro, você pode até <a href="receitas-airfryer.html" style="color: var(--success); text-decoration: underline; font-weight: bold;">aproveitar nossas receitas fáceis e saudáveis para Air Fryer</a> sem preocupação com sua saúde!</p>
+    <!-- 3. BLOCO DE PRÓS E CONTRAS HONESTOS -->
+    <h2>O que observar antes de comprar (Análise Prática)</h2>
+    <p>Durante a nossa avaliação dos materiais das fritadeiras elétricas vendidas no Brasil, identificamos pontos indispensáveis para você não errar na compra:</p>
 
-    <img src="img/airfryer_mondial_12l.png" alt="Air Fryer Mondial 12L Oven" style="width: 100%; max-width: 500px; display: block; margin: 2rem auto; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+    <div class="pros-cons-wrapper">
+      <div class="pros-box">
+        <h4><i class="fas fa-circle-check"></i> O que garante segurança:</h4>
+        <ul>
+          <li><i class="fas fa-check"></i> Cesto com certificação Inmetro livre de toxinas PFOA.</li>
+          <li><i class="fas fa-check"></i> Camada antiaderente com cura térmica de fábrica (não solta na primeira lavagem).</li>
+          <li><i class="fas fa-check"></i> Cestos com grelha removível de fácil higienização ou prateleiras em inox.</li>
+        </ul>
+      </div>
 
-    <h2>Nós fizemos o dever de casa por você</h2>
-    <p>Para garantir que você vai ter uma fritadeira durável, onde a comida não gruda e que não coloca a saúde da sua família em risco, nós cruzamos milhares de avaliações de compradores para separar o joio do trigo.</p>
+      <div class="cons-box">
+        <h4><i class="fas fa-triangle-exclamation"></i> Cuidados indispensáveis:</h4>
+        <ul>
+          <li><i class="fas fa-times"></i> NUNCA use o lado verde da esponja ou palha de aço na limpeza.</li>
+          <li><i class="fas fa-times"></i> Evite marcas genéricas importadas sem selo do Inmetro e sem assistência nacional.</li>
+          <li><i class="fas fa-times"></i> Fazer a cura inicial do cesto com óleo antes do primeiro uso é fundamental para aumentar a vida útil.</li>
+        </ul>
+      </div>
+    </div>
 
-    <div class="conclusion-box">
-      <h3 style="color: #fff; margin-bottom: 1rem;">O Ranking 2026 de Segurança e Preço</h3>
-      <p style="color: #ccc; margin-bottom: 2rem;">Confira a nossa seleção exclusiva com as melhores Air Fryers do mercado. Testadas, com antiaderente durável e, o melhor de tudo, com os maiores descontos da Shopee hoje.</p>
-      <a href="airfryers.html" class="btn btn-primary" style="font-size: 1.2rem; padding: 1rem 2rem; background: var(--success); box-shadow: 0 0 20px rgba(40,167,69,0.4); text-transform: uppercase; border-color: var(--success);">Ver as Melhores Ofertas <i class="fas fa-shopping-cart"></i></a>
+    <img src="img/airfryer_mondial_12l.png" alt="Air Fryer Mondial 12L Oven" style="width: 100%; max-width: 500px; display: block; margin: 2rem auto; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+
+    <!-- 4. VEREDITO FINAL E BOTÕES DE CONVERSÃO -->
+    <div class="verdict-card">
+      <h3>Veredito: Vale a pena comprar uma Air Fryer em 2026?</h3>
+      <p><strong>Sim, com certeza!</strong> O segredo está em fugir dos modelos descartáveis de marcas desconhecidas que descascam em 30 dias. Optando por marcas consolidadas com antiaderente certificado como a <strong>Mondial</strong> e a <strong>Britânia</strong>, você ganha rapidez, economia de energia e protege a saúde da sua família.</p>
+      
+      <div class="affiliate-cta-group">
+        <a href="https://s.shopee.com.br/W36mDCKtK" target="_blank" rel="nofollow sponsored" class="btn-affiliate btn-shopee">
+          🛒 Ver Mondial 12L na Shopee
+          <span class="btn-subtext">Cesto Seguro Duraflon + Frete Grátis</span>
+        </a>
+        <a href="https://s.shopee.com.br/2g7ZuLBrOy" target="_blank" rel="nofollow sponsored" class="btn-affiliate btn-shopee">
+          🏷️ Ver Britânia 4L na Shopee
+          <span class="btn-subtext">Melhor Custo-Benefício 2026</span>
+        </a>
+      </div>
     </div>
 
   </main>
