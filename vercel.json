@@ -4,6 +4,28 @@
       "source": "/index_antigo.html",
       "destination": "/notebooks.html",
       "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "minhadecisaocerta.vercel.app"
+        }
+      ],
+      "destination": "https://www.minhadecisaocerta.com.br/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "minhadecisaocerta.com.br"
+        }
+      ],
+      "destination": "https://www.minhadecisaocerta.com.br/$1",
+      "permanent": true
     }
   ]
 }
