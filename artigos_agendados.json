@@ -35,7 +35,8 @@
     "termo_shopee": "copo treinamento 360",
     "icone": "fa-glass-water",
     "cor": "#2a9d8f",
-    "status": "agendado"
+    "status": "publicado",
+    "publishedAt": "2026-10-22T17:54:56.693Z"
   },
   {
     "id": 4,
