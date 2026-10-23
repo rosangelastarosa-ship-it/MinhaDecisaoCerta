@@ -41,52 +41,48 @@
 
   <!-- Header -->
   <div class="top-bar" id="top-announcement-bar">
-        Filtramos o que realmente vale a pena para você não jogar dinheiro fora. <span>✓ Curadoria 100% Humana</span>
-    </div>
+    Curadoria independente de compras. Testamos o que realmente vale o seu dinheiro. <span>✓ 100% Imparcial</span>
+</div>
 
-    <header id="main-header">
-        <div class="container nav-container">
-            <!-- Logo -->
-            <a href="index.html" class="logo" id="logo-anchor" style="display: flex; align-items: center; gap: 8px;">
-                <img src="img/favicon.png" alt="Logo Minha Decisão Certa" style="width: 32px; height: 32px; object-fit: contain;">
-                <span>Minha<span class="logo-highlight">Decisão</span>Certa</span>
-            </a>
+  <header id="main-header">
+      <div class="container nav-container">
+          <!-- Logo -->
+          <a href="index.html" class="logo" id="logo-anchor">
+              <img src="img/favicon.png" alt="Logo Minha Decisão Certa" style="width: 32px; height: 32px; object-fit: contain;">
+              <span>Minha<span class="logo-highlight">Decisão</span>Certa</span>
+          </a>
 
-            <!-- Search Bar -->
-            <div class="search-container" id="nav-search-bar">
-                <form class="search-input-wrapper" onsubmit="return false;">
-                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                    <input type="text" class="search-input-field" placeholder="Qual produto você procura?" id="search-input-main" aria-label="Pesquisar produtos">
-                    <button class="search-btn search-trigger-btn" type="submit" id="search-button-main">Buscar</button>
-                </form>
-            </div>
-        </div>
-    </header>
+          <!-- Search Bar -->
+          <div class="search-container" id="nav-search-bar">
+              <form class="search-input-wrapper" onsubmit="return false;">
+                  <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                  <input type="text" class="search-input-field" placeholder="Qual produto você procura?" id="search-input-main" aria-label="Pesquisar produtos">
+                  <button class="search-btn search-trigger-btn" type="submit" id="search-button-main">Buscar</button>
+              </form>
+          </div>
 
-    <!-- Subheader Categories -->
-    <nav class="category-nav-bar" id="category-navigation" aria-label="Categorias de produtos">
+          <div style="display: flex; gap: 16px; align-items: center;" class="header-quick-links">
+              <a href="blog.html" style="font-family: var(--font-heading); font-weight: 600; font-size: 0.9rem; color: var(--text-main);">Blog</a>
+              <a href="sobre.html" style="font-family: var(--font-heading); font-weight: 600; font-size: 0.9rem; color: var(--text-main);">Sobre Nós</a>
+          </div>
+      </div>
+  </header>
+
+  <!-- Subheader Categories -->
+  <nav class="category-nav-bar" id="category-navigation" aria-label="Categorias de produtos">
         <div class="category-nav-links">
-            <a href="index.html" class="category-link" id="cat-all">🏠 Início</a>
-            <a href="notebooks.html" class="category-link" id="cat-notebook">💻 Notebooks</a>
-            <a href="geladeiras.html" class="category-link" id="cat-geladeiras">🧊 Geladeiras</a>
-            <a href="airfryers.html" class="category-link" id="cat-airfryer">🍟 Air Fryers</a>
-            <a href="bicicletas.html" class="category-link" id="cat-bicicletas">🚲 Bicicletas</a>
-            <a href="maquinas-de-lavar.html" class="category-link" id="cat-maquinas">⚙️ Máquinas</a>
-            <a href="celulares.html" class="category-link" id="cat-celular">📱 Celulares</a>
-            <a href="tvs.html" class="category-link" id="cat-tvs">📺 TVs</a>
-            <a href="https://www.minhadecisaocerta.com.br/veo-ai" class="category-link" id="cat-veo" style="color: #10b981; font-weight: 700;">VEO AI</a>
-            <a href="https://www.minhadecisaocerta.com.br/video-de-amor" class="category-link" id="cat-video-amor">❤️ Video de Amor</a>
-            <a href="https://www.minhadecisaocerta.com.br/guia-gemini" class="category-link" id="cat-guia-gemini">🤖 Guia Gemini</a>
-            <a href="https://www.minhadecisaocerta.com.br/animacao-2d" class="category-link" id="cat-animacao">🎬 Animação 2D</a>
-            <a href="https://www.minhadecisaocerta.com.br/album-copa-2026" class="category-link" id="cat-copa">⚽ Álbum Copa 2026</a>
-            <a href="https://www.minhadecisaocerta.com.br/blog" class="category-link" id="cat-blog">📝 Blog</a>
-            <a href="calca-jeans-wide-leg.html" class="category-link" id="cat-moda" style="border-left: 1px solid var(--border-color); padding-left: 15px; color: #ec4899; font-weight: 700;">👗 Moda</a>
-            <a href="celimax-retinal.html" class="category-link" id="cat-beleza" style="border-left: 1px solid var(--border-color); padding-left: 15px; color: #e879a0; font-weight: 700;">💄 Beleza e Cuidados Pessoais</a>
-            <a href="massageador-portatil.html" class="category-link" id="cat-massageador" style="border-left: 1px solid var(--border-color); padding-left: 15px; color: #06b6d4; font-weight: 700;">💆‍♂️ Massageador Portátil</a>
-            <a href="planejador-sandbox.html" class="category-link" id="cat-sandbox" style="border-left: 1px solid var(--border-color); padding-left: 15px; color: var(--accent);">🛠️ Planejador Sandbox</a>
-            <a href="gerador-de-prompts.html" class="category-link" id="cat-gerador" style="border-left: 1px solid var(--border-color); padding-left: 15px; color: #f59e0b; font-weight: 700;">✨ Gerador de Prompts</a>
+            <a href="index.html" class="category-link " id="cat-all">Início</a>
+            <a href="notebooks.html" class="category-link active" id="cat-notebook">Notebooks</a>
+            <a href="celulares.html" class="category-link " id="cat-celular">Smartphones</a>
+            <a href="tvs.html" class="category-link " id="cat-tvs">Smart TVs</a>
+            <a href="airfryers.html" class="category-link " id="cat-airfryer">Air Fryers</a>
+            <a href="geladeiras.html" class="category-link " id="cat-geladeiras">Geladeiras</a>
+            <a href="maquinas-de-lavar.html" class="category-link " id="cat-maquinas">Máquinas de Lavar</a>
+            <a href="bicicletas.html" class="category-link " id="cat-bicicletas">Bicicletas</a>
+            <a href="achadinhos.html" class="category-link " id="cat-achadinhos">Achadinhos</a>
+            <a href="categorias.html" class="category-link " id="cat-mais" style="color: var(--primary-color); font-weight: 700;">+ Todas as Categorias</a>
         </div>
     </nav>
 
@@ -117,9 +113,10 @@
           <div style="color: var(--text-main); font-weight: 600;">Nota da Nossa Equipe</div>
         </div>
 
-        <div style="text-align: center;">
-          <div style="font-size: 1.5rem; font-weight: 800; margin-bottom: 1rem; color: var(--text-light);">Preço Médio: R$ 5.029,08</div>
-          <a href="https://s.shopee.com.br/9fHIZGECRR" target="_blank" rel="nofollow sponsored noopener" class="btn btn-primary" style="width: 100%;">Comprar na Shopee com Desconto</a>
+        <div style="text-align: center; margin-top: 20px;">
+          <div style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.5px;">Preço Médio Atualizado</div>
+          <div style="font-family: var(--font-heading); font-size: 1.6rem; font-weight: 800; margin-bottom: 1rem; color: var(--secondary-color);">R$ 5.029,08</div>
+          <a href="https://s.shopee.com.br/9fHIZGECRR" target="_blank" rel="nofollow sponsored noopener" class="btn btn-primary" style="width: 100%; font-size: 1.05rem;">Conferir Menor Preço e Avaliações ↗</a>
         </div>
       </div>
     </div>
