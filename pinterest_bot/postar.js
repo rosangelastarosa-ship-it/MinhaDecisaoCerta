@@ -15,6 +15,11 @@ const PINS_CONFIG = {
         titulo: "Vale a Pena? Os 5 Melhores Robôs Aspiradores Baratos da Shopee (2026)",
         descricao: "Chega de sofrer com pelos de pet e poeira pela casa! Analisamos os 5 melhores robôs aspiradores da Shopee que realmente funcionam e cabem no bolso. Veja o comparativo sincero com cupons de frete grátis no Minha Decisão Certa! #roboaspirador #achadinhosshopee #shopeebrasil #limpeza #casalimpa #dicasdecasa",
         link: "https://www.minhadecisaocerta.com.br/artigo-robos-aspiradores.html"
+    },
+    "pin_eletronicos_shopee.jpg": {
+        titulo: "10 Eletrônicos Baratos da Shopee que Parecem Caros em 2026",
+        descricao: "Fones sem fio com cancelamento de ruído, smartwatch AMOLED, mini projetor de cinema e caixas de som à prova d'água! Selecionamos os 10 melhores gadgets virais da Shopee com avaliações 5 estrelas e frete grátis. Confira o comparativo no Minha Decisão Certa! #eletronicos #achadinhosshopee #gadgets #tecnologia #fonedeouvido #smartwatch #shopee",
+        link: "https://www.minhadecisaocerta.com.br/eletronicos.html"
     }
 };
 
