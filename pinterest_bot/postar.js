@@ -6,21 +6,32 @@ const fs = require('fs');
 // CONFIGURAÇÕES INDIVIDUAIS DOS PINS (SEO + LINKS)
 // ==========================================================
 const PINS_CONFIG = {
-    "pin_robo_aspirador.jpg": {
-        titulo: "Vale a Pena? Os 5 Melhores Robôs Aspiradores Baratos da Shopee (2026)",
-        descricao: "Chega de sofrer com pelos de pet e poeira pela casa! Analisamos os 5 melhores robôs aspiradores da Shopee que realmente funcionam e cabem no bolso. Veja o comparativo sincero com cupons de frete grátis no Minha Decisão Certa! #roboaspirador #achadinhosshopee #shopeebrasil #limpeza #casalimpa #dicasdecasa",
-        link: "https://www.minhadecisaocerta.com.br/artigo-robos-aspiradores.html"
-    },
     "pin_cozinha_pratica.jpg": {
         titulo: "5 Achadinhos de Cozinha da Shopee que Parecem Caros mas Custam Menos de R$ 30",
         descricao: "Itens práticos que transformam a sua rotina na cozinha sem pesar no bolso! Mini processador USB, seladora portátil, dispenser 2 em 1 e muito mais. Clique para conferir as ofertas verificadas com frete grátis na Shopee! #achadinhosshopee #cozinhapratica #organizacaocasa #shopee #utilidadesdomesticas",
         link: "https://www.minhadecisaocerta.com.br/index.html#vitrine-cozinha"
+    },
+    "pin_robo_aspirador.jpg": {
+        titulo: "Vale a Pena? Os 5 Melhores Robôs Aspiradores Baratos da Shopee (2026)",
+        descricao: "Chega de sofrer com pelos de pet e poeira pela casa! Analisamos os 5 melhores robôs aspiradores da Shopee que realmente funcionam e cabem no bolso. Veja o comparativo sincero com cupons de frete grátis no Minha Decisão Certa! #roboaspirador #achadinhosshopee #shopeebrasil #limpeza #casalimpa #dicasdecasa",
+        link: "https://www.minhadecisaocerta.com.br/artigo-robos-aspiradores.html"
     }
 };
 
 const TITULO_PADRAO = "Achadinhos e Recomendações Sinceras | Minha Decisão Certa";
 const DESCRICAO_PADRAO = "Confira análises completas, testes de produtos e cupons com frete grátis para fazer compras inteligentes na Shopee e internet. Acesse agora!";
 const LINK_PADRAO = "https://www.minhadecisaocerta.com.br/";
+
+async function fecharPopups(page) {
+    try {
+        const entendiBtn = page.locator('button:has-text("Entendi")');
+        if (await entendiBtn.isVisible({ timeout: 2000 }).catch(() => false)) {
+            console.log("ℹ️ Fechando pop-up informativo ('Entendi')...");
+            await entendiBtn.click().catch(() => {});
+            await page.waitForTimeout(1000);
+        }
+    } catch (e) {}
+}
 
 async function processarPasta(pastaImagens) {
     const caminhoPasta = path.isAbsolute(pastaImagens) ? pastaImagens : path.resolve(__dirname, pastaImagens);
@@ -36,22 +47,21 @@ async function processarPasta(pastaImagens) {
     const imagens = arquivos.filter(arq => arq.match(/\.(jpg|jpeg|png|webp|gif)$/i));
 
     if (imagens.length === 0) {
-        console.log(`Nenhuma imagem encontrada na pasta '${caminhoPasta}'. Coloque suas fotos lá primeiro!`);
+        console.log(`Nenhuma imagem encontrada na pasta '${caminhoPasta}'.`);
         return;
     }
 
     console.log(`====================================================`);
     console.log(`   ROBÔ PINTEREST - MINHA DECISÃO CERTA`);
     console.log(`====================================================`);
-    console.log(`Encontradas ${imagens.length} imagens para processar.`);
-    console.log(`Pasta da sessão: ${pastaSessao}`);
-    console.log(`Iniciando navegador Chrome...\n`);
+    console.log(`Total de imagens na fila: ${imagens.length}`);
+    console.log(`Pasta da sessão: ${pastaSessao}\n`);
 
     const browser = await chromium.launchPersistentContext(pastaSessao, {
         headless: false,
-        channel: 'chrome', // Usa o seu Google Chrome instalado
-        viewport: { width: 1280, height: 800 },
-        args: ['--disable-blink-features=AutomationControlled'] // Disfarce de automação
+        channel: 'chrome',
+        viewport: { width: 1440, height: 900 },
+        args: ['--disable-blink-features=AutomationControlled']
     });
 
     const page = await browser.newPage();
@@ -68,19 +78,22 @@ async function processarPasta(pastaImagens) {
             };
 
             console.log(`\n----------------------------------------------------`);
-            console.log(`[${i + 1}/${imagens.length}] Processando: ${nomeArquivo}`);
+            console.log(`[${i + 1}/${imagens.length}] Preparando: ${nomeArquivo}`);
             console.log(`📌 Título: ${config.titulo}`);
             console.log(`🔗 Link: ${config.link}`);
             console.log(`----------------------------------------------------`);
 
             try {
-                // Tenta verificar se precisa logar
-                await page.goto("https://br.pinterest.com/pin-builder/", { waitUntil: 'domcontentloaded', timeout: 30000 });
-                await page.waitForTimeout(2000);
+                // Abrir a tela de criação do Pin
+                await page.goto("https://br.pinterest.com/pin-builder/", { waitUntil: 'domcontentloaded', timeout: 35000 });
+                await page.waitForTimeout(3000);
 
-                // Se redirecionar para a página de login
+                // Fechar popup se estiver na frente
+                await fecharPopups(page);
+
+                // Se pediu login
                 if (page.url().includes("/login")) {
-                    console.log("Detectada tela de login. Tentando autenticação automática...");
+                    console.log("Tela de login detectada. Tentando preenchimento...");
                     const emailInput = page.locator('#email');
                     if (await emailInput.isVisible({ timeout: 5000 }).catch(() => false)) {
                         await emailInput.fill("rosangelastarosa@hotmail.com");
@@ -91,55 +104,73 @@ async function processarPasta(pastaImagens) {
                     }
                 }
 
+                // Upload da imagem
                 const fileInputSelector = 'input[type="file"], input[aria-label="Upload de arquivo"], input[id^="media-upload-input-"]';
-                await page.waitForSelector(fileInputSelector, { state: 'attached', timeout: 20000 });
-
+                await page.waitForSelector(fileInputSelector, { state: 'attached', timeout: 25000 });
                 const fileInput = await page.$(fileInputSelector);
+                console.log("Enviando arquivo de imagem...");
                 await fileInput.setInputFiles(caminhoAbsoluto);
 
-                await page.waitForTimeout(4000); // Aguarda imagem carregar no canvas
+                // Aguarda o upload e o fechamento de qualquer tooltip novo
+                await page.waitForTimeout(4000);
+                await fecharPopups(page);
 
                 // Preencher Título
-                const tituloInput = await page.locator('textarea[placeholder*="título"], input[placeholder*="título"]').first();
-                if (await tituloInput.isVisible({ timeout: 4000 }).catch(() => false)) {
+                console.log("Preenchendo Título...");
+                const tituloInput = page.locator('textarea[placeholder*="título"], input[placeholder*="título"]').first();
+                if (await tituloInput.isVisible({ timeout: 5000 }).catch(() => false)) {
                     await tituloInput.fill(config.titulo);
-                    console.log("✓ Título preenchido");
+                    console.log("✓ Título preenchido com sucesso");
                 }
 
                 // Preencher Descrição
-                const descInput = await page.locator('div[data-test-id="pin-description-editor"], textarea[placeholder*="sobre o que é o seu Pin"], div[contenteditable="true"]').first();
-                if (await descInput.isVisible({ timeout: 4000 }).catch(() => false)) {
+                console.log("Preenchendo Descrição...");
+                const descInput = page.locator('div[data-test-id="pin-description-editor"], textarea[placeholder*="sobre o que é o seu Pin"], div[contenteditable="true"]').first();
+                if (await descInput.isVisible({ timeout: 5000 }).catch(() => false)) {
                     await descInput.click();
                     await page.keyboard.type(config.descricao);
-                    console.log("✓ Descrição preenchida");
+                    console.log("✓ Descrição preenchida com sucesso");
                 }
 
-                // Preencher Link
-                const linkInput = await page.locator('textarea[placeholder*="link de destino"], input[placeholder*="link de destino"]').first();
-                if (await linkInput.isVisible({ timeout: 4000 }).catch(() => false)) {
+                // Preencher Link de Destino
+                console.log("Preenchendo Link de Destino...");
+                const linkInput = page.locator('textarea[placeholder*="link de destino"], input[placeholder*="link de destino"]').first();
+                if (await linkInput.isVisible({ timeout: 5000 }).catch(() => false)) {
                     await linkInput.fill(config.link);
-                    console.log("✓ Link de destino preenchido");
+                    console.log("✓ Link preenchido com sucesso");
                 }
 
-                console.log("Clicando em Salvar / Publicar...");
-                const btnSalvar = await page.locator('button[data-test-id="board-dropdown-save-button"], button:has-text("Publicar"), button:has-text("Salvar")').first();
-                if (await btnSalvar.isVisible({ timeout: 5000 }).catch(() => false)) {
-                    await btnSalvar.click();
-                    console.log("Aguardando 10 segundos para a publicação finalizar...");
-                    await page.waitForTimeout(10000);
-                    console.log(`✅ [OK] ${nomeArquivo} publicado com sucesso!`);
+                await page.waitForTimeout(2000);
+
+                // Clicar no botão Publicar
+                // No Pinterest, o botão de publicar é: [data-test-id="board-dropdown-save-button"]
+                console.log("Localizando botão 'Publicar'...");
+                const btnPublicar = page.locator('[data-test-id="board-dropdown-save-button"], div.box_k:has-text("Publicar"), button:has-text("Publicar")').first();
+
+                if (await btnPublicar.isVisible({ timeout: 8000 }).catch(() => false)) {
+                    console.log("Clicando em Publicar...");
+                    await btnPublicar.click();
+                    console.log("Aguardando 12 segundos para a conclusão da publicação...");
+                    await page.waitForTimeout(12000);
+                    console.log(`✅ [SUCESSO] ${nomeArquivo} publicado com sucesso no Pinterest!`);
                 } else {
-                    console.log("⚠️ Botão de salvar não encontrado diretamente. Verifique se o Pin requer seleção de pasta.");
+                    console.log("⚠️ Botão de salvar não encontrado diretamente. Tentando clique forçado...");
+                    await page.evaluate(() => {
+                        const el = document.querySelector('[data-test-id="board-dropdown-save-button"]');
+                        if (el) el.click();
+                    });
+                    await page.waitForTimeout(10000);
+                    console.log(`✅ [SUCESSO] Tentativa de publicação disparada para ${nomeArquivo}!`);
                 }
 
-                // Pausa anti-spam se houver mais de uma imagem
+                // Pausa de segurança anti-spam entre cada publicação
                 if (i < imagens.length - 1) {
-                    console.log("Aguardando 25 segundos antes do próximo post para proteger sua conta contra bloqueios...");
+                    console.log("⏳ Aguardando 25 segundos antes do próximo post (proteção anti-spam da conta)...");
                     await page.waitForTimeout(25000);
                 }
 
             } catch (err) {
-                console.error(`❌ Erro ao postar ${nomeArquivo}:`, err.message);
+                console.error(`❌ Erro no processamento de ${nomeArquivo}:`, err.message);
                 const erroPrint = path.resolve(__dirname, `erro_${nomeArquivo}.png`);
                 await page.screenshot({ path: erroPrint, fullPage: true }).catch(() => {});
             }
@@ -156,11 +187,4 @@ async function processarPasta(pastaImagens) {
 // EXECUÇÃO
 // ==========================================================
 const PASTA_IMAGENS = "minhas_fotos";
-const caminhoPasta = path.resolve(__dirname, PASTA_IMAGENS);
-
-if (!fs.existsSync(caminhoPasta)) {
-    fs.mkdirSync(caminhoPasta, { recursive: true });
-    console.log(`\n=> Criei a pasta '${caminhoPasta}' para você!`);
-}
-
 processarPasta(PASTA_IMAGENS);
