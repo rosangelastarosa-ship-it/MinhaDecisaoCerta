@@ -48,7 +48,8 @@
     "termo_shopee": "kit prato silicone ventosa bebe",
     "icone": "fa-utensils",
     "cor": "#f4a261",
-    "status": "agendado"
+    "status": "publicado",
+    "publishedAt": "2026-10-24T16:31:02.437Z"
   },
   {
     "id": 5,
