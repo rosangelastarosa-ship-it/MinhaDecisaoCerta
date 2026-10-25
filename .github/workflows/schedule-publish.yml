@@ -33,13 +33,13 @@ jobs:
 
       - name: Commit and Push if New Articles Published
         run: |
-          git config --global user.name "MdcBot"
-          git config --global user.email "bot@minhadecisaocerta.com.br"
+          git config --global user.name "Rosangela"
+          git config --global user.email "rosangelastarosa@gmail.com"
           
           if [[ -n $(git status -s *.html sitemap.xml artigos_agendados.json data/) ]]; then
             echo "Novo artigo publicado! Comitando e acionando deploy da Vercel..."
             git add *.html sitemap.xml artigos_agendados.json data/publish-history.json
-            git commit -m "chore(content): automated article publication [skip ci]"
+            git commit -m "chore(content): automated article publication"
             git push origin main
           else
             echo "Nenhum artigo agendado para hoje ou nada alterado."
