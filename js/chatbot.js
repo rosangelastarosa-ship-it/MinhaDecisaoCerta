@@ -33,7 +33,6 @@
                 <div class="mdc-chat-options">
                     <button class="mdc-opt" data-answer="notebook">💻 Melhor Notebook?</button>
                     <button class="mdc-opt" data-answer="geladeira">❄️ Geladeira Econômica?</button>
-                    <button class="mdc-opt" data-answer="ia">🤖 Criar vídeos com IA?</button>
                     <button class="mdc-opt" data-answer="whatsapp">📱 Falar com a Rosângela</button>
                 </div>
             </div>
@@ -165,9 +164,8 @@
 
     // 3. Respostas do Robô
     const answers = {
-        notebook: "O campeão de 2026 é o <strong>Acer Aspire 5 (Ryzen 5)</strong>! Ele tem o melhor equilíbrio entre preço e potência. Quer ver o ranking completo? <a href='index.html#ranking' style='color: #ffb800'>Clique aqui</a>.",
+        notebook: "O campeão de 2026 é o <strong>Acer Aspire 5 (Ryzen 5)</strong>! Ele tem o melhor equilíbrio entre preço e potência. Quer ver o ranking completo? <a href='notebooks.html' style='color: #ffb800'>Clique aqui para ver os notebooks</a>.",
         geladeira: "Para economizar na conta de luz, a melhor escolha é a <strong>Panasonic 387L A+++</strong> com tecnologia Inverter. Ela gasta muito pouco! Veja o ranking: <a href='geladeiras.html' style='color: #ffb800'>Ver geladeiras</a>.",
-        ia: "Você pode criar vídeos automáticos incríveis usando o <strong>VEO AI Free</strong> ou o <strong>Claude Code</strong>. Temos guias passo a passo aqui: <a href='blog.html' style='color: #ffb800'>Ver guias de IA</a>.",
         whatsapp: "Você pode falar diretamente com a Rosângela para tirar dúvidas personalizadas! <a href='https://wa.me/5513991145129' target='_blank' style='color: #22c55e; font-weight: bold;'>Clique aqui para abrir o WhatsApp</a>."
     };
 

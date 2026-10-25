@@ -54,10 +54,16 @@ function getPageConfig(fileName) {
         return { priority: '0.7', changefreq: 'monthly' };
     }
 
-    // Institucionais e legais
+    // Institucionais, metodologia e transparência
+    if (fileName === 'como-testamos.html') {
+        return { priority: '0.8', changefreq: 'monthly' };
+    }
+    if (fileName === 'divulgacao-afiliados.html') {
+        return { priority: '0.7', changefreq: 'monthly' };
+    }
     const institutional = ['sobre.html', 'contato.html', 'privacidade.html', 'termos.html'];
     if (institutional.includes(fileName)) {
-        return { priority: '0.5', changefreq: 'monthly' };
+        return { priority: '0.6', changefreq: 'monthly' };
     }
 
     // Padrão para demais páginas de conteúdo
