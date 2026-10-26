@@ -61,7 +61,8 @@
     "termo_shopee": "maquina de ruido branco infantil",
     "icone": "fa-volume-high",
     "cor": "#6366f1",
-    "status": "agendado"
+    "status": "publicado",
+    "publishedAt": "2026-10-26T19:07:15.050Z"
   },
   {
     "id": 6,
