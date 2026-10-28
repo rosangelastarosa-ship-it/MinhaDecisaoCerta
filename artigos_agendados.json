@@ -74,7 +74,8 @@
     "termo_shopee": "mochila maternidade termica impermeavel",
     "icone": "fa-bag-shopping",
     "cor": "#ec4899",
-    "status": "agendado"
+    "status": "publicado",
+    "publishedAt": "2026-10-28T18:44:44.560Z"
   },
   {
     "id": 7,
