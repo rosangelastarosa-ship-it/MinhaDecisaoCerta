@@ -87,7 +87,8 @@
     "termo_shopee": "potes hermeticos papinha bebe",
     "icone": "fa-bowl-food",
     "cor": "#10b981",
-    "status": "agendado"
+    "status": "publicado",
+    "publishedAt": "2026-10-30T18:31:37.112Z"
   },
   {
     "id": 8,
