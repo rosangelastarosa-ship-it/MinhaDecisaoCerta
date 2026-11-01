@@ -100,7 +100,8 @@
     "termo_shopee": "luminaria touch silicone abajur",
     "icone": "fa-lightbulb",
     "cor": "#f59e0b",
-    "status": "agendado"
+    "status": "publicado",
+    "publishedAt": "2026-11-01T18:21:04.708Z"
   },
   {
     "id": 9,
