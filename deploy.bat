@@ -1,8 +1,14 @@
 @echo off
-echo Preparando para enviar o site...
-git add .
-git commit -m "Atualizando materia do Gemini e melhorias de SEO"
+chcp 65001 >nul
+echo Preparando para enviar o site para o GitHub e Vercel...
+git add index.html img/achadinhos/dispenser-detergente.jpg deploy.bat
+git commit -m "fix(showcase): usar asset local para dispenser e atualizar script de deploy da Vercel" 2>nul
 git push
 echo.
-echo Pronto! O site foi enviado para a Vercel. Pode fechar esta janela.
+echo Atualizando producao na Vercel...
+call npx -y vercel --prod --yes
+echo.
+echo ========================================================
+echo Pronto! O site foi publicado com sucesso na Vercel e GitHub.
+echo ========================================================
 pause
