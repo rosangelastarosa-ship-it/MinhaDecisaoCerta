@@ -1,3 +1,26 @@
+
+// Páginas editoriais e hubs em subdiretórios (ex.: Especial Black Friday 2026)
+const SPECIAL_SUBDIR_PAGES = [
+    {
+        url: "https://www.minhadecisaocerta.com.br/blog/black-friday-2026/",
+        relPath: "blog/black-friday-2026/index.html",
+        priority: "0.95",
+        changefreq: "daily"
+    },
+    {
+        url: "https://www.minhadecisaocerta.com.br/blog/black-friday-2026/smart-tvs/",
+        relPath: "blog/black-friday-2026/smart-tvs/index.html",
+        priority: "0.90",
+        changefreq: "daily"
+    },
+    {
+        url: "https://www.minhadecisaocerta.com.br/blog/black-friday-2026/air-fryers/",
+        relPath: "blog/black-friday-2026/air-fryers/index.html",
+        priority: "0.90",
+        changefreq: "daily"
+    }
+];
+
 /**
  * Gerador de Sitemap XML Avançado para Minha Decisão Certa
  * Otimizado para SEO técnico, Google Search Console e Bing Webmaster.
@@ -110,6 +133,22 @@ function generateSitemap() {
         xml += `    <lastmod>${lastmod}</lastmod>\n`;
         xml += `    <changefreq>${config.changefreq}</changefreq>\n`;
         xml += `    <priority>${config.priority}</priority>\n`;
+        xml += '  </url>\n';
+    });
+
+    // Adicionar páginas especiais de subdiretório (Black Friday 2026)
+    SPECIAL_SUBDIR_PAGES.forEach(sp => {
+        let lastmod = today;
+        const fullSpPath = path.join(ROOT_DIR, sp.relPath);
+        if (fs.existsSync(fullSpPath)) {
+            const stats = fs.statSync(fullSpPath);
+            lastmod = stats.mtime.toISOString().split('T')[0];
+        }
+        xml += '  <url>\n';
+        xml += `    <loc>${sp.url}</loc>\n`;
+        xml += `    <lastmod>${lastmod}</lastmod>\n`;
+        xml += `    <changefreq>${sp.changefreq}</changefreq>\n`;
+        xml += `    <priority>${sp.priority}</priority>\n`;
         xml += '  </url>\n';
     });
 
