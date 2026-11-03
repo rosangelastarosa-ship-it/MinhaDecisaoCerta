@@ -113,7 +113,8 @@
     "termo_shopee": "kit seguranca bebe trava portas protetor quina",
     "icone": "fa-shield-halved",
     "cor": "#0ea5e9",
-    "status": "agendado"
+    "status": "publicado",
+    "publishedAt": "2026-11-03T20:02:09.716Z"
   },
   {
     "id": 10,
