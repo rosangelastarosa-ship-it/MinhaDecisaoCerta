@@ -126,7 +126,8 @@
     "termo_shopee": "achadinhos bebe pratico",
     "icone": "fa-tags",
     "cor": "#ee4d2d",
-    "status": "agendado"
+    "status": "publicado",
+    "publishedAt": "2026-11-05T20:32:45.635Z"
   },
   {
     "id": 11,
