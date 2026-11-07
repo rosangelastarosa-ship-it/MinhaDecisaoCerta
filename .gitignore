@@ -8,3 +8,14 @@ scratch
 sessao_pinterest/
 **/sessao_pinterest/**
 erro.png
+# Minerador YouTube
+minerador_*.py
+canais_*.json
+ranking_*.csv
+relatorio_*.md
+pinterest_bot/*.png
+pinterest_bot/minhas_fotos/
+pinterest_bot/fotos_gourmet_studio/
+pinterest_bot/sticky_pins/
+pinterest_bot/sticky_pins_vertical/
+video_serie/

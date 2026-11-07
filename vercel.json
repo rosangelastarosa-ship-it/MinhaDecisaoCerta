@@ -1,4 +1,11 @@
 {
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/comparador",
+      "destination": "/comparador.html"
+    }
+  ],
   "redirects": [
     {
       "source": "/index_antigo.html",

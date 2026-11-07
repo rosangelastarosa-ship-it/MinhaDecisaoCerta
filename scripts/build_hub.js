@@ -1,0 +1,424 @@
+﻿const fs = require('fs');
+const path = require('path');
+
+const hubDir = path.join(__dirname, '..', 'blog', 'black-friday-2026');
+if (!fs.existsSync(hubDir)) {
+    fs.mkdirSync(hubDir, { recursive: true });
+}
+
+const html = <!DOCTYPE html>
+<html lang=pt-BR>
+<head>
+  <meta charset=UTF-8>
+  <meta name=viewport content=width=device-width, initial-scale=1.0>
+  <title>Black Friday 2026: os produtos que recomendamos para comprar sem arrependimentos | Minha Decisão Certa</title>
+  <meta name=description content=Descubra quais produtos merecem sua atenção nesta Black Friday 2026. Compare características, preços e vantagens antes de decidir onde comprar com segurança.>
+  <meta name=keywords content=black friday 2026, produtos recomendados black friday, comprar sem arrependimentos, guia black friday 2026, melhores ofertas>
+  
+  <link rel=canonical href=https://www.minhadecisaocerta.com.br/blog/black-friday-2026/>
+  <link rel=icon type=image/png href=/img/favicon.png>
+  
+  <meta name=robots content=index, follow, max-image-preview:large>
+  <meta property=og:type content=website>
+  <meta property=og:url content=https://www.minhadecisaocerta.com.br/blog/black-friday-2026/>
+  <meta property=og:title content=Black Friday 2026: os produtos que recomendamos para comprar sem arrependimentos>
+  <meta property=og:description content=Descubra quais produtos merecem sua atenção nesta Black Friday. Compare características, preços e vantagens antes de decidir onde comprar.>
+  <meta property=og:site_name content=Minha Decisão Certa>
+  <meta property=og:locale content=pt_BR>
+  <meta property=og:image content=https://www.minhadecisaocerta.com.br/img/black-friday/banner-bf-hub.jpg>
+  
+  <meta name=twitter:card content=summary_large_image>
+  <meta name=twitter:title content=Black Friday 2026: os produtos que recomendamos para comprar sem arrependimentos>
+  <meta name=twitter:description content=Curadoria independente de produtos que valem o investimento na Black Friday 2026.>
+  <meta name=twitter:image content=https://www.minhadecisaocerta.com.br/img/black-friday/banner-bf-hub.jpg>
+  
+  <!-- Google Fonts -->
+  <link rel=preconnect href=https://fonts.googleapis.com>
+  <link rel=preconnect href=https://fonts.gstatic.com crossorigin>
+  <link href=https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap rel=stylesheet>
+  
+  <!-- CSS -->
+  <link rel=stylesheet href=/css/style.css>
+  <link rel=stylesheet href=/css/black-friday.css>
+  <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css>
+  
+  <!-- Schema.org JSON-LD -->
+  <script type=application/ld+json>
+  {
+    @context: https://schema.org,
+    @graph: [
+      {
+        @type: BreadcrumbList,
+        itemListElement: [
+          {
+            @type: ListItem,
+            position: 1,
+            name: Início,
+            item: https://www.minhadecisaocerta.com.br/
+          },
+          {
+            @type: ListItem,
+            position: 2,
+            name: Blog,
+            item: https://www.minhadecisaocerta.com.br/blog.html
+          },
+          {
+            @type: ListItem,
+            position: 3,
+            name: Especial Black Friday 2026,
+            item: https://www.minhadecisaocerta.com.br/blog/black-friday-2026/
+          }
+        ]
+      },
+      {
+        @type: CollectionPage,
+        name: Black Friday 2026: os produtos que recomendamos para comprar sem arrependimentos,
+        url: https://www.minhadecisaocerta.com.br/blog/black-friday-2026/,
+        description: Descubra quais produtos merecem sua atenção nesta Black Friday. Compare características, preços e vantagens antes de decidir onde comprar.,
+        publisher: {
+          @type: Organization,
+          name: Minha Decisão Certa,
+          url: https://www.minhadecisaocerta.com.br/,
+          logo: {
+            @type: ImageObject,
+            url: https://www.minhadecisaocerta.com.br/img/favicon.png
+          }
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body class=bf-page-wrapper>
+
+  <!-- Top Announcement Bar -->
+  <div class=top-bar id=top-announcement-bar>
+    Curadoria independente de compras. Testamos o que realmente vale o seu dinheiro. <span>✓ 100% Imparcial</span>
+  </div>
+
+  <!-- Header Principal -->
+  <header id=main-header>
+    <div class=container nav-container>
+      <a href=/index.html class=logo id=logo-anchor>
+        <img src=/img/favicon.png alt=Logo Minha Decisão Certa style=width: 32px; height: 32px; object-fit: contain;>
+        <span>Minha<span class=logo-highlight>Decisão</span>Certa</span>
+      </a>
+
+      <div class=search-container id=nav-search-bar>
+        <form class=search-input-wrapper onsubmit=return false;>
+          <svg class=search-icon xmlns=http://www.w3.org/2000/svg width=18 height=18 fill=none viewBox=0 0 24 24 stroke=currentColor stroke-width=2>
+            <path stroke-linecap=round stroke-linejoin=round d=M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z />
+          </svg>
+          <input type=text class=search-input-field placeholder=Pesquisar produtos na Black Friday id=search-input-main aria-label=Pesquisar produtos>
+          <button class=search-btn search-trigger-btn type=submit id=search-button-main>Buscar</button>
+        </form>
+      </div>
+
+      <div style=display: flex; gap: 16px; align-items: center; class=header-quick-links>
+        <a href=/blog.html style=font-family: var(--font-heading); font-weight: 600; font-size: 0.9rem; color: var(--text-main);>Blog</a>
+        <a href=/sobre.html style=font-family: var(--font-heading); font-weight: 600; font-size: 0.9rem; color: var(--text-main);>Sobre Nós</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Subheader Categories -->
+  <nav class=category-nav-bar id=category-navigation aria-label=Categorias de produtos>
+    <div class=category-nav-links>
+      <a href=/index.html class=category-link id=cat-all>Início</a>
+      <a href=/notebooks.html class=category-link id=cat-notebook>Notebooks</a>
+      <a href=/celulares.html class=category-link id=cat-celular>Smartphones</a>
+      <a href=/tvs.html class=category-link id=cat-tvs>Smart TVs</a>
+      <a href=/airfryers.html class=category-link id=cat-airfryer>Air Fryers</a>
+      <a href=/geladeiras.html class=category-link id=cat-geladeiras>Geladeiras</a>
+      <a href=/maquinas-de-lavar.html class=category-link id=cat-maquinas>Máquinas de Lavar</a>
+      <a href=/bicicletas.html class=category-link id=cat-bicicletas>Bicicletas</a>
+      <a href=/eletronicos.html class=category-link id=cat-eletronicos>Eletrônicos</a>
+      <a href=/achadinhos.html class=category-link id=cat-achadinhos>Achadinhos</a>
+      <a href=/blog.html class=category-link active id=cat-blog>Blog</a>
+      <a href=/categorias.html class=category-link id=cat-mais style=color: var(--primary-color); font-weight: 700;>+ Todas as Categorias</a>
+    </div>
+  </nav>
+
+  <!-- Breadcrumbs -->
+  <nav class=bf-breadcrumbs aria-label=Navegação em trilha>
+    <a href=/index.html><i class=fas fa-home></i> Início</a>
+    <span class=separator>/</span>
+    <a href=/blog.html>Blog</a>
+    <span class=separator>/</span>
+    <span style=color: var(--bf-text-dark); font-weight: 600;>Especial Black Friday 2026</span>
+  </nav>
+
+  <!-- Hero Principal -->
+  <section class=bf-hero>
+    <div class=bf-hero-container>
+      <div class=bf-badge-pill>
+        <i class=fas fa-bolt style=color: #f65b00;></i> Especial Editorial 2026
+      </div>
+      <h1>Black Friday 2026: os produtos que recomendamos para comprar sem arrependimentos</h1>
+      <p class=bf-hero-sub>Descubra quais produtos merecem sua atenção nesta Black Friday. Compare características, preços e vantagens antes de decidir onde comprar.</p>
+      
+      <div class=bf-meta-strip>
+        <span><i class=fas fa-shield-alt style=color: #22c55e;></i> Curadoria 100% Independente</span>
+        <span><i class=fas fa-balance-scale style=color: #60a5fa;></i> Fichas Técnicas Verificadas</span>
+        <span><i class=fas fa-tags style=color: #f65b00;></i> Sem Falsos Descontos</span>
+        <span><i class=fas fa-calendar-check style=color: #cbd5e1;></i> Atualizado para Nov/2026</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Container Principal -->
+  <main class=container style=max-width: 1200px; padding: 2.5rem 1.5rem 4rem;>
+
+    <!-- Card de Compromisso Editorial -->
+    <div class=bf-trust-box>
+      <div class=bf-trust-text>
+        <h3><i class=fas fa-check-circle style=color: var(--bf-blue);></i> O compromisso do Minha Decisão Certa nesta Black Friday</h3>
+        <p>Não somos um mural confuso de panfletos. Nossa missão é filtrar o excesso de informações, desmascarar promoções falsas e entregar comparações técnicas sinceras para que você gaste seu dinheiro com sabedoria e total tranquilidade.</p>
+      </div>
+      <a href=/como-testamos.html style=font-weight: 700; color: var(--bf-blue); font-size: 0.92rem; text-decoration: underline; white-space: nowrap;>Nossa Metodologia &rarr;</a>
+    </div>
+
+    <!-- Seção de Guias Comparativos em Destaque -->
+    <div style=margin: 3.5rem 0 1.5rem;>
+      <div style=text-align: center; max-width: 700px; margin: 0 auto 2.5rem;>
+        <span style=font-size: 0.85rem; font-weight: 800; color: var(--bf-orange); text-transform: uppercase; letter-spacing: 0.05em;>Comparativos Oficiais</span>
+        <h2 style=font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2.1rem; color: var(--bf-text-dark); margin-top: 0.5rem;>Escolha a categoria e compare antes de fechar o carrinho</h2>
+        <p style=color: var(--bf-text-muted); font-size: 1.05rem; margin-top: 0.75rem;>Análises profundas de 5 modelos criteriosamente escolhidos em cada segmento chave.</p>
+      </div>
+
+      <div class=bf-guides-grid style=margin: 0;>
+        
+        <!-- Guia 1: Smart TVs -->
+        <article class=bf-guide-card>
+          <div class=bf-guide-img-wrapper>
+            <img src=/img/black-friday/banner-bf-smart-tvs.jpg alt=Comparativo Smart TVs 50 polegadas Black Friday 2026 class=bf-guide-img loading=lazy>
+            <span class=bf-tag-overlay><i class=fas fa-tv></i> Guia 50 Polegadas</span>
+          </div>
+          <div class=bf-guide-body>
+            <span style=font-size: 0.8rem; font-weight: 700; color: var(--bf-blue); text-transform: uppercase; margin-bottom: 0.5rem; display: block;>Smart TVs 4K</span>
+            <h3 class=bf-guide-title>5 Smart TVs para ficar de olho na Black Friday 2026: qual vale mais a pena?</h3>
+            <p class=bf-guide-desc>Comparamos a fundo Samsung Crystal UHD U8000F, Toshiba 50C350NS, AOC Roku 50U7045, Philco P50VIK e Samsung Mini LED M75H. Saiba qual entrega o melhor sistema, recursos para games e imagem sem surpresas.</p>
+            <div class=bf-guide-footer>
+              <span style=font-size: 0.85rem; color: #64748b;><i class=far fa-clock></i> 7 min de leitura</span>
+              <a href=/blog/black-friday-2026/smart-tvs/ class=bf-guide-link>Acessar Comparativo Completo <i class=fas fa-arrow-right></i></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Guia 2: Air Fryers -->
+        <article class=bf-guide-card>
+          <div class=bf-guide-img-wrapper>
+            <img src=/img/black-friday/banner-bf-air-fryers.jpg alt=Comparativo Air Fryers Black Friday 2026 class=bf-guide-img loading=lazy>
+            <span class=bf-tag-overlay><i class=fas fa-fire></i> Guia Cozinha Prática</span>
+          </div>
+          <div class=bf-guide-body>
+            <span style=font-size: 0.8rem; font-weight: 700; color: var(--bf-orange); text-transform: uppercase; margin-bottom: 0.5rem; display: block;>Air Fryers 4L a 5L</span>
+            <h3 class=bf-guide-title>5 Air Fryers para comparar na Black Friday 2026: descubra qual combina com sua cozinha</h3>
+            <p class=bf-guide-desc>Comparamos Mondial AFN-50-BI, Electrolux EAF30, Oster Inox Compact OFRT520, Philips Walita RI9252 e Electrolux EAF50. Veja capacidade útil real, durabilidade do antiaderente, potência e facilidade de limpeza.</p>
+            <div class=bf-guide-footer>
+              <span style=font-size: 0.85rem; color: #64748b;><i class=far fa-clock></i> 8 min de leitura</span>
+              <a href=/blog/black-friday-2026/air-fryers/ class=bf-guide-link>Acessar Comparativo Completo <i class=fas fa-arrow-right></i></a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- As 4 Regras de Ouro da Black Friday 2026 -->
+    <section style=background: #ffffff; border: 1px solid var(--bf-border); border-radius: 16px; padding: 3rem 2rem; margin: 4rem auto; box-shadow: var(--bf-shadow-card);>
+      <div style=text-align: center; max-width: 750px; margin: 0 auto 2.5rem;>
+        <span style=font-size: 0.82rem; font-weight: 800; color: var(--bf-green); text-transform: uppercase; letter-spacing: 0.05em;><i class=fas fa-shield-alt></i> Guia do Consumidor Inteligente</span>
+        <h2 style=font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.95rem; color: var(--bf-text-dark); margin-top: 0.5rem;>4 Regras para não cair em ciladas nesta Black Friday</h2>
+      </div>
+
+      <div style=display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem;>
+        
+        <div style=background: #f8fafc; border: 1px solid var(--bf-border); border-radius: 12px; padding: 1.5rem;>
+          <div style=width: 44px; height: 44px; border-radius: 8px; background: #eff6ff; color: var(--bf-blue); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; font-weight: 800; margin-bottom: 1rem;>1</div>
+          <h4 style=font-size: 1.1rem; color: var(--bf-text-dark); margin-bottom: 0.5rem;>Desconfie da Metade do Dobro</h4>
+          <p style=font-size: 0.92rem; color: var(--bf-text-muted); line-height: 1.6; margin: 0;>Lojas elevam os preços semanas antes para simular descontos de 40% a 50%. Acompanhe o histórico de preço real dos últimos 60 dias antes de se empolgar.</p>
+        </div>
+
+        <div style=background: #f8fafc; border: 1px solid var(--bf-border); border-radius: 12px; padding: 1.5rem;>
+          <div style=width: 44px; height: 44px; border-radius: 8px; background: #fff7ed; color: var(--bf-orange); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; font-weight: 800; margin-bottom: 1rem;>2</div>
+          <h4 style=font-size: 1.1rem; color: var(--bf-text-dark); margin-bottom: 0.5rem;>Foque no Código Exato do Modelo</h4>
+          <p style=font-size: 0.92rem; color: var(--bf-text-muted); line-height: 1.6; margin: 0;>Fabricantes mantêm o mesmo nome comercial para aparelhos com especificações muito diferentes. Verifique o código exato (ex: EAF30 vs EAF50) para saber o que está levando.</p>
+        </div>
+
+        <div style=background: #f8fafc; border: 1px solid var(--bf-border); border-radius: 12px; padding: 1.5rem;>
+          <div style=width: 44px; height: 44px; border-radius: 8px; background: #ecfdf5; color: var(--bf-green); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; font-weight: 800; margin-bottom: 1rem;>3</div>
+          <h4 style=font-size: 1.1rem; color: var(--bf-text-dark); margin-bottom: 0.5rem;>Cheque a Loja Oficial no Marketplace</h4>
+          <p style=font-size: 0.92rem; color: var(--bf-text-muted); line-height: 1.6; margin: 0;>Na Amazon, Shopee e Mercado Livre, prefira produtos Vendido e entregue pela loja oficial da marca ou com selo de garantia para não arriscar pós-venda ou falsificações.</p>
+        </div>
+
+        <div style=background: #f8fafc; border: 1px solid var(--bf-border); border-radius: 12px; padding: 1.5rem;>
+          <div style=width: 44px; height: 44px; border-radius: 8px; background: #fdf2f8; color: #db2777; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; font-weight: 800; margin-bottom: 1rem;>4</div>
+          <h4 style=font-size: 1.1rem; color: var(--bf-text-dark); margin-bottom: 0.5rem;>Atenção à Voltagem e Instalação</h4>
+          <p style=font-size: 0.92rem; color: var(--bf-text-muted); line-height: 1.6; margin: 0;>Eletrodomésticos de alta potência (Air Fryers de 1700W/1900W) exigem tomadas padrão 20A. Selecione com atenção 110V ou 220V antes de finalizar o pedido.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Estrutura Reutilizável: Próximas Categorias em Preparação (Item 10) -->
+    <section class=bf-future-section>
+      <div style=display: flex; flex-direction: column; gap: 0.5rem;>
+        <span style=font-size: 0.8rem; font-weight: 800; color: var(--bf-blue); text-transform: uppercase; letter-spacing: 0.05em;>Cronograma Editorial</span>
+        <h2 style=font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.75rem; color: var(--bf-text-dark);>Próximos comparativos em curadoria para a Black Friday 2026</h2>
+        <p style=color: var(--bf-text-muted); font-size: 0.95rem; margin: 0;>Nossa equipe técnica está analisando fichas técnicas e histórico de preços destas categorias para publicar guias completos nos próximos dias:</p>
+      </div>
+
+      <div class=bf-future-grid>
+        <div class=bf-future-card>
+          <div class=bf-future-icon><i class=fas fa-laptop></i></div>
+          <div>
+            <div class=bf-future-title>Notebooks</div>
+            <span class=bf-future-badge>Custo-Benefício & Estudo</span>
+          </div>
+        </div>
+        <div class=bf-future-card>
+          <div class=bf-future-icon><i class=fas fa-mobile-alt></i></div>
+          <div>
+            <div class=bf-future-title>Smartphones</div>
+            <span class=bf-future-badge>Até R$ 2.000 & Tops</span>
+          </div>
+        </div>
+        <div class=bf-future-card>
+          <div class=bf-future-icon><i class=fas fa-snowflake></i></div>
+          <div>
+            <div class=bf-future-title>Geladeiras</div>
+            <span class=bf-future-badge>Frost Free & Inverter</span>
+          </div>
+        </div>
+        <div class=bf-future-card>
+          <div class=bf-future-icon><i class=fas fa-tshirt></i></div>
+          <div>
+            <div class=bf-future-title>Máquinas de Lavar</div>
+            <span class=bf-future-badge>12kg a 17kg & Lava e Seca</span>
+          </div>
+        </div>
+        <div class=bf-future-card>
+          <div class=bf-future-icon><i class=fas fa-robot></i></div>
+          <div>
+            <div class=bf-future-title>Robôs Aspiradores</div>
+            <span class=bf-future-badge>Com Mop & Mapeamento</span>
+          </div>
+        </div>
+        <div class=bf-future-card>
+          <div class=bf-future-icon><i class=fas fa-coffee></i></div>
+          <div>
+            <div class=bf-future-title>Cafeteiras</div>
+            <span class=bf-future-badge>Cápsula & Expresso</span>
+          </div>
+        </div>
+        <div class=bf-future-card>
+          <div class=bf-future-icon><i class=fas fa-tablet-alt></i></div>
+          <div>
+            <div class=bf-future-title>Tablets</div>
+            <span class=bf-future-badge>Com Caneta & Teclado</span>
+          </div>
+        </div>
+        <div class=bf-future-card>
+          <div class=bf-future-icon><i class=fas fa-fan></i></div>
+          <div>
+            <div class=bf-future-title>Ventiladores</div>
+            <span class=bf-future-badge>Silenciosos & Turbo</span>
+          </div>
+        </div>
+        <div class=bf-future-card>
+          <div class=bf-future-icon><i class=fas fa-wind></i></div>
+          <div>
+            <div class=bf-future-title>Ar-condicionado</div>
+            <span class=bf-future-badge>Dual Inverter Econômico</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Transparência de Afiliados -->
+    <div class=bf-affiliate-disclosure>
+      <i class=fas fa-info-circle style=color: var(--bf-blue); font-size: 1.1rem;></i>
+      <div>
+        <strong>Aviso de transparência editorial:</strong> Este conteúdo pode conter links de afiliados. Ao clicar e realizar uma compra qualificada nas lojas parceiras (como Amazon, Shopee e Mercado Livre), podemos receber uma pequena comissão. Isso não altera o valor final do seu produto e ajuda a manter nossa equipe de testes 100% independente e sem patrocínio de marcas.
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer Principal -->
+  <footer id=footer-section>
+    <div class=container>
+      <div class=footer-grid>
+        
+        <div class=footer-about id=footer-about-info>
+          <h3 style=font-family: var(--font-heading); font-size: 1.25rem; font-weight: 800; color: var(--text-dark);>
+            Minha<span style=color: var(--primary-color);>Decisão</span>Certa
+          </h3>
+          <p style=color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; margin-top: 10px;>
+            Guia de compras e análises independentes de produtos. Testamos, comparamos e selecionamos o que realmente vale o seu dinheiro na Black Friday e o ano inteiro.
+          </p>
+          <p style=color: var(--text-muted); font-size: 0.8rem; line-height: 1.5; margin-top: 12px; background: #f8fafc; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color);>
+            <strong>Transparência:</strong> Podemos receber comissões por compras realizadas através dos nossos links, sem nenhum custo adicional para você.
+          </p>
+        </div>
+
+        <div class=footer-col id=footer-categories-col>
+          <h4>Categorias</h4>
+          <ul class=footer-links>
+            <li><a href=/notebooks.html>Notebooks</a></li>
+            <li><a href=/celulares.html>Smartphones</a></li>
+            <li><a href=/tvs.html>Smart TVs</a></li>
+            <li><a href=/airfryers.html>Air Fryers</a></li>
+            <li><a href=/geladeiras.html>Geladeiras</a></li>
+            <li><a href=/maquinas-de-lavar.html>Máquinas de Lavar</a></li>
+            <li><a href=/bicicletas.html>Bicicletas</a></li>
+            <li><a href=/eletronicos.html>Eletrônicos</a></li>
+            <li><a href=/achadinhos.html>Achadinhos</a></li>
+          </ul>
+        </div>
+
+        <div class=footer-col id=footer-institutional-col>
+          <h4>Institucional</h4>
+          <ul class=footer-links>
+            <li><a href=/sobre.html>Sobre Nós</a></li>
+            <li><a href=/como-testamos.html>Como Testamos</a></li>
+            <li><a href=/blog.html>Blog e Guias</a></li>
+            <li><a href=/blog/black-friday-2026/>Especial Black Friday 2026</a></li>
+            <li><a href=/categorias.html>Todas as Categorias</a></li>
+            <li><a href=/contato.html>Fale Conosco</a></li>
+          </ul>
+        </div>
+
+        <div class=footer-col id=footer-trust-col>
+          <h4>Transparência</h4>
+          <ul class=footer-links>
+            <li><a href=/divulgacao-afiliados.html>Divulgação de Afiliados</a></li>
+            <li><a href=/privacidade.html>Política de Privacidade</a></li>
+            <li><a href=/termos.html>Termos de Uso</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class=footer-bottom>
+        <p>&copy; 2026 Minha Decisão Certa. Todos os direitos reservados. Especial Black Friday 2026.</p>
+        <div class=footer-legal-links>
+          <a href=/divulgacao-afiliados.html>Afiliados</a>
+          <a href=/privacidade.html>Privacidade</a>
+          <a href=/termos.html>Termos</a>
+          <a href=/contato.html>Contato</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src=/js/main.js></script>
+  <script src=/js/search.js></script>
+  <script src=/js/chatbot.js></script>
+</body>
+</html>
+;
+
+fs.writeFileSync(path.join(hubDir, 'index.html'), html, 'utf8');
+console.log('blog/black-friday-2026/index.html generated successfully!');

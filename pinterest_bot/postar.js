@@ -9,34 +9,33 @@ const PINS_CONFIG = {
     "pin_bf_2026_hub.jpg": {
         titulo: "Black Friday 2026: Guia Completo com Alertas de Preço Real e Testes Técnicos",
         descricao: "Não caia na metade do dobro nesta Black Friday 2026! Confira análises técnicas sinceras, comparativos lado a lado e os melhores produtos que realmente valem a pena comprar no Minha Decisão Certa. #blackfriday2026 #promocoes #comprascertas #tecnologia #achadinhos #ofertas #minhadecisaocerta",
-        link: "https://www.minhadecisaocerta.com.br/blog/black-f
-        riday- 2026 / "
-},
-"pin_bf_2026_smart_tvs.jpg": {
-    titulo: "As 5 Melhores Smart TVs 50 Polegadas para Comprar na Black Friday 2026",
+        link: "https://www.minhadecisaocerta.com.br/blog/black-friday-2026/"
+    },
+    "pin_bf_2026_smart_tvs.jpg": {
+        titulo: "As 5 Melhores Smart TVs 50 Polegadas para Comprar na Black Friday 2026",
         descricao: "Samsung Crystal UHD, Toshiba REGZA com Dolby Vision, AOC Roku TV, Philco Fast e Samsung Mini LED 120Hz! Qual realmente compensa pelo seu dinheiro? Veja o comparativo técnico sem viés no Minha Decisão Certa. #smarttv #smarttv50 #blackfriday2026 #samsungcrystal #dolbyvision #cinemaemcasa #tecnologia",
-            link: "https://www.minhadecisaocerta.com.br/blog/black-friday-2026/smart-tvs/"
-},
-"pin_bf_2026_air_fryers.jpg": {
-    titulo: "5 Melhores Air Fryers que Valem Cada Centavo na Black Friday 2026",
+        link: "https://www.minhadecisaocerta.com.br/blog/black-friday-2026/smart-tvs/"
+    },
+    "pin_bf_2026_air_fryers.jpg": {
+        titulo: "5 Melhores Air Fryers que Valem Cada Centavo na Black Friday 2026",
         descricao: "Mondial AFN-50 1900W, Electrolux EAF30 compacta, Oster OFRT520 inox, Philips Walita RapidAir e Electrolux Grand 5L! Comparamos potência, facilidade de limpar o antiaderente e crocância real. Confira o guia no Minha Decisão Certa! #airfryer #fritadeirasemoleo #blackfriday2026 #mondial #electrolux #oster #receitasairfryer",
-            link: "https://www.minhadecisaocerta.com.br/blog/black-friday-2026/air-fryers/"
-},
-"pin_cozinha_pratica.jpg": {
-    titulo: "5 Achadinhos de Cozinha da Shopee que Parecem Caros mas Custam Menos de R$ 30",
+        link: "https://www.minhadecisaocerta.com.br/blog/black-friday-2026/air-fryers/"
+    },
+    "pin_cozinha_pratica.jpg": {
+        titulo: "5 Achadinhos de Cozinha da Shopee que Parecem Caros mas Custam Menos de R$ 30",
         descricao: "Itens práticos que transformam a sua rotina na cozinha sem pesar no bolso! Mini processador USB, seladora portátil, dispenser 2 em 1 e muito mais. Clique para conferir as ofertas verificadas com frete grátis na Shopee! #achadinhosshopee #cozinhapratica #organizacaocasa #shopee #utilidadesdomesticas",
-            link: "https://www.minhadecisaocerta.com.br/index.html#vitrine-cozinha"
-},
-"pin_robo_aspirador.jpg": {
-    titulo: "Vale a Pena? Os 5 Melhores Robôs Aspiradores Baratos da Shopee (2026)",
+        link: "https://www.minhadecisaocerta.com.br/index.html#vitrine-cozinha"
+    },
+    "pin_robo_aspirador.jpg": {
+        titulo: "Vale a Pena? Os 5 Melhores Robôs Aspiradores Baratos da Shopee (2026)",
         descricao: "Chega de sofrer com pelos de pet e poeira pela casa! Analisamos os 5 melhores robôs aspiradores da Shopee que realmente funcionam e cabem no bolso. Veja o comparativo sincero com cupons de frete grátis no Minha Decisão Certa! #roboaspirador #achadinhosshopee #shopeebrasil #limpeza #casalimpa #dicasdecasa",
-            link: "https://www.minhadecisaocerta.com.br/artigo-robos-aspiradores.html"
-},
-"pin_eletronicos_shopee.jpg": {
-    titulo: "10 Eletrônicos Baratos da Shopee que Parecem Caros em 2026",
+        link: "https://www.minhadecisaocerta.com.br/artigo-robos-aspiradores.html"
+    },
+    "pin_eletronicos_shopee.jpg": {
+        titulo: "10 Eletrônicos Baratos da Shopee que Parecem Caros em 2026",
         descricao: "Fones sem fio com cancelamento de ruído, smartwatch AMOLED, mini projetor de cinema e caixas de som à prova d'água! Selecionamos os 10 melhores gadgets virais da Shopee com avaliações 5 estrelas e frete grátis. Confira o comparativo no Minha Decisão Certa! #eletronicos #achadinhosshopee #gadgets #tecnologia #fonedeouvido #smartwatch #shopee",
-            link: "https://www.minhadecisaocerta.com.br/eletronicos.html"
-}
+        link: "https://www.minhadecisaocerta.com.br/eletronicos.html"
+    }
 };
 
 const TITULO_PADRAO = "Achadinhos e Recomendações Sinceras | Minha Decisão Certa";
