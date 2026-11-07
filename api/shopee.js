@@ -75,23 +75,24 @@ module.exports = async function handler(req, res) {
     const data = await apiRes.json();
     let nodes = (data && data.data && data.data.productOfferV2 && data.data.productOfferV2.nodes) || [];
 
-    // Filtro rigoroso contra acessórios (teclados, fontes, cabos, capinhas, etc.)
+    // Filtro rigoroso contra acessórios (bolsas, capas, teclados, carregadores, etc.)
     const ACCESSORY_WORDS = [
       'teclado', 'teclados',
       'capa', 'capas', 'capinha', 'capinhas', 'case', 'cases', 'pasta', 'maleta',
-      'pelicula', 'peliculas', 'protetor', 'protetora',
+      'bolsa', 'bolsas', 'bagagem', 'bagagens', 'bag', 'luva', 'luvas', 'saco', 'sacos',
+      'mochila', 'mochilas', 'sleeve', 'sleeves',
+      'pelicula', 'peliculas',
       'carregador', 'carregadores',
       'cabo', 'cabos', 'flat',
       'adaptador', 'adaptadores', 'plug', 'hub', 'dock',
       'suporte', 'suportes',
       'fonte', 'fontes',
-      'bateria', 'baterias',
       'mouse', 'mouses', 'mousepad',
       'fone', 'fones', 'headset', 'headphone',
       'cooler', 'coolers', 'cooler pad', 'base refrigerada',
       'adesivo', 'adesivos', 'skin', 'skins',
-      'display', 'touch', 'tela display', 'peca', 'pecas', 'modulo', 'placa', 'flex',
-      'cesto', 'grelha', 'tapete', 'forma', 'papel', 'resistencia', 'alca', 'controle'
+      'display touch', 'tela display', 'touch screen', 'modulo display',
+      'cesto', 'grelha', 'tapete', 'forma de silicone', 'papel descartavel', 'resistencia eletrica'
     ];
     const minPriceReq = Number(req.query.minPrice) || 0;
     nodes = nodes.filter(n => {
@@ -101,7 +102,7 @@ module.exports = async function handler(req, res) {
       if (price <= 0) return false;
       if (minPriceReq > 0 && price < minPriceReq) return false;
       return true;
-    }).slice(0, 5); // Foca nos 5 melhores itens válidos
+    }).slice(0, 5); // Foca nos 5 melhores itens válidos realistas
 
     // Gera shortlink de afiliado para cada oferta encontrada
     for (let node of nodes) {

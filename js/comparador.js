@@ -615,31 +615,32 @@ function nameTokens(name) {
 var ACCESSORY_WORDS = [
   'teclado', 'teclados',
   'capa', 'capas', 'capinha', 'capinhas', 'case', 'cases', 'pasta', 'maleta',
-  'pelicula', 'peliculas', 'protetor', 'protetora',
+  'bolsa', 'bolsas', 'bagagem', 'bagagens', 'bag', 'luva', 'luvas', 'saco', 'sacos',
+  'mochila', 'mochilas', 'sleeve', 'sleeves',
+  'pelicula', 'peliculas',
   'carregador', 'carregadores',
   'cabo', 'cabos', 'flat',
   'adaptador', 'adaptadores', 'plug', 'hub', 'dock',
   'suporte', 'suportes',
   'fonte', 'fontes',
-  'bateria', 'baterias',
   'mouse', 'mouses', 'mousepad',
   'fone', 'fones', 'headset', 'headphone',
   'cooler', 'coolers', 'cooler pad', 'base refrigerada',
   'adesivo', 'adesivos', 'skin', 'skins',
-  'display', 'touch', 'tela display', 'peca', 'pecas', 'modulo', 'placa', 'flex',
-  'cesto', 'grelha', 'tapete', 'forma', 'papel', 'resistencia', 'alca', 'controle'
+  'display touch', 'tela display', 'touch screen', 'modulo display',
+  'cesto', 'grelha', 'tapete', 'forma de silicone', 'papel descartavel', 'resistencia eletrica'
 ];
 
 /* Casa a oferta ao vivo com o produto quando há pelo menos 2 tokens
  * em comum, ou o token de modelo (ex.: bfr21p, 50pug7300) aparece.
  * DESCARTA categoricamente qualquer oferta cujo nome contenha palavra de acessório
- * (teclado, capa, capinha, película, carregador, cabo, adaptador, suporte, fonte),
+ * (teclado, capa, capinha, película, carregador, cabo, adaptador, suporte, fonte, bolsa, bagagem, luva, saco, mochila, sleeve, case),
  * mesmo que o nome contenha o modelo exato.
  * DESCARTA discrepâncias de preço. */
 function matchOffer(product, offers) {
   var tokens = nameTokens(product.name);
   var best = null, bestScore = 0;
-  var minPrice = product.price ? product.price * 0.6 : 50;
+  var minPrice = product.price ? product.price * 0.5 : 50;
   var maxPrice = product.price ? product.price * 2.8 : 50000;
 
   (offers || []).forEach(function (o) {
