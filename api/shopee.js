@@ -44,7 +44,7 @@ module.exports = async function handler(req, res) {
   try {
     const payload = JSON.stringify({
       query: `query SearchOffers($keyword: String!) {
-        productOfferV2(keyword: $keyword, page: 1, limit: 5) {
+        productOfferV2(keyword: $keyword, page: 1, limit: 20) {
           nodes {
             itemId
             productName
@@ -75,23 +75,33 @@ module.exports = async function handler(req, res) {
     const data = await apiRes.json();
     let nodes = (data && data.data && data.data.productOfferV2 && data.data.productOfferV2.nodes) || [];
 
-    // Filtro rigoroso contra acessórios (capinhas, películas, cabos)
+    // Filtro rigoroso contra acessórios (teclados, fontes, cabos, capinhas, etc.)
     const ACCESSORY_WORDS = [
-      'capa', 'capinha', 'pelicula', 'case', 'cabo', 'carregador', 'suporte',
-      'adaptador', 'fone', 'relogio', 'pulseira', 'protetor', 'adesivo', 'skin',
-      'vidro', 'peca', 'pecas', 'display', 'touch', 'bateria original', 'troca', 'flex',
-      'modulo', 'painel', 'barra de led', 'barras de led', 'placa',
-      'controle', 'cesto', 'grelha', 'tapete', 'papel', 'forma de silicone',
-      'resistencia', 'alca', 'cooler', 'fonte', 'mochila'
+      'teclado', 'teclados',
+      'capa', 'capas', 'capinha', 'capinhas', 'case', 'cases', 'pasta', 'maleta',
+      'pelicula', 'peliculas', 'protetor', 'protetora',
+      'carregador', 'carregadores',
+      'cabo', 'cabos', 'flat',
+      'adaptador', 'adaptadores', 'plug', 'hub', 'dock',
+      'suporte', 'suportes',
+      'fonte', 'fontes',
+      'bateria', 'baterias',
+      'mouse', 'mouses', 'mousepad',
+      'fone', 'fones', 'headset', 'headphone',
+      'cooler', 'coolers', 'cooler pad', 'base refrigerada',
+      'adesivo', 'adesivos', 'skin', 'skins',
+      'display', 'touch', 'tela display', 'peca', 'pecas', 'modulo', 'placa', 'flex',
+      'cesto', 'grelha', 'tapete', 'forma', 'papel', 'resistencia', 'alca', 'controle'
     ];
     const minPriceReq = Number(req.query.minPrice) || 0;
     nodes = nodes.filter(n => {
       const hay = (n.productName || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
       if (ACCESSORY_WORDS.some(w => hay.includes(w))) return false;
       const price = Number(n.priceMin) > 100000 ? Number(n.priceMin) / 100 : Number(n.priceMin);
+      if (price <= 0) return false;
       if (minPriceReq > 0 && price < minPriceReq) return false;
       return true;
-    });
+    }).slice(0, 5); // Foca nos 5 melhores itens válidos
 
     // Gera shortlink de afiliado para cada oferta encontrada
     for (let node of nodes) {

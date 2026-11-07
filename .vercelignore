@@ -1,0 +1,12 @@
+.env*
+node_modules
+scratch
+pinterest_bot
+sessao_pinterest
+*.log
+video_serie
+canais_*
+ranking_*
+relatorio_*
+minerador_*
+

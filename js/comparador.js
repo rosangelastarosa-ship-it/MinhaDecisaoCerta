@@ -613,28 +613,40 @@ function nameTokens(name) {
 }
 /* Palavras-chave de acessórios que NUNCA devem ser confundidos com o produto real */
 var ACCESSORY_WORDS = [
-  'capa', 'capinha', 'pelicula', 'case', 'cabo', 'carregador', 'suporte',
-  'adaptador', 'fone', 'relogio', 'pulseira', 'protetor', 'adesivo', 'skin',
-  'vidro', 'peca', 'pecas', 'display', 'touch', 'bateria original', 'troca', 'flex',
-  'modulo', 'painel', 'barra de led', 'barras de led', 'placa',
-  'controle', 'cesto', 'grelha', 'tapete', 'papel', 'forma de silicone',
-  'resistencia', 'alca', 'cooler', 'fonte', 'mochila'
+  'teclado', 'teclados',
+  'capa', 'capas', 'capinha', 'capinhas', 'case', 'cases', 'pasta', 'maleta',
+  'pelicula', 'peliculas', 'protetor', 'protetora',
+  'carregador', 'carregadores',
+  'cabo', 'cabos', 'flat',
+  'adaptador', 'adaptadores', 'plug', 'hub', 'dock',
+  'suporte', 'suportes',
+  'fonte', 'fontes',
+  'bateria', 'baterias',
+  'mouse', 'mouses', 'mousepad',
+  'fone', 'fones', 'headset', 'headphone',
+  'cooler', 'coolers', 'cooler pad', 'base refrigerada',
+  'adesivo', 'adesivos', 'skin', 'skins',
+  'display', 'touch', 'tela display', 'peca', 'pecas', 'modulo', 'placa', 'flex',
+  'cesto', 'grelha', 'tapete', 'forma', 'papel', 'resistencia', 'alca', 'controle'
 ];
 
 /* Casa a oferta ao vivo com o produto quando há pelo menos 2 tokens
  * em comum, ou o token de modelo (ex.: bfr21p, 50pug7300) aparece.
- * REJEITA categoricamente capinhas, películas, cabos e discrepâncias de preço. */
+ * DESCARTA categoricamente qualquer oferta cujo nome contenha palavra de acessório
+ * (teclado, capa, capinha, película, carregador, cabo, adaptador, suporte, fonte),
+ * mesmo que o nome contenha o modelo exato.
+ * DESCARTA discrepâncias de preço. */
 function matchOffer(product, offers) {
   var tokens = nameTokens(product.name);
   var best = null, bestScore = 0;
-  var minPrice = product.price ? product.price * 0.5 : 50;
+  var minPrice = product.price ? product.price * 0.6 : 50;
   var maxPrice = product.price ? product.price * 2.8 : 50000;
 
   (offers || []).forEach(function (o) {
     var rawName = o.productName || '';
     var hay = rawName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
-    // Rejeita qualquer acessório/capinha/película
+    // Descartar qualquer oferta cujo nome contenha palavra de acessório
     var isAccessory = ACCESSORY_WORDS.some(function (w) {
       return hay.indexOf(w) !== -1;
     });
@@ -642,7 +654,7 @@ function matchOffer(product, offers) {
 
     var price = Number(o.priceMin);
     if (price > 100000) price = price / 100;
-    // Rejeita ofertas com preço discrepante (ex.: capinha de R$ 18 num celular de R$ 1400)
+    if (!price || price <= 0) return;
     if (price < minPrice || price > maxPrice) return;
 
     var score = 0;
@@ -673,21 +685,25 @@ function renderTabs() {
 
 function priceHtml(p) {
   var live = state.live[p.id];
-  if (live) {
+  if (live && live.price && live.price > 0) {
     return '<p class="product-price">' + formatBRL(live.price) +
       '<span class="live-badge">AO VIVO</span>' +
       '<small>Preço ao vivo via Shopee — confira na loja</small></p>' +
       (live.offerLink ? '<p><a href="' + live.offerLink + '" target="_blank" rel="noopener sponsored">Ver oferta na Shopee ↗</a></p>' : '');
   }
-  return '<p class="product-price">' + formatBRL(p.price) +
-    '<small>' + p.store + ' • ' + p.priceDate + ' — confira o preço atual na loja</small></p>';
+  // Quando a API não retornar nenhuma oferta válida, mostrar o preço do guia, nunca deixar em branco nem mostrar R$ 0.
+  var fallbackPrice = (p && p.price && p.price > 0) ? p.price : 0;
+  return '<p class="product-price">' + formatBRL(fallbackPrice) +
+    '<small>' + (p.store || 'Guia') + ' • ' + (p.priceDate || 'Out/2026') + ' — confira o preço atual na loja</small></p>';
 }
 
-/* Preço efetivo do produto: ao vivo, quando disponível; senão, o do guia. */
+/* Preço efetivo do produto: ao vivo, quando disponível; senão, o do guia (nunca em branco nem R$ 0). */
 function effectivePrice(p) {
   var live = state.live[p.id];
-  if (live) return { price: live.price, source: 'Preço ao vivo via Shopee' };
-  return { price: p.price, source: p.store + ' • ' + p.priceDate };
+  if (live && live.price && live.price > 0) {
+    return { price: live.price, source: 'Preço ao vivo via Shopee' };
+  }
+  return { price: (p && p.price && p.price > 0) ? p.price : 0, source: p.store + ' • ' + p.priceDate };
 }
 
 /* HTML do widget de parcelas de um produto (puro — sem amarrar eventos).
@@ -1150,14 +1166,23 @@ function fetchLivePrices() {
           if (offer && offer.priceMin != null) {
             var price = Number(offer.priceMin);
             if (price > 100000) price = price / 100; /* centavos, se vier assim */
-            state.live[p.id] = { price: price, offerLink: offer.offerLink || null };
-            anyLive = true;
+            if (price > 0 && (!p.price || (price >= p.price * 0.6 && price <= p.price * 2.8))) {
+              state.live[p.id] = { price: price, offerLink: offer.offerLink || null };
+              anyLive = true;
+            } else {
+              delete state.live[p.id];
+            }
+          } else {
+            delete state.live[p.id];
           }
         } else {
           state.liveConfigured = false;
+          delete state.live[p.id];
         }
       })
-      .catch(function () { /* sem preço ao vivo: mantém o preço do guia */ })
+      .catch(function () {
+        delete state.live[p.id];
+      })
       .finally(function () {
         pending--;
         if (pending === 0) {
