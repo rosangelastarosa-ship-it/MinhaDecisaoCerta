@@ -139,7 +139,8 @@
     "termo_shopee": "cadeirao refeicao bebe dobravel",
     "icone": "fa-chair",
     "cor": "#8b5cf6",
-    "status": "agendado"
+    "status": "publicado",
+    "publishedAt": "2026-11-07T17:58:52.891Z"
   },
   {
     "id": 12,
