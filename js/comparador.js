@@ -611,13 +611,40 @@ function nameTokens(name) {
     .replace(/[^a-z0-9 ]/g, ' ').split(' ')
     .filter(function (t) { return t.length > 1 && STOPWORDS.indexOf(t) === -1; });
 }
+/* Palavras-chave de acessórios que NUNCA devem ser confundidos com o produto real */
+var ACCESSORY_WORDS = [
+  'capa', 'capinha', 'pelicula', 'case', 'cabo', 'carregador', 'suporte',
+  'adaptador', 'fone', 'relogio', 'pulseira', 'protetor', 'adesivo', 'skin',
+  'vidro', 'peca', 'pecas', 'display', 'touch', 'bateria original', 'troca', 'flex',
+  'modulo', 'painel', 'barra de led', 'barras de led', 'placa',
+  'controle', 'cesto', 'grelha', 'tapete', 'papel', 'forma de silicone',
+  'resistencia', 'alca', 'cooler', 'fonte', 'mochila'
+];
+
 /* Casa a oferta ao vivo com o produto quando há pelo menos 2 tokens
- * em comum, ou o token de modelo (ex.: bfr21p, 50pug7300) aparece. */
+ * em comum, ou o token de modelo (ex.: bfr21p, 50pug7300) aparece.
+ * REJEITA categoricamente capinhas, películas, cabos e discrepâncias de preço. */
 function matchOffer(product, offers) {
   var tokens = nameTokens(product.name);
   var best = null, bestScore = 0;
+  var minPrice = product.price ? product.price * 0.5 : 50;
+  var maxPrice = product.price ? product.price * 2.8 : 50000;
+
   (offers || []).forEach(function (o) {
-    var hay = (o.productName || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    var rawName = o.productName || '';
+    var hay = rawName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+    // Rejeita qualquer acessório/capinha/película
+    var isAccessory = ACCESSORY_WORDS.some(function (w) {
+      return hay.indexOf(w) !== -1;
+    });
+    if (isAccessory) return;
+
+    var price = Number(o.priceMin);
+    if (price > 100000) price = price / 100;
+    // Rejeita ofertas com preço discrepante (ex.: capinha de R$ 18 num celular de R$ 1400)
+    if (price < minPrice || price > maxPrice) return;
+
     var score = 0;
     tokens.forEach(function (t) { if (hay.indexOf(t) !== -1) score++; });
     if (score > bestScore) { bestScore = score; best = o; }
@@ -1113,7 +1140,8 @@ function fetchLivePrices() {
     return;
   }
   products.forEach(function (p) {
-    fetch('/api/shopee?keyword=' + encodeURIComponent(p.name))
+    var minP = p.price ? Math.floor(p.price * 0.5) : 0;
+    fetch('/api/shopee?keyword=' + encodeURIComponent(p.name) + '&minPrice=' + minP)
       .then(function (r) { return r.json(); })
       .then(function (data) {
         if (data && data.configured) {

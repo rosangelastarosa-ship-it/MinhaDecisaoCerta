@@ -73,7 +73,25 @@ module.exports = async function handler(req, res) {
     });
 
     const data = await apiRes.json();
-    const nodes = (data && data.data && data.data.productOfferV2 && data.data.productOfferV2.nodes) || [];
+    let nodes = (data && data.data && data.data.productOfferV2 && data.data.productOfferV2.nodes) || [];
+
+    // Filtro rigoroso contra acessórios (capinhas, películas, cabos)
+    const ACCESSORY_WORDS = [
+      'capa', 'capinha', 'pelicula', 'case', 'cabo', 'carregador', 'suporte',
+      'adaptador', 'fone', 'relogio', 'pulseira', 'protetor', 'adesivo', 'skin',
+      'vidro', 'peca', 'pecas', 'display', 'touch', 'bateria original', 'troca', 'flex',
+      'modulo', 'painel', 'barra de led', 'barras de led', 'placa',
+      'controle', 'cesto', 'grelha', 'tapete', 'papel', 'forma de silicone',
+      'resistencia', 'alca', 'cooler', 'fonte', 'mochila'
+    ];
+    const minPriceReq = Number(req.query.minPrice) || 0;
+    nodes = nodes.filter(n => {
+      const hay = (n.productName || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      if (ACCESSORY_WORDS.some(w => hay.includes(w))) return false;
+      const price = Number(n.priceMin) > 100000 ? Number(n.priceMin) / 100 : Number(n.priceMin);
+      if (minPriceReq > 0 && price < minPriceReq) return false;
+      return true;
+    });
 
     // Gera shortlink de afiliado para cada oferta encontrada
     for (let node of nodes) {
