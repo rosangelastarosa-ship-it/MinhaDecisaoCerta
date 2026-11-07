@@ -20,8 +20,8 @@ module.exports = async function handler(req, res) {
     return res.status(200).end();
   }
 
-  const appId = process.env.SHOPEE_APP_ID;
-  const secret = process.env.SHOPEE_SECRET;
+  const appId = (process.env.SHOPEE_APP_ID || '').replace(/[^\x20-\x7E]/g, '').trim();
+  const secret = (process.env.SHOPEE_SECRET || '').replace(/[^\x20-\x7E]/g, '').trim();
 
   // Sem as variáveis configuradas, avisa honestamente sem quebrar a página
   if (!appId || !secret || appId === 'SEU_APP_ID_AQUI' || secret === 'SEU_SECRET_KEY_AQUI') {
