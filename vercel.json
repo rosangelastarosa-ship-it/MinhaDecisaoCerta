@@ -4,6 +4,10 @@
     {
       "source": "/comparador",
       "destination": "/comparador.html"
+    },
+    {
+      "source": "/black-friday",
+      "destination": "/blog/black-friday-2026/index.html"
     }
   ],
   "redirects": [
