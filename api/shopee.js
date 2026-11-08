@@ -94,15 +94,38 @@ module.exports = async function handler(req, res) {
       'display touch', 'tela display', 'touch screen', 'modulo display',
       'cesto', 'grelha', 'tapete', 'forma de silicone', 'papel descartavel', 'resistencia eletrica'
     ];
+
+    // Filtro rigoroso contra produtos usados / seminovos / mostruário / defeito
+    const USED_WORDS = [
+      'usado', 'usada', 'usados', 'usadas',
+      'seminovo', 'semi-novo', 'semi novo', 'seminovos', 'semi novos',
+      'segunda mao', 'segunda mao', 'recondicionado', 'recondicionada', 'refurbished',
+      'open box', 'open-box', 'vitrine', 'mostruario', 'mostruario', 'defeito', 'sucata', 'para pecas'
+    ];
+
     const minPriceReq = Number(req.query.minPrice) || 0;
+    const exactModelReq = (req.query.exactModel || '').toLowerCase().trim();
+    const exactModelParts = exactModelReq ? exactModelReq.split(',').map(s => s.trim()).filter(Boolean) : [];
+
     nodes = nodes.filter(n => {
       const hay = (n.productName || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
       if (ACCESSORY_WORDS.some(w => hay.includes(w))) return false;
+      if (USED_WORDS.some(w => new RegExp('\\b' + w + '\\b', 'i').test(hay))) return false;
+      if (exactModelParts.length > 0 && !exactModelParts.every(p => hay.includes(p))) return false;
       const price = Number(n.priceMin) > 100000 ? Number(n.priceMin) / 100 : Number(n.priceMin);
       if (price <= 0) return false;
       if (minPriceReq > 0 && price < minPriceReq) return false;
       return true;
-    }).slice(0, 5); // Foca nos 5 melhores itens válidos realistas
+    });
+
+    // Ordena pelo MENOR preço da oferta (priceMin)
+    nodes.sort((a, b) => {
+      const pA = Number(a.priceMin) > 100000 ? Number(a.priceMin) / 100 : Number(a.priceMin);
+      const pB = Number(b.priceMin) > 100000 ? Number(b.priceMin) / 100 : Number(b.priceMin);
+      return pA - pB;
+    });
+
+    nodes = nodes.slice(0, 5); // Foca nos 5 melhores itens válidos de menor preço
 
     // Gera shortlink de afiliado para cada oferta encontrada
     for (let node of nodes) {

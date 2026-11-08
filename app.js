@@ -27,6 +27,7 @@ var PRODUCTS = [
   /* ---------------- Celulares (Shopee, Out/2026) ---------------- */
   {
     id: 'redmi-note-13-pro', cat: 'celulares', name: 'Xiaomi Redmi Note 13 Pro 5G',
+    exactModel: ['note 13 pro'],
     rating: 4.8, ratingText: '4,8 (100 avaliações)',
     price: 1449.50, store: 'Shopee', priceDate: 'Out/2026',
     shopeeQuery: 'Smartphone Xiaomi Redmi Note 13 Pro 5G',
@@ -39,6 +40,7 @@ var PRODUCTS = [
   },
   {
     id: 'galaxy-s23-fe', cat: 'celulares', name: 'Samsung Galaxy S23 FE (256GB)',
+    exactModel: ['s23 fe'],
     rating: 4.5, ratingText: '4,5 (100 avaliações)',
     price: 2003.55, store: 'Shopee', priceDate: 'Out/2026',
     shopeeQuery: 'Smartphone Samsung Galaxy S23 FE',
@@ -50,6 +52,7 @@ var PRODUCTS = [
   },
   {
     id: 'poco-c85', cat: 'celulares', name: 'Xiaomi POCO C85 NFC (256GB)',
+    exactModel: ['c85'],
     rating: 4.9, ratingText: '4,9 (175 avaliações)',
     price: 1243.00, store: 'Shopee', priceDate: 'Out/2026',
     shopeeQuery: 'Smartphone Xiaomi Poco C85',
@@ -66,9 +69,10 @@ var PRODUCTS = [
   /* ---------------- Notebooks (Out/2026) ---------------- */
   {
     id: 'acer-aspire-5', cat: 'notebooks', name: 'Acer Aspire 5 (Ryzen 5)',
+    exactModel: ['aspire 5'],
     rating: 9.5, ratingText: '9,5 / 10 — Melhor custo-benefício do ano',
     price: 2864.01, store: 'Preço médio do guia', priceDate: 'Out/2026',
-    shopeeQuery: 'Notebook Acer Aspire 5 Ryzen',
+    shopeeQuery: 'Notebook Acer Aspire 5',
     img: 'img/acer_aspire.jpg', tag: 'Melhor custo-benefício do ano',
     specs: {
       processador: { text: 'Ryzen 5' }, ram: { text: '—' }, tela: { text: '—' },
@@ -77,9 +81,10 @@ var PRODUCTS = [
   },
   {
     id: 'macbook-air-m1', cat: 'notebooks', name: 'Apple MacBook Air M1',
+    exactModel: ['macbook air', 'm1'],
     rating: 9.5, ratingText: '9,5 / 10 — Melhor notebook premium',
     price: 5029.08, store: 'Preço médio do guia', priceDate: 'Out/2026',
-    shopeeQuery: 'Apple MacBook Air M1 Lacrado',
+    shopeeQuery: 'Apple MacBook Air M1',
     img: 'img/macbook_air.jpg', tag: 'Bateria de 14h+',
     specs: {
       processador: { text: 'Apple M1' }, ram: { text: '—' },
@@ -89,6 +94,7 @@ var PRODUCTS = [
   },
   {
     id: 'asus-vivobook', cat: 'notebooks', name: 'ASUS Vivobook (Ryzen 7)',
+    exactModel: ['vivobook'],
     rating: 9.2, ratingText: '9,2 / 10',
     price: 5714.88, store: 'Preço médio do guia', priceDate: 'Out/2026',
     shopeeQuery: 'Notebook ASUS Vivobook OLED',
@@ -103,6 +109,7 @@ var PRODUCTS = [
   /* ---------------- TVs de 50" (preços de 26/10/2026) ---------------- */
   {
     id: 'semp-s42', cat: 'tvs', name: 'SEMP S42 50" Full HD',
+    exactModel: ['s42'],
     rating: null, ratingText: null,
     price: 1793.97, store: 'Magazine Luiza (Pix)', priceDate: '26/10/2026',
     img: 'img/tv-semp.jpg', tag: 'Menor preço em 50"',
@@ -114,6 +121,7 @@ var PRODUCTS = [
   },
   {
     id: 'philips-50pug7300', cat: 'tvs', name: 'Philips 50PUG7300 4K',
+    exactModel: ['7300'],
     rating: null, ratingText: null,
     price: 1899.00, store: 'Mercado Livre', priceDate: '26/10/2026',
     img: 'img/tv-philips.jpg', tag: '4K com comando de voz',
@@ -127,6 +135,7 @@ var PRODUCTS = [
   /* ---------------- Air fryers (Shopee, Out/2026) ---------------- */
   {
     id: 'britania-bfr21p', cat: 'airfryers', name: 'Britânia BFR21P Air Flow (4L)',
+    exactModel: ['bfr21p'],
     rating: 4.8, ratingText: '4,8 (432 avaliações)',
     price: 421.40, store: 'Shopee', priceDate: 'Out/2026',
     shopeeQuery: 'Fritadeira Air Fry Britânia BFR21P',
@@ -139,6 +148,7 @@ var PRODUCTS = [
   },
   {
     id: 'mondial-afon-12l', cat: 'airfryers', name: 'Mondial AFON-12L-BI Digital (12L)',
+    exactModel: ['12l'],
     rating: 4.9, ratingText: '4,9 (512 avaliações)',
     price: 521.55, store: 'Shopee', priceDate: 'Out/2026',
     shopeeQuery: 'Fritadeira Mondial AFON-12L',
@@ -151,6 +161,7 @@ var PRODUCTS = [
   },
   {
     id: 'gaabor-duo', cat: 'airfryers', name: 'Gaabor Duo Touchscreen (4,2L)',
+    exactModel: ['gaabor', 'duo'],
     rating: 4.8, ratingText: '4,8 (140 avaliações)',
     price: 209.00, store: 'Shopee', priceDate: 'Out/2026',
     shopeeQuery: 'Fritadeira Gaabor Duo 4,2L',
@@ -640,17 +651,25 @@ var ACCESSORY_WORDS = [
   'cesto', 'grelha', 'tapete', 'forma de silicone', 'papel descartavel', 'resistencia eletrica'
 ];
 
-/* Casa a oferta ao vivo com o produto quando há pelo menos 2 tokens
- * em comum, ou o token de modelo (ex.: bfr21p, 50pug7300) aparece.
- * DESCARTA categoricamente qualquer oferta cujo nome contenha palavra de acessório
- * (teclado, capa, capinha, película, carregador, cabo, adaptador, suporte, fonte, bolsa, bagagem, luva, saco, mochila, sleeve, case),
- * mesmo que o nome contenha o modelo exato.
- * DESCARTA discrepâncias de preço. */
+/* Filtro rigoroso contra produtos usados / seminovos / mostruário / defeito */
+var USED_WORDS = [
+  'usado', 'usada', 'usados', 'usadas',
+  'seminovo', 'semi-novo', 'semi novo', 'seminovos', 'semi novos',
+  'segunda mao', 'segunda mao', 'recondicionado', 'recondicionada', 'refurbished',
+  'open box', 'open-box', 'vitrine', 'mostruario', 'defeito', 'sucata', 'para pecas'
+];
+
+/* Casa a oferta ao vivo com o produto:
+ * 1. Usa o MENOR preço da oferta (priceMin).
+ * 2. EXIGE o modelo exato no título da oferta (exactModel).
+ * 3. DESCARTA categoricamente produtos usados/seminovos (USED_WORDS).
+ * 4. DESCARTA categoricamente qualquer oferta cujo nome contenha palavra de acessório (ACCESSORY_WORDS).
+ * 5. Se não houver oferta válida, retorna null (garantindo fallback para o preço do guia). */
 function matchOffer(product, offers) {
   var tokens = nameTokens(product.name);
-  var best = null, bestScore = 0;
   var minPrice = product.price ? product.price * 0.5 : 50;
   var maxPrice = product.price ? product.price * 2.8 : 50000;
+  var validOffers = [];
 
   (offers || []).forEach(function (o) {
     var rawName = o.productName || '';
@@ -662,6 +681,21 @@ function matchOffer(product, offers) {
     });
     if (isAccessory) return;
 
+    // Descartar ofertas de produtos usados / seminovos / vitrine
+    var isUsed = USED_WORDS.some(function (w) {
+      return new RegExp('\\b' + w + '\\b', 'i').test(hay);
+    });
+    if (isUsed) return;
+
+    // Exigir o modelo exato no título da oferta (ex: 'aspire 5', 's23 fe', 'c85')
+    if (Array.isArray(product.exactModel) && product.exactModel.length > 0) {
+      var matchesExact = product.exactModel.every(function (m) {
+        return hay.indexOf(m.toLowerCase()) !== -1;
+      });
+      if (!matchesExact) return;
+    }
+
+    // Preço da oferta: usar MENOR preço (priceMin)
     var price = Number(o.priceMin);
     if (price > 100000) price = price / 100;
     if (!price || price <= 0) return;
@@ -669,10 +703,18 @@ function matchOffer(product, offers) {
 
     var score = 0;
     tokens.forEach(function (t) { if (hay.indexOf(t) !== -1) score++; });
-    if (score > bestScore) { bestScore = score; best = o; }
+
+    validOffers.push({ offer: o, price: price, score: score });
   });
-  if (bestScore >= 2) return best;
-  return null;
+
+  if (validOffers.length === 0) return null;
+
+  // Ordenar pelo MENOR preço (priceMin) das ofertas válidas
+  validOffers.sort(function (a, b) {
+    return a.price - b.price;
+  });
+
+  return validOffers[0].offer;
 }
 
 /* ------------------------------------------------------------------ */
@@ -1174,7 +1216,8 @@ function fetchLivePrices() {
       return;
     }
     var minP = p.price ? Math.floor(p.price * 0.5) : 0;
-    fetch('/api/shopee?keyword=' + encodeURIComponent(query) + '&minPrice=' + minP)
+    var exactParam = (p.exactModel && p.exactModel.length) ? '&exactModel=' + encodeURIComponent(p.exactModel.join(',')) : '';
+    fetch('/api/shopee?keyword=' + encodeURIComponent(query) + '&minPrice=' + minP + exactParam)
       .then(function (r) { return r.json(); })
       .then(function (data) {
         if (data && data.configured && Array.isArray(data.offers) && data.offers.length > 0) {
