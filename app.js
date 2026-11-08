@@ -29,6 +29,7 @@ var PRODUCTS = [
     id: 'redmi-note-13-pro', cat: 'celulares', name: 'Xiaomi Redmi Note 13 Pro 5G',
     rating: 4.8, ratingText: '4,8 (100 avaliações)',
     price: 1449.50, store: 'Shopee', priceDate: 'Out/2026',
+    shopeeQuery: 'Smartphone Xiaomi Redmi Note 13 Pro 5G',
     img: 'img/redmi_note_13_pro.jpg', tag: 'Câmera de 200 MP',
     specs: {
       camera: { text: '200 MP', num: 200 },
@@ -40,6 +41,7 @@ var PRODUCTS = [
     id: 'galaxy-s23-fe', cat: 'celulares', name: 'Samsung Galaxy S23 FE (256GB)',
     rating: 4.5, ratingText: '4,5 (100 avaliações)',
     price: 2003.55, store: 'Shopee', priceDate: 'Out/2026',
+    shopeeQuery: 'Smartphone Samsung Galaxy S23 FE',
     img: 'img/galaxy_s23_fe.jpg', tag: 'Zoom óptico',
     specs: {
       camera: { text: '—' }, tela: { text: '—' }, bateria: { text: '—' },
@@ -50,6 +52,7 @@ var PRODUCTS = [
     id: 'poco-c85', cat: 'celulares', name: 'Xiaomi POCO C85 NFC (256GB)',
     rating: 4.9, ratingText: '4,9 (175 avaliações)',
     price: 1243.00, store: 'Shopee', priceDate: 'Out/2026',
+    shopeeQuery: 'Smartphone Xiaomi Poco C85',
     img: 'img/poco_c85.jpg', tag: 'Tela 120 Hz e bateria grande',
     specs: {
       camera: { text: '—' },
@@ -65,6 +68,7 @@ var PRODUCTS = [
     id: 'acer-aspire-5', cat: 'notebooks', name: 'Acer Aspire 5 (Ryzen 5)',
     rating: 9.5, ratingText: '9,5 / 10 — Melhor custo-benefício do ano',
     price: 2864.01, store: 'Preço médio do guia', priceDate: 'Out/2026',
+    shopeeQuery: 'Notebook Acer Aspire 5 Ryzen',
     img: 'img/acer_aspire.jpg', tag: 'Melhor custo-benefício do ano',
     specs: {
       processador: { text: 'Ryzen 5' }, ram: { text: '—' }, tela: { text: '—' },
@@ -75,6 +79,7 @@ var PRODUCTS = [
     id: 'macbook-air-m1', cat: 'notebooks', name: 'Apple MacBook Air M1',
     rating: 9.5, ratingText: '9,5 / 10 — Melhor notebook premium',
     price: 5029.08, store: 'Preço médio do guia', priceDate: 'Out/2026',
+    shopeeQuery: 'Apple MacBook Air M1 Lacrado',
     img: 'img/macbook_air.jpg', tag: 'Bateria de 14h+',
     specs: {
       processador: { text: 'Apple M1' }, ram: { text: '—' },
@@ -86,6 +91,7 @@ var PRODUCTS = [
     id: 'asus-vivobook', cat: 'notebooks', name: 'ASUS Vivobook (Ryzen 7)',
     rating: 9.2, ratingText: '9,2 / 10',
     price: 5714.88, store: 'Preço médio do guia', priceDate: 'Out/2026',
+    shopeeQuery: 'Notebook ASUS Vivobook OLED',
     img: 'img/asus_vivobook.jpg', tag: 'Tela OLED espetacular',
     specs: {
       processador: { text: 'Ryzen 7' },
@@ -123,6 +129,7 @@ var PRODUCTS = [
     id: 'britania-bfr21p', cat: 'airfryers', name: 'Britânia BFR21P Air Flow (4L)',
     rating: 4.8, ratingText: '4,8 (432 avaliações)',
     price: 421.40, store: 'Shopee', priceDate: 'Out/2026',
+    shopeeQuery: 'Fritadeira Air Fry Britânia BFR21P',
     img: 'img/airfryer_britannia_4l.jpg', tag: '1.500 W • cesto quadrado',
     specs: {
       capacidade: { text: '4 L', num: 4 },
@@ -134,6 +141,7 @@ var PRODUCTS = [
     id: 'mondial-afon-12l', cat: 'airfryers', name: 'Mondial AFON-12L-BI Digital (12L)',
     rating: 4.9, ratingText: '4,9 (512 avaliações)',
     price: 521.55, store: 'Shopee', priceDate: 'Out/2026',
+    shopeeQuery: 'Fritadeira Mondial AFON-12L',
     img: 'img/airfryer_mondial_12l.jpg', tag: 'Oven 2 em 1 digital',
     specs: {
       capacidade: { text: '12 L', num: 12 },
@@ -145,6 +153,7 @@ var PRODUCTS = [
     id: 'gaabor-duo', cat: 'airfryers', name: 'Gaabor Duo Touchscreen (4,2L)',
     rating: 4.8, ratingText: '4,8 (140 avaliações)',
     price: 209.00, store: 'Shopee', priceDate: 'Out/2026',
+    shopeeQuery: 'Fritadeira Gaabor Duo 4,2L',
     img: 'img/airfryer_gaabor_duo.jpg', tag: 'Visor transparente',
     specs: {
       capacidade: { text: '4,2 L', num: 4.2 },
@@ -1157,17 +1166,24 @@ function fetchLivePrices() {
     return;
   }
   products.forEach(function (p) {
+    var query = p.shopeeQuery || (p.store === 'Shopee' ? p.name : null);
+    if (!query) {
+      delete state.live[p.id];
+      pending--;
+      if (pending === 0) finish();
+      return;
+    }
     var minP = p.price ? Math.floor(p.price * 0.5) : 0;
-    fetch('/api/shopee?keyword=' + encodeURIComponent(p.name) + '&minPrice=' + minP)
+    fetch('/api/shopee?keyword=' + encodeURIComponent(query) + '&minPrice=' + minP)
       .then(function (r) { return r.json(); })
       .then(function (data) {
-        if (data && data.configured) {
+        if (data && data.configured && Array.isArray(data.offers) && data.offers.length > 0) {
           state.liveConfigured = true;
-          var offer = matchOffer(p, data.offers || []);
+          var offer = matchOffer(p, data.offers);
           if (offer && offer.priceMin != null) {
             var price = Number(offer.priceMin);
             if (price > 100000) price = price / 100; /* centavos, se vier assim */
-            if (price > 0 && (!p.price || (price >= p.price * 0.6 && price <= p.price * 2.8))) {
+            if (price > 0 && (!p.price || (price >= p.price * 0.5 && price <= p.price * 2.8))) {
               state.live[p.id] = { price: price, offerLink: offer.offerLink || null };
               anyLive = true;
             } else {
@@ -1177,7 +1193,6 @@ function fetchLivePrices() {
             delete state.live[p.id];
           }
         } else {
-          state.liveConfigured = false;
           delete state.live[p.id];
         }
       })
@@ -1186,19 +1201,22 @@ function fetchLivePrices() {
       })
       .finally(function () {
         pending--;
-        if (pending === 0) {
-          if (state.liveConfigured && anyLive) {
-            status.textContent = '✅ Preços ao vivo via API da Shopee — valores conferidos agora.';
-            status.classList.add('live');
-          } else {
-            status.textContent = 'Preço ao vivo em breve — os valores abaixo são do guia (Out/2026 e 26/10/2026). Confira o preço atual na loja.';
-          }
-          renderProducts();
-          renderDuel();
-          renderWishlist();
-        }
+        if (pending === 0) finish();
       });
   });
+
+  function finish() {
+    if (state.liveConfigured && anyLive) {
+      status.textContent = '✅ Preços ao vivo via API da Shopee — valores conferidos agora.';
+      status.classList.add('live');
+    } else {
+      status.textContent = 'Preço ao vivo em breve — os valores abaixo são do guia (Out/2026 e 26/10/2026). Confira o preço atual na loja.';
+      status.classList.remove('live');
+    }
+    renderProducts();
+    renderDuel();
+    renderWishlist();
+  }
 }
 
 /* ---------------- Quiz (interface) ---------------- */
