@@ -152,7 +152,8 @@
     "termo_shopee": "banheira dobravel bebe almofada banho",
     "icone": "fa-bath",
     "cor": "#06b6d4",
-    "status": "agendado"
+    "status": "publicado",
+    "publishedAt": "2026-11-09T22:56:23.228Z"
   },
   {
     "id": 13,
