@@ -165,7 +165,8 @@
     "termo_shopee": "babador silicone cata migalhas impermeavel",
     "icone": "fa-shirt",
     "cor": "#14b8a6",
-    "status": "agendado"
+    "status": "publicado",
+    "publishedAt": "2026-11-11T20:06:09.528Z"
   },
   {
     "id": 14,
