@@ -178,7 +178,8 @@
     "termo_shopee": "organizador fraldas trocador bebe",
     "icone": "fa-box-open",
     "cor": "#d97706",
-    "status": "agendado"
+    "status": "publicado",
+    "publishedAt": "2026-11-13T20:25:47.601Z"
   },
   {
     "id": 15,
