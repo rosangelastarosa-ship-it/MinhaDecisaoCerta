@@ -19,3 +19,11 @@ pinterest_bot/fotos_gourmet_studio/
 pinterest_bot/sticky_pins/
 pinterest_bot/sticky_pins_vertical/
 video_serie/
+
+# Social Bot (X e Reddit)
+social_bot/sessao_x/
+social_bot/sessao_reddit/
+**/sessao_x/**
+**/sessao_reddit/**
+social_bot/prints/
+social_bot/estado_publicacoes.json
